@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf4e6">
+<title>矛盾マスター｜漢文『韓非子』テスト対策ゲーム</title>
+<style>
+:root{
+  --paper:#fbf4e6;
+  --paper2:#fffdf7;
+  --ink:#2e2a26;
+  --ink2:#6d6357;
+  --shu:#cf4230;
+  --shu-d:#a52f21;
+  --ai:#28506f;
+  --kin:#d9a441;
+  --midori:#3d7a56;
+  --line:#e5d8c0;
+  --shadow:0 3px 0 #e8dbc2;
+  --mincho:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 12% 6%, #fff9ec 0, rgba(255,249,236,0) 46%),
+    repeating-linear-gradient(45deg, rgba(217,164,65,.04) 0 2px, rgba(0,0,0,0) 2px 11px),
+    var(--paper);
+  min-height:100vh;
+  -webkit-text-size-adjust:100%;
+  touch-action:manipulation;
+  line-height:1.6;
+}
+button{font-family:inherit;}
+.app{max-width:760px;margin:0 auto;padding:0 14px calc(26px + env(safe-area-inset-bottom));}
+
+/* ---------- トップバー ---------- */
+.topbar{
+  position:sticky;top:0;z-index:30;
+  display:flex;align-items:center;gap:8px;
+  padding:9px 2px;
+  background:rgba(251,244,230,.92);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  flex:1;text-align:center;
+  font-family:var(--mincho);font-weight:700;font-size:1.05rem;letter-spacing:.12em;
+}
+.iconbtn{
+  width:42px;height:42px;flex:0 0 42px;border-radius:50%;
+  border:2px solid var(--line);background:var(--paper2);color:var(--ink);
+  font-size:18px;line-height:1;display:grid;place-items:center;
+  box-shadow:0 2px 0 #e8dbc2;cursor:pointer;
+}
+.iconbtn:active{transform:translateY(1px);box-shadow:none;}
+.iconbtn[hidden]{display:none;}
+
+/* ---------- 画面 ---------- */
+.screen{display:none;padding-top:14px;}
+.screen.active{display:block;animation:fadein .28s ease-out;}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- ホーム ---------- */
+.hero{text-align:center;padding:6px 0 16px;}
+.hero-art{width:220px;max-width:60vw;height:auto;display:block;margin:0 auto 6px;filter:drop-shadow(0 6px 10px rgba(165,47,33,.12));}
+.hero h1{
+  font-family:var(--mincho);
+  font-size:clamp(1.7rem,7.4vw,2.3rem);
+  letter-spacing:.14em;
+  margin:4px 0 2px;
+  color:var(--ai);
+}
+.hero h1 .accent{color:var(--shu);}
+.hero .sub{margin:0;color:var(--ink2);font-size:.84rem;letter-spacing:.04em;}
+.hero .tagline{
+  display:inline-block;margin-top:10px;padding:3px 12px;border-radius:999px;
+  background:#f6e7cf;color:#8a5a1e;font-size:.76rem;font-weight:700;letter-spacing:.04em;
+}
+.modes{margin-top:8px;}
+.mode{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:var(--paper2);border:2px solid var(--line);border-radius:var(--radius);
+  padding:13px 14px;margin-bottom:12px;color:inherit;font-size:1rem;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .1s ease, box-shadow .1s ease;
+}
+.mode:active{transform:translateY(2px);box-shadow:0 1px 0 #e8dbc2;}
+.mode-icon{
+  width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;
+  font-size:23px;border-radius:14px;background:#f7e9d1;
+}
+.mode-body{flex:1;display:flex;flex-direction:column;gap:1px;min-width:0;}
+.mode-body b{font-size:1.02rem;letter-spacing:.02em;}
+.mode-body small{color:var(--ink2);font-size:.76rem;line-height:1.45;}
+.mode-go{color:#c3b49a;font-size:.9rem;}
+
+/* ---------- ボタン ---------- */
+.btn{
+  border:2px solid var(--line);background:var(--paper2);color:var(--ink);
+  border-radius:14px;padding:13px 18px;font-size:1rem;font-weight:700;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .1s ease, box-shadow .1s ease;
+  min-height:52px;
+}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 #e8dbc2;}
+.btn.primary{background:var(--shu);border-color:var(--shu-d);color:#fff;box-shadow:0 3px 0 var(--shu-d);}
+.btn.primary:active{box-shadow:none;}
+.btn.ghost{background:#fffdf7;}
+.btn.wide{width:100%;margin-top:4px;}
+.btn.small{padding:9px 12px;font-size:.88rem;min-height:44px;box-shadow:0 2px 0 #e8dbc2;}
+.btn[hidden]{display:none;}
+.best{text-align:center;color:var(--ink2);font-size:.74rem;margin:12px 0 4px;min-height:1.2em;}
+
+/* ---------- クイズ共通ヘッダー ---------- */
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.progWrap{flex:1;display:flex;align-items:center;gap:8px;}
+.progBar{flex:1;height:11px;border-radius:999px;background:#eee2cc;overflow:hidden;border:1px solid #e2d3b8;}
+.progBar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#e8a33c,#cf4230);transition:width .35s cubic-bezier(.2,.8,.2,1);}
+.progText{font-size:.74rem;color:var(--ink2);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.hud{display:flex;align-items:center;gap:6px;}
+.pill{
+  font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:999px;
+  background:#f2e7d3;color:#7a6444;white-space:nowrap;
+}
+.combo{
+  font-size:.72rem;font-weight:800;padding:4px 9px;border-radius:999px;
+  background:#ffe6c7;color:#a8571a;white-space:nowrap;
+  opacity:0;transform:scale(.6);transition:opacity .2s, transform .2s;
+}
+.combo.on{opacity:1;transform:none;animation:comboPulse .5s ease-out;}
+@keyframes comboPulse{0%{transform:scale(1.35)}100%{transform:scale(1)}}
+
+/* ---------- 問題カード ---------- */
+.qcard{
+  background:var(--paper2);border:2px solid var(--line);border-radius:var(--radius);
+  padding:16px 15px;box-shadow:var(--shadow);margin-bottom:14px;
+}
+.qtag{
+  display:inline-block;margin:0 0 8px;padding:2px 10px;border-radius:999px;
+  background:#eaf1f6;color:var(--ai);font-size:.7rem;font-weight:800;letter-spacing:.06em;
+}
+.qtext{
+  font-size:1.08rem;font-weight:700;line-height:1.65;margin:0;
+  font-feature-settings:"palt" 1;
+}
+.qtext .han{font-family:var(--mincho);letter-spacing:.04em;}
+
+/* ---------- 選択肢 ---------- */
+.options{margin-bottom:6px;}
+.opt{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:var(--paper2);border:2px solid var(--line);border-radius:14px;
+  padding:12px 13px;margin-bottom:10px;color:inherit;font-size:.99rem;line-height:1.45;
+  box-shadow:var(--shadow);cursor:pointer;min-height:56px;
+  transition:transform .1s ease, background .18s, border-color .18s, box-shadow .1s;
+}
+.opt:active{transform:translateY(2px);box-shadow:0 1px 0 #e8dbc2;}
+.opt .mark{
+  flex:0 0 30px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:#f2e7d3;color:#8a744f;font-size:.82rem;font-weight:800;
+}
+.opt .opt-t{flex:1;min-width:0;}
+.opt.locked{cursor:default;}
+.opt.correct{border-color:var(--midori);background:#e9f6ee;}
+.opt.correct .mark{background:var(--midori);color:#fff;}
+.opt.wrong{border-color:var(--shu);background:#fdece9;}
+.opt.wrong .mark{background:var(--shu);color:#fff;}
+.opt.dim{opacity:.5;}
+.pop{animation:pop .38s cubic-bezier(.2,1.6,.4,1);}
+@keyframes pop{0%{transform:scale(.94)}55%{transform:scale(1.035)}100%{transform:scale(1)}}
+.shake{animation:shake .4s ease-in-out;}
+@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(7px)}45%{transform:translateX(-5px)}60%{transform:translateX(5px)}80%{transform:translateX(-2px)}}
+
+/* ---------- フィードバック ---------- */
+.feedback{
+  border-radius:var(--radius);padding:13px 14px;margin:6px 0 14px;
+  border:2px solid var(--line);background:var(--paper2);
+  animation:fadein .25s ease-out;
+}
+.feedback.ok{background:#eef8f1;border-color:#a8cfb6;}
+.feedback.ng{background:#fdf0ec;border-color:#e9b6a8;}
+.feedback[hidden]{display:none;}
+.fb-head{font-weight:800;font-size:.98rem;margin:0 0 4px;}
+.feedback.ok .fb-head{color:var(--midori);}
+.feedback.ng .fb-head{color:var(--shu-d);}
+.feedback p{margin:0;font-size:.87rem;line-height:1.65;color:#4a423a;}
+.fb-detail{margin-top:7px !important;font-size:.8rem !important;color:var(--ink2) !important;}
+.fb-detail b{color:var(--ai);}
+
+/* ---------- スタンプ演出 ---------- */
+.stamp{
+  position:fixed;left:50%;top:21%;transform:translate(-50%,-50%) scale(.6);
+  font-family:var(--mincho);font-size:2.1rem;font-weight:800;color:#fff;
+  background:var(--midori);padding:.12em .55em;border-radius:18px;
+  opacity:0;pointer-events:none;z-index:70;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);letter-spacing:.06em;white-space:nowrap;
+}
+.stamp.ng{background:var(--shu);}
+.stamp.show{animation:stampIn 1s ease-out forwards;}
+@keyframes stampIn{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(-8deg);}
+  22%{opacity:1;transform:translate(-50%,-50%) scale(1.12) rotate(-3deg);}
+  38%{transform:translate(-50%,-50%) scale(1) rotate(-2deg);}
+  75%{opacity:1;transform:translate(-50%,-56%) scale(1) rotate(-2deg);}
+  100%{opacity:0;transform:translate(-50%,-72%) scale(.96) rotate(-2deg);}
+}
+
+/* ---------- 返り点パズル ---------- */
+.hakubun{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:16px;
+  padding:14px 6px 20px;margin-top:6px;
+  font-family:var(--mincho);
+}
+.hb-char{
+  position:relative;font-size:2rem;line-height:1.1;
+  padding:0 2px;letter-spacing:.02em;
+}
+.hb-char .kaeri{
+  position:absolute;left:-.24em;bottom:-.68em;
+  font-size:.5em;font-weight:700;color:var(--shu);
+  font-family:var(--mincho);line-height:1;
+}
+.label{
+  font-size:.72rem;font-weight:800;color:var(--ink2);letter-spacing:.1em;margin:0 0 6px;
+}
+.answerArea,.poolWrap{margin-bottom:12px;}
+.slots{
+  display:flex;flex-wrap:wrap;gap:6px;min-height:64px;align-items:center;
+  background:#f7eeda;border:2px dashed #ddcba9;border-radius:14px;padding:8px;
+}
+.slot{
+  flex:0 0 48px;width:48px;height:52px;border-radius:12px;border:2px dashed #e0d0b2;
+  display:grid;place-items:center;
+}
+.slot.filled{flex:0 0 auto;border:2px solid var(--line);background:var(--paper2);box-shadow:0 2px 0 #e8dbc2;width:auto;min-width:48px;height:auto;min-height:52px;padding:2px 7px;}
+.pool{display:flex;flex-wrap:wrap;gap:8px;}
+.block{
+  position:relative;min-width:52px;height:52px;padding:0 8px 0 4px;
+  border-radius:12px;border:2px solid var(--line);background:var(--paper2);color:var(--ink);
+  box-shadow:var(--shadow);cursor:pointer;display:inline-flex;align-items:baseline;justify-content:center;
+  font-family:var(--mincho);font-size:1.45rem;line-height:1;
+  padding-top:6px;transition:transform .1s ease, opacity .2s, background .2s;
+}
+.block:active{transform:translateY(2px);box-shadow:none;}
+.block .bok{font-size:.5em;color:var(--ink2);margin-left:2px;position:relative;top:.15em;font-family:system-ui,sans-serif;}
+.block.used{opacity:.28;background:#f0e8d8;box-shadow:none;cursor:default;}
+.block.pulse{animation:blockPulse .6s ease-out 2;}
+@keyframes blockPulse{0%{background:#fff3cf;border-color:var(--kin);}100%{background:var(--paper2);border-color:var(--line);}}
+.pzBtns{display:flex;gap:10px;margin-bottom:10px;}
+.pzBtns .btn{flex:1;}
+.pzHint{font-size:.8rem;color:#a8571a;font-weight:700;min-height:1.3em;margin:6px 0 0;text-align:center;}
+
+/* ---------- 結果 ---------- */
+.resultCard{text-align:center;padding:8px 0 0;}
+.resultTag{
+  display:block;width:fit-content;margin:0 auto 10px;padding:3px 12px;border-radius:999px;
+  background:#eaf1f6;color:var(--ai);font-size:.72rem;font-weight:800;letter-spacing:.08em;
+}
+.rankBadge{
+  width:118px;height:118px;margin:4px auto 10px;border-radius:50%;
+  display:grid;place-items:center;color:#fff;
+  font-family:var(--mincho);font-size:3.4rem;font-weight:800;
+  background:radial-gradient(circle at 35% 30%, #f0b653, #cf4230 70%);
+  box-shadow:0 8px 20px rgba(165,47,33,.28), inset 0 0 0 6px rgba(255,255,255,.35);
+  animation:pop .5s cubic-bezier(.2,1.6,.4,1);
+}
+.rankBadge.r-a{background:radial-gradient(circle at 35% 30%, #7fb6d6, #28506f 70%);box-shadow:0 8px 20px rgba(40,80,111,.26), inset 0 0 0 6px rgba(255,255,255,.35);}
+.rankBadge.r-b{background:radial-gradient(circle at 35% 30%, #93c6a3, #3d7a56 70%);box-shadow:0 8px 20px rgba(61,122,86,.24), inset 0 0 0 6px rgba(255,255,255,.35);}
+.rankBadge.r-c{background:radial-gradient(circle at 35% 30%, #b9b0a2, #6d6357 70%);box-shadow:0 8px 20px rgba(109,99,87,.22), inset 0 0 0 6px rgba(255,255,255,.35);}
+.rankBadge.small{font-size:1.9rem;}
+.rankBadge.text{
+  display:inline-block;width:auto;min-width:0;height:auto;padding:16px 30px;border-radius:999px;
+  font-size:1.45rem;letter-spacing:.04em;line-height:1.3;text-align:center;
+}
+.resScore{font-size:1.22rem;font-weight:800;margin:0 0 4px;font-variant-numeric:tabular-nums;}
+.resMsg{margin:0 auto 16px;max-width:26em;color:#5a5148;font-size:.9rem;}
+.reviewBox{text-align:left;margin-top:6px;}
+.reviewTitle{
+  font-size:.85rem;font-weight:800;color:var(--ai);margin:18px 0 8px;
+  padding-left:9px;border-left:4px solid var(--ai);
+}
+.revItem{
+  background:var(--paper2);border:2px solid var(--line);border-radius:14px;
+  padding:11px 12px;margin-bottom:9px;box-shadow:0 2px 0 #efe4cf;
+}
+.revQ{margin:0 0 5px;font-weight:700;font-size:.88rem;line-height:1.5;}
+.revA{margin:0 0 5px;font-size:.85rem;color:var(--midori);font-weight:700;line-height:1.5;}
+.revN{margin:0;font-size:.79rem;color:var(--ink2);line-height:1.6;}
+.perfect{
+  background:#eef8f1;border:2px solid #a8cfb6;border-radius:14px;
+  padding:14px;text-align:center;font-weight:800;color:var(--midori);margin-top:12px;font-size:.95rem;
+}
+.resBtns{display:flex;gap:10px;margin:18px 0 8px;}
+.resBtns .btn{flex:1;}
+
+/* ---------- 虎の巻モーダル ---------- */
+.modal{
+  position:fixed;inset:0;z-index:80;display:none;
+  background:rgba(46,42,38,.45);padding:0;
+}
+.modal.open{display:block;animation:fadein .2s ease-out;}
+.sheet{
+  position:absolute;left:0;right:0;bottom:0;top:4vh;
+  background:var(--paper);border-radius:20px 20px 0 0;
+  max-width:760px;margin:0 auto;display:flex;flex-direction:column;
+  box-shadow:0 -8px 30px rgba(0,0,0,.25);
+  animation:sheetUp .28s cubic-bezier(.2,.9,.3,1);
+}
+@keyframes sheetUp{from{transform:translateY(28px);opacity:.6}to{transform:none;opacity:1}}
+.sheetHead{
+  display:flex;align-items:center;gap:10px;padding:14px 14px 10px;
+  border-bottom:1px solid var(--line);
+}
+.sheetHead h2{flex:1;margin:0;font-size:1.02rem;letter-spacing:.06em;font-family:var(--mincho);}
+.sheetBody{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 14px 30px;}
+.toraSec{margin-bottom:18px;}
+.toraSec h3{
+  font-size:.9rem;margin:0 0 8px;color:var(--ai);letter-spacing:.06em;
+  padding-left:9px;border-left:4px solid var(--ai);
+}
+.toraCard{
+  background:var(--paper2);border:2px solid var(--line);border-radius:14px;
+  padding:11px 12px;margin-bottom:9px;box-shadow:0 2px 0 #efe4cf;
+}
+.toraCard .no{
+  display:inline-block;font-size:.68rem;font-weight:800;color:#fff;background:#c3ab84;
+  border-radius:999px;padding:1px 8px;margin-bottom:5px;
+}
+.toraLine{margin:0 0 5px;font-size:.88rem;line-height:1.6;}
+.toraLine:last-child{margin-bottom:0;}
+.toraLine .lbl{
+  display:inline-block;font-size:.66rem;font-weight:800;color:#fff;border-radius:5px;
+  padding:0 6px;margin-right:6px;vertical-align:1px;
+}
+.lbl.b{background:#a52f21;}
+.lbl.k{background:#28506f;}
+.lbl.y{background:#3d7a56;}
+.hak{font-family:var(--mincho);letter-spacing:.03em;}
+.toraCard .yomi{color:#1f3a52;}
+.toraCard .yaku{color:#37543f;}
+.wordList{display:flex;flex-direction:column;gap:6px;}
+.word{
+  display:flex;align-items:baseline;gap:8px;background:var(--paper2);
+  border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:.85rem;
+}
+.word b{font-family:var(--mincho);font-size:1rem;white-space:nowrap;}
+.word .r{color:var(--shu);font-size:.76rem;font-weight:700;white-space:nowrap;}
+.word span.m{color:#4a423a;font-size:.82rem;}
+.tips{background:#fff6e3;border:2px solid #f0d7a4;border-radius:14px;padding:11px 12px;font-size:.83rem;line-height:1.7;color:#6b4f22;}
+.tips b{color:#a8571a;}
+.tips ul{margin:6px 0 0;padding-left:1.1em;}
+.tips li{margin-bottom:4px;}
+.note{font-size:.74rem;color:var(--ink2);line-height:1.6;margin:8px 0 0;}
+
+/* ---------- 小さい画面向け ---------- */
+@media (max-width:400px){
+  .hero-art{width:180px;}
+  .hb-char{font-size:1.62rem;}
+  .hakubun{gap:10px;padding-left:0;padding-right:0;}
+  .qcard{padding:13px 12px;}
+  .block{min-width:46px;height:46px;font-size:1.3rem;}
+  .slot{flex:0 0 44px;width:44px;height:48px;}
+  .slot.filled{min-width:44px;}
+  .qtext{font-size:1.02rem;}
+  .opt{font-size:.94rem;}
+  .mode-body small{font-size:.72rem;}
+  .stamp{font-size:1.7rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button id="homeBtn" class="iconbtn" hidden aria-label="ホームに戻る">🏠</button>
+    <div class="brand">矛盾マスター</div>
+    <button id="soundBtn" class="iconbtn" aria-label="音のオン・オフ">🔊</button>
+  </header>
+
+  <main>
+    <!-- ============ ホーム ============ -->
+    <section id="screen-home" class="screen active">
+      <div class="hero">
+        <svg class="hero-art" viewBox="0 0 240 160" role="img" aria-label="盾と矛のイラスト">
+          <circle cx="120" cy="80" r="62" fill="#f7e2c2"/>
+          <circle cx="120" cy="80" r="62" fill="none" stroke="#eccf9f" stroke-width="2" stroke-dasharray="4 6"/>
+          <!-- 矛（盾のうしろで交差） -->
+          <g transform="rotate(40 120 80)">
+            <rect x="115" y="-6" width="10" height="172" rx="5" fill="#a9723c"/>
+            <rect x="115" y="-6" width="3.5" height="172" rx="1.7" fill="#c9945a"/>
+            <path d="M120 -24 L131 4 L109 4 Z" fill="#cfd8e0" stroke="#8d9aa6" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M120 -18 L120 2" stroke="#a8b4bf" stroke-width="2"/>
+            <rect x="110" y="110" width="20" height="7" rx="3.5" fill="#c4452f"/>
+            <path d="M120 117 L113 134 M120 117 L127 134" stroke="#c4452f" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <!-- 盾（手前） -->
+          <g transform="translate(120 80)">
+            <path d="M0 -48 L44 -34 V6 C44 31 24 45 0 53 C-24 45 -44 31 -44 6 V-34 Z"
+                  fill="#cf4230" stroke="#8f2b1c" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M0 -38 L35 -27 V6 C35 26 19 38 0 44 C-19 38 -35 26 -35 6 V-27 Z"
+                  fill="#e0604a" opacity=".55"/>
+            <circle cx="0" cy="-2" r="9" fill="#f6dfa8" stroke="#8f2b1c" stroke-width="2.5"/>
+            <path d="M-18 20 L18 20" stroke="#f6dfa8" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+          </g>
+        </svg>
+        <h1>矛 <span class="accent">盾</span> マスター</h1>
+        <p class="sub">漢文『韓非子』－ 盾と矛でテスト対策</p>
+        <span class="tagline">全4モード＋虎の巻</span>
+      </div>
+
+      <div class="modes">
+        <button class="mode" data-mode="r1" type="button">
+          <span class="mode-icon">📖</span>
+          <span class="mode-body">
+            <b>読み・意味道場</b>
+            <small>読みと意味を4択でテンポよく</small>
+          </span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" data-mode="pz" type="button">
+          <span class="mode-icon">🧩</span>
+          <span class="mode-body">
+            <b>返り点パズル</b>
+            <small>返り点を見て読む順にタップ</small>
+          </span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" data-mode="story" type="button">
+          <span class="mode-icon">📜</span>
+          <span class="mode-body">
+            <b>物語・テスト対策クイズ</b>
+            <small>訳・だれのセリフか・なぜ？を理解</small>
+          </span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" data-mode="exam" type="button">
+          <span class="mode-icon">🏆</span>
+          <span class="mode-body">
+            <b>総仕上げ！テスト本番モード</b>
+            <small>全範囲から10問／S〜C判定</small>
+          </span>
+          <span class="mode-go">▶</span>
+        </button>
+      </div>
+
+      <button id="toranoBtn" class="btn wide ghost" type="button">📜 虎の巻（本文・書き下し・現代語訳）</button>
+      <p class="best" id="bestLine"></p>
+    </section>
+
+    <!-- ============ 4択クイズ ============ -->
+    <section id="screen-quiz" class="screen">
+      <div class="qhead">
+        <div class="progWrap">
+          <div class="progBar"><i id="progFill"></i></div>
+          <span class="progText" id="progText">1 / 10</span>
+        </div>
+        <div class="hud">
+          <span class="combo" id="comboBadge">🔥 0コンボ</span>
+          <span class="pill" id="scoreBadge">0問正解</span>
+        </div>
+      </div>
+
+      <div class="qcard">
+        <p class="qtag" id="qTag">読み・意味道場</p>
+        <h2 class="qtext" id="qText"></h2>
+      </div>
+
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback" hidden>
+        <p class="fb-head" id="fbHead"></p>
+        <p id="fbNote"></p>
+        <p class="fb-detail" id="fbDetail"></p>
+      </div>
+
+      <button id="nextBtn" class="btn primary wide" type="button" hidden>次へ ▶</button>
+    </section>
+
+    <!-- ============ 返り点パズル ============ -->
+    <section id="screen-puzzle" class="screen">
+      <div class="qhead">
+        <div class="progWrap">
+          <div class="progBar"><i id="pProgFill"></i></div>
+          <span class="progText" id="pProgText">1 / 6</span>
+        </div>
+        <div class="hud">
+          <span class="pill" id="pScoreBadge">0問クリア</span>
+        </div>
+      </div>
+
+      <div class="qcard">
+        <p class="qtag">返り点パズル</p>
+        <p class="qtext" style="font-size:.92rem;font-weight:600;color:#6d6357;">
+          返り点（レ・一・二）を見て、<b>読む順</b>に漢字をタップしよう！
+        </p>
+        <div class="hakubun" id="pzHakubun"></div>
+      </div>
+
+      <div class="answerArea">
+        <p class="label">よむ順</p>
+        <div class="slots" id="pzAnswer"></div>
+        <p class="pzHint" id="pzHint"></p>
+      </div>
+
+      <div class="poolWrap">
+        <p class="label">ならべる漢字</p>
+        <div class="pool" id="pzPool"></div>
+      </div>
+
+      <div class="pzBtns">
+        <button id="pzUndo" class="btn ghost small" type="button">↩ 1つ戻す</button>
+        <button id="pzHintBtn" class="btn ghost small" type="button">💡 ヒント</button>
+      </div>
+      <button id="pzCheck" class="btn primary wide" type="button">判定する</button>
+
+      <div class="feedback" id="pzFeedback" hidden>
+        <p class="fb-head" id="pzFbHead"></p>
+        <p id="pzKundoku"></p>
+        <p class="fb-detail" id="pzPoint"></p>
+      </div>
+
+      <button id="pzNext" class="btn primary wide" type="button" hidden>次へ ▶</button>
+    </section>
+
+    <!-- ============ 結果 ============ -->
+    <section id="screen-result" class="screen">
+      <div class="resultCard">
+        <p class="resultTag" id="resTag">総仕上げテスト</p>
+        <div class="rankBadge" id="rankBadge">S</div>
+        <p class="resScore" id="resScore"></p>
+        <p class="resMsg" id="resMsg"></p>
+        <div class="reviewBox" id="reviewBox"></div>
+        <div class="resBtns">
+          <button id="retryBtn" class="btn primary" type="button">もう一度</button>
+          <button id="toHomeBtn" class="btn ghost" type="button">ホームへ</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ============ 虎の巻 ============ -->
+<div class="modal" id="toranoModal" role="dialog" aria-modal="true" aria-labelledby="toranoTitle">
+  <div class="sheet">
+    <div class="sheetHead">
+      <h2 id="toranoTitle">📜 虎の巻</h2>
+      <button id="toranoClose" class="iconbtn" type="button" aria-label="閉じる">✕</button>
+    </div>
+    <div class="sheetBody">
+      <div class="toraSec">
+        <h3>本文・書き下し文・現代語訳</h3>
+
+        <div class="toraCard">
+          <span class="no">①</span>
+          <p class="toraLine"><span class="lbl b">白文</span><span class="hak">楚人有鬻盾与矛者。</span></p>
+          <p class="toraLine"><span class="lbl k">書き下し</span><span class="hak yomi">楚人に盾と矛とを鬻ぐ者有り。</span></p>
+          <p class="toraLine"><span class="lbl y">訳</span><span class="yaku">楚の国の人で、盾と矛を売る者がいた。</span></p>
+        </div>
+
+        <div class="toraCard">
+          <span class="no">②</span>
+          <p class="toraLine"><span class="lbl b">白文</span><span class="hak">誉之曰、「吾盾之堅、莫能陥也。」</span></p>
+          <p class="toraLine"><span class="lbl k">書き下し</span><span class="hak yomi">之を誉めて曰はく、「吾が盾の堅きこと、能く陥す莫きなり。」と。</span></p>
+          <p class="toraLine"><span class="lbl y">訳</span><span class="yaku">その人は盾を誉めて言うことには、「私の盾の堅いことといったら、突き通せるものはない。」と。</span></p>
+        </div>
+
+        <div class="toraCard">
+          <span class="no">③</span>
+          <p class="toraLine"><span class="lbl b">白文</span><span class="hak">又誉其矛曰、「吾矛之利、於物無不陥也。」</span></p>
+          <p class="toraLine"><span class="lbl k">書き下し</span><span class="hak yomi">又其の矛を誉めて曰はく、「吾が矛の利きこと、物に於いて陥さざる無きなり。」と。</span></p>
+          <p class="toraLine"><span class="lbl y">訳</span><span class="yaku">また、その矛を誉めて言うことには、「私の矛の鋭いことといったら、どんなものでも突き通さないものはない。」と。</span></p>
+        </div>
+
+        <div class="toraCard">
+          <span class="no">④</span>
+          <p class="toraLine"><span class="lbl b">白文</span><span class="hak">或曰、「以子之矛、陥子之盾、何如。」</span></p>
+          <p class="toraLine"><span class="lbl k">書き下し</span><span class="hak yomi">或るひと曰はく、「子の矛を以て、子の盾を陥さば、何如。」と。</span></p>
+          <p class="toraLine"><span class="lbl y">訳</span><span class="yaku">ある人が言うことには、「あなたの矛で、あなたの盾を突いたら、どうなるのか。」と。</span></p>
+        </div>
+
+        <div class="toraCard">
+          <span class="no">⑤</span>
+          <p class="toraLine"><span class="lbl b">白文</span><span class="hak">其人弗能応也。</span></p>
+          <p class="toraLine"><span class="lbl k">書き下し</span><span class="hak yomi">其の人応ふること能はざるなり。</span></p>
+          <p class="toraLine"><span class="lbl y">訳</span><span class="yaku">その人は答えることができなかった。</span></p>
+        </div>
+
+        <div class="toraCard">
+          <span class="no">⑥</span>
+          <p class="toraLine"><span class="lbl b">白文</span><span class="hak">夫不可陥之盾、与無不陥之矛、不可同世而立。</span></p>
+          <p class="toraLine"><span class="lbl k">書き下し</span><span class="hak yomi">夫れ陥すべからざるの盾と、陥さざる無きの矛とは、世を同じくして立つべからず。</span></p>
+          <p class="toraLine"><span class="lbl y">訳</span><span class="yaku">そもそも、突き通すことのできない盾と、突き通さないものはない矛とは、同じ世に並び立つことはできない。</span></p>
+        </div>
+      </div>
+
+      <div class="toraSec">
+        <h3>重要語句（読み・意味）</h3>
+        <div class="wordList">
+          <div class="word"><b>鬻ぐ</b><span class="r">ひさぐ</span><span class="m">売る</span></div>
+          <div class="word"><b>誉む</b><span class="r">ほむ</span><span class="m">ほめる</span></div>
+          <div class="word"><b>堅し</b><span class="r">かたし</span><span class="m">かたい</span></div>
+          <div class="word"><b>莫し</b><span class="r">なし</span><span class="m">〜ない（「無」と同じ）</span></div>
+          <div class="word"><b>陥す</b><span class="r">とほす</span><span class="m">突き通す</span></div>
+          <div class="word"><b>利し</b><span class="r">とし・するどし</span><span class="m">鋭い（よく切れる）</span></div>
+          <div class="word"><b>或</b><span class="r">あるひと</span><span class="m">ある人</span></div>
+          <div class="word"><b>何如</b><span class="r">いかん</span><span class="m">どうか（どうなるか）</span></div>
+          <div class="word"><b>子</b><span class="r">し</span><span class="m">あなた</span></div>
+          <div class="word"><b>以</b><span class="r">もつ（て）</span><span class="m">〜で（道具・手段）</span></div>
+          <div class="word"><b>弗</b><span class="r">ず</span><span class="m">〜ない（「不」と同じ）</span></div>
+          <div class="word"><b>能はず</b><span class="r">あたはず</span><span class="m">〜できない（不・弗の下の「能」）</span></div>
+          <div class="word"><b>応ふ</b><span class="r">こたふ</span><span class="m">答える（返事をする）</span></div>
+          <div class="word"><b>夫れ</b><span class="r">それ</span><span class="m">そもそも（話をまとめるとき）</span></div>
+          <div class="word"><b>同世</b><span class="r">どうせい</span><span class="m">同じ世（時代）に存在すること</span></div>
+          <div class="word"><b>立つ</b><span class="r">たつ</span><span class="m">並び立つ・両立する</span></div>
+        </div>
+      </div>
+
+      <div class="toraSec">
+        <h3>テストで狙われるポイント</h3>
+        <div class="tips">
+          <ul>
+            <li><b>莫能陥</b>＝「能く陥す莫きなり」…〈〜できるものはない〉<b>否定</b>。</li>
+            <li><b>無不陥</b>＝「陥さざる無きなり」…〈〜しないものはない〉<b>二重否定＝強い肯定</b>（何でも突き通す）。この2つの訳し分けが最頻出！</li>
+            <li><b>能</b>の読み分け…「不・弗」のすぐ下なら<b>「あたはず」</b>（できない）。それ以外は<b>「よく」</b>（できる）。</li>
+            <li><b>不可〜</b>＝「〜すべからず」…〈〜できない〉。ここでは禁止ではなく不可能。</li>
+            <li><b>レ点</b>＝すぐ下の一字を先に読んで一字上へ返る。<b>一二点</b>＝離れた字に返る（「一」まで読んでから「二」へ）。</li>
+            <li><b>「之」</b>…「誉之」の之は「これ（盾）」、「吾盾之堅」の之は「の」。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="toraSec">
+        <h3>出典と故事成語</h3>
+        <div class="toraCard">
+          <p class="toraLine">出典：<b class="hak">『韓非子』</b>（戦国時代の思想家・韓非）</p>
+          <p class="toraLine">故事成語「矛盾」＝<b>前と後ろの話が食い違って、つじつまが合わないこと</b>。この話の売り文句が食い違ったところから生まれた言葉。</p>
+        </div>
+        <p class="note">※書き下し文は教科書によって細かい部分が少し違うことがあります（「能く陥す莫きなり／能く陥すもの莫きなり」「応ふること能はざるなり／応ふる能はざるなり」など）。授業で配られた本文を優先して覚えてね。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stamp" id="stamp" aria-hidden="true"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= 効果音（Web Audio） ================= */
+  var actx = null;
+  var soundOn = true;
+
+  function beep(freq, dur, type, vol, delay) {
+    if (!soundOn) return;
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!actx) actx = new AC();
+      if (actx.state === 'suspended' && actx.resume) actx.resume();
+      var t0 = actx.currentTime + (delay || 0);
+      var o = actx.createOscillator();
+      var g = actx.createGain();
+      o.type = type || 'sine';
+      o.frequency.setValueAtTime(freq, t0);
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(vol || 0.1, t0 + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+      o.connect(g);
+      g.connect(actx.destination);
+      o.start(t0);
+      o.stop(t0 + dur + 0.03);
+    } catch (e) { /* 音が出せない環境でも止めない */ }
+  }
+
+  function sfx(kind) {
+    if (kind === 'correct') { beep(680, 0.1, 'sine', 0.09, 0); beep(900, 0.14, 'sine', 0.09, 0.09); }
+    else if (kind === 'wrong') { beep(200, 0.16, 'triangle', 0.09, 0); beep(150, 0.2, 'triangle', 0.09, 0.13); }
+    else if (kind === 'tap') { beep(560, 0.05, 'triangle', 0.05, 0); }
+    else if (kind === 'undo') { beep(400, 0.06, 'triangle', 0.05, 0); }
+    else if (kind === 'win') { [523, 659, 784, 1047].forEach(function (f, i) { beep(f, 0.18, 'sine', 0.09, i * 0.1); }); }
+  }
+
+  /* ================= 便利関数 ================= */
+  function $(id) { return document.getElementById(id); }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function store(key, val) {
+    try { window.localStorage.setItem(key, String(val)); return true; }
+    catch (e) { return false; }
+  }
+  function read(key) {
+    try {
+      var v = window.localStorage.getItem(key);
+      return v === null ? null : Number(v);
+    } catch (e) { return null; }
+  }
+
+  /* ================= 問題データ：読み・意味 ================= */
+  var Q1 = [
+    { q: '「鬻ぐ」の読みは？', choices: ['ひさぐ', 'うる', 'かう', 'あきなう'], a: 0,
+      note: '「鬻ぐ」＝ひさぐ。「売る」という意味だよ。',
+      detail: '本文：楚人有鬻盾与矛者。（楚人に盾と矛とを鬻ぐ者有り）' },
+    { q: '「誉む」の読みは？', choices: ['ほむ', 'よむ', 'たたむ', 'うやまう'], a: 0,
+      note: '「誉む」＝ほむ。「ほめる」という意味。',
+      detail: '本文：誉之曰（之を誉めて曰はく）' },
+    { q: '「吾盾之堅」の「堅き」の読みは？', choices: ['かたき', 'つよき', 'かしこき', 'さかき'], a: 0,
+      note: '「堅し」＝かたし。ここは「堅きこと」で「かたいこと」。',
+      detail: '本文：吾盾之堅（吾が盾の堅きこと）' },
+    { q: '「莫し」の読みと意味は？', choices: ['なし（〜ない）', 'なかれ（〜するな）', 'すくなし（少ない）', 'あらし（荒い）'], a: 0,
+      note: '「莫」は「なし」で「〜ない」の意味。「なかれ」と読むと禁止になるので読み分けに注意！',
+      detail: '本文：莫能陥也（能く陥す莫きなり）' },
+    { q: 'このお話の「陥す」の意味は？', choices: ['突き通す', '落ちる', 'だます', 'かくす'], a: 0,
+      note: 'ここでの「陥」は「とほす」と読み、「突き通す」という意味だよ。',
+      detail: '本文：陥子之盾（子の盾を陥さば）' },
+    { q: '「吾矛之利」の「利」の意味は？', choices: ['鋭い（よく切れる）', 'もうけ', '役に立つ', 'はやい'], a: 0,
+      note: '「利し」＝鋭くてよく切れること。読みは「と（き）」や「するど（き）」だよ。',
+      detail: '本文：吾矛之利（吾が矛の利きこと）' },
+    { q: '「或」の読みは？', choices: ['あるひと', 'あるいは', 'たまたま', 'もしくは'], a: 0,
+      note: '「或」＝あるひと。「ある人が言うことには」と、話が進む合図だよ。',
+      detail: '本文：或曰（或るひと曰はく）' },
+    { q: '「何如」の読みと意味は？', choices: ['いかん（どうか）', 'いかがわしい', 'なにごと', 'いかにも'], a: 0,
+      note: '「何如」＝いかん。「どうなるか」とようすをたずねる言葉。「如何（どうしたらよいか）」とは別物！',
+      detail: '本文：陥子之盾、何如。（子の盾を陥さば、何如）' },
+    { q: '「弗」の意味は？', choices: ['〜ない（「不」と同じ）', '〜するな', '〜だろう', '〜しなさい'], a: 0,
+      note: '「弗」＝ず。「不」と同じ打ち消しの字だよ。',
+      detail: '本文：其人弗能応也（其の人応ふること能はざるなり）' },
+    { q: '「応ふ」の読みと意味は？', choices: ['こたふ（返事をする）', 'おうず（受け入れる）', 'まねく（呼ぶ）', 'したがう（従う）'], a: 0,
+      note: '「応ふ」＝こたふ。「答える・返事をする」という意味。',
+      detail: '本文：其人弗能応也' },
+    { q: '「夫れ」の読みと意味は？', choices: ['それ（そもそも）', 'おっと', 'おのれ', 'かれ'], a: 0,
+      note: '「夫れ」＝それ。文の初めに置いて「そもそも」と話をまとめるよ。',
+      detail: '本文：夫不可陥之盾（夫れ陥すべからざるの盾）' },
+    { q: '「同世」の意味は？', choices: ['同じ世（時代）に存在すること', '同じ国に生まれること', '同じ家に住むこと', '同じ年齢であること'], a: 0,
+      note: '「同世」＝どうせい。「同じ世に立つ」で「両立する」という意味になるよ。',
+      detail: '本文：不可同世而立（世を同じくして立つべからず）' },
+    { q: '「能はず」の読みは？', choices: ['あたはず', 'よはず', 'のうはず', 'ちからはず'], a: 0,
+      note: '「不」「弗」のすぐ下の「能」は「あた（はず）」＝「できない」。それ以外の「能」は「よ（く）」＝「できる」だよ。',
+      detail: '本文：其人弗能応也（其の人応ふること能はざるなり）' }
+  ];
+
+  /* ================= 問題データ：物語・テスト対策 ================= */
+  var Q3 = [
+    { q: '盾を売る人は、盾をどのように誉めたか？',
+      choices: ['どんなものでも突き通せないほど堅い', 'どんなものでも突き通すほど鋭い', 'どんなに重くても運べるほど軽い', '何年たっても色があせない'],
+      a: 0,
+      note: '「吾盾之堅、莫能陥也」＝「私の盾の堅いこと、能く陥す莫きなり」。否定の「莫」で「突き通せるものはない」と言っているよ。',
+      detail: '② 誉之曰、「吾盾之堅、莫能陥也。」' },
+    { q: 'その人は、矛をどのように誉めたか？',
+      choices: ['どんなものでも突き通すほど鋭い', 'どんなものでも突き通せないほど堅い', '軽くて持ちやすい', '値段が安い'],
+      a: 0,
+      note: '「物に於いて陥さざる無きなり」＝「どんなものに対しても、突き通さないものはない」＝何でも突き通す。二重否定で強い肯定だよ。',
+      detail: '③ 又誉其矛曰、「吾矛之利、於物無不陥也。」' },
+    { q: '「或曰、以子之矛、陥子之盾、何如」とあるが、ある人は何をたずねたか？',
+      choices: ['あなたの矛で、あなたの盾を突いたら、どうなるのか', 'その盾と矛は、いくらで売るのか', 'その盾と矛は、どこで作られたのか', 'その矛で、ほかの人の盾を突いてみてはどうか'],
+      a: 0,
+      note: '「子」＝あなた、「以」＝〜で（道具）。この質問がお話のクライマックス！',
+      detail: '④ 或曰、「以子之矛、陥子之盾、何如。」' },
+    { q: '商人が答えられなかったのはなぜ？',
+      choices: ['どちらに転んでも、盾か矛のどちらかの自慢がうそになるから', 'ことばの意味がわからなかったから', '盾と矛を両方とも売ってしまったから', 'お客さんが多すぎて、答える時間がなかったから'],
+      a: 0,
+      note: '矛が盾を突き通せば「盾の自慢」が、突き通せなければ「矛の自慢」がうそになる。両方は成り立たない＝これが「矛盾」。',
+      detail: '⑤ 其人弗能応也。（其の人応ふること能はざるなり）' },
+    { q: '「無不陥」の意味として正しいのは？',
+      choices: ['突き通さないものはない（＝何でも突き通す）', '突き通すものはない（＝何も突き通せない）', '突き通せないことがある', '突き通すかもしれない'],
+      a: 0,
+      note: '「無不〜」は二重否定で「〜しないものはない」＝強い肯定。「莫能陥（突き通せるものはない）」との訳し分けがテストの定番！',
+      detail: '「莫能陥」＝否定（〜できるものはない）／「無不陥」＝二重否定（〜しないものはない）' },
+    { q: '「其人弗能応也」の「能」の読みは？',
+      choices: ['あた（はず）', 'よ（く）', 'のう', 'ちから'],
+      a: 0,
+      note: '「弗能〜」＝「〜する能はず」＝できない。打ち消しの「不・弗」の下の「能」は「あたはず」と読むよ。',
+      detail: '⑤ 其人弗能応也。（其の人応ふること能はざるなり）' },
+    { q: '「夫不可陥之盾、与無不陥之矛、不可同世而立」の意味は？',
+      choices: ['突き通せない盾と、必ず突き通す矛とは、同じ世に両立できない', 'よい盾とよい矛は、同じ店で売るべきだ', '盾と矛は、同じ時代に発明された', '盾と矛を両方買うと、安くなる'],
+      a: 0,
+      note: '「同世而立」＝同じ世に並び立つ。「両立しない」＝つじつまが合わない、というこの話の結論だよ。',
+      detail: '⑥ 夫不可陥之盾、与無不陥之矛、不可同世而立。' },
+    { q: '故事成語「矛盾」の意味は？',
+      choices: ['前と後ろの話が食い違って、つじつまが合わないこと', '二つのよいものを両方手に入れること', '同じことを何度もくり返すこと', '強いものが弱いものを助けること'],
+      a: 0,
+      note: 'このお話から生まれた言葉。「矛」と「盾」の売り文句が食い違ったのが由来だよ。',
+      detail: '出典：『韓非子』「矛盾」' },
+    { q: 'このお話の出典（書かれた本）は？',
+      choices: ['『韓非子』（韓非）', '『論語』（孔子）', '『史記』（司馬遷）', '『枕草子』（清少納言）'],
+      a: 0,
+      note: '『韓非子』は戦国時代の思想家・韓非の書物。法（きまり）で国を治めるべきだと説いたよ。',
+      detail: '出典：『韓非子』（戦国時代・韓非）' },
+    { q: '「以子之矛」の「子」の意味は？',
+      choices: ['あなた', '子ども', '息子', '先生'],
+      a: 0,
+      note: '漢文の「子」は「あなた」。相手をうやまって呼ぶ言葉だよ。',
+      detail: '④ 以子之矛（子の矛を以て）' }
+  ];
+
+  /* ================= 問題データ：返り点・書き下し（総仕上げ用） ================= */
+  var RR = [
+    { q: '「莫能陥也」を「能く陥す莫きなり」と読むとき、返り点はどう付く？',
+      choices: ['「莫」に二点、「陥」に一点', '「莫」にレ点、「能」にレ点', '「能」に一点、「也」に二点', '返り点は付かない'],
+      a: 0,
+      note: '「莫」から「能・陥」まで返るので二点・一点。先に「能く陥す」と読み、さいごに「莫（な）きなり」に返るよ。',
+      detail: '② 莫二能陥一也' },
+    { q: '「於物無不陥也」で、「物」の次に読む字は？',
+      choices: ['於', '無', '不', '陥'],
+      a: 0,
+      note: '「於レ物」はレ点で「物」を先に読む。「物に於いて」となるよ。',
+      detail: '③ 於レ物ニ無レ不レ陥也' },
+    { q: '「其人弗能応也」の書き下し文は？',
+      choices: ['其の人応ふること能はざるなり', '其の人能く応ふるなり', '其の人の応ふる能はざるなり', '其の人応ふることを能はざるなり'],
+      a: 0,
+      note: '「弗能応」＝「応ふる（こと）能はず」。不可能の言い方だよ。',
+      detail: '⑤ 其人弗能応也。' },
+    { q: '「以子之矛」の書き下し文は？',
+      choices: ['子の矛を以て', '子の矛を以つ', '以て子の矛を', '子の矛に以て'],
+      a: 0,
+      note: '「以」は「〜を以て」と返って読む（以二子之矛一）。',
+      detail: '④ 以子之矛（以二子之矛一）' },
+    { q: 'レ点の説明として正しいのは？',
+      choices: ['すぐ下の一字を先に読んで、一字上に返る', '二つ以上離れた字に返る', '同じ字を二度読む', '文の終わりで一度止まる'],
+      a: 0,
+      note: 'レ点は一字だけ返る印。離れた字に返るときは一二点を使うよ。',
+      detail: '例：読レ書 → 「書を読む」' },
+    { q: '「不可同世而立」の書き下し文は？',
+      choices: ['世を同じくして立つべからず', '同じ世に立ちて可からず', '世を同しくして立つべし', '同じ世に立ちつべからず'],
+      a: 0,
+      note: '「不可〜」＝「〜すべからず」（〜できない）。「同世」「而立（して）」の順に読むよ。',
+      detail: '⑥ 夫不可陥之盾、与無不陥之矛、不可同世而立。' }
+  ];
+
+  /* ================= 問題データ：返り点パズル ================= */
+  var PZ = [
+    {
+      chars: [
+        { c: '誉', k: '', o: 'めて' },
+        { c: '之', k: 'レ', o: 'を' },
+        { c: '曰', k: '', o: 'はく' }
+      ],
+      order: [1, 0, 2],
+      kundoku: '之を誉めて曰はく、',
+      point: '「誉レ之」は、すぐ下の「之」を先に読むレ点。「之を誉めて」と読むよ。',
+      meaning: 'それをほめて言うことには、'
+    },
+    {
+      chars: [
+        { c: '莫', k: '二', o: 'き' },
+        { c: '能', k: '', o: 'く' },
+        { c: '陥', k: '一', o: 'す' },
+        { c: '也', k: '', o: 'なり' }
+      ],
+      order: [1, 2, 0, 3],
+      kundoku: '能く陥す莫きなり。',
+      point: '「莫二能陥一」は、二点の「莫」から一点の「陥」まで返る。まず「能く陥す」と読んで、さいごに「莫（な）きなり」。',
+      meaning: '突き通すことのできるものはない。'
+    },
+    {
+      chars: [
+        { c: '於', k: 'レ', o: 'いて' },
+        { c: '物', k: '', o: 'に' },
+        { c: '無', k: 'レ', o: 'き' },
+        { c: '不', k: 'レ', o: 'ざる' },
+        { c: '陥', k: '', o: 'さ' },
+        { c: '也', k: '', o: 'なり' }
+      ],
+      order: [1, 0, 4, 3, 2, 5],
+      kundoku: '物に於いて陥さざる無きなり。',
+      point: 'レ点が3つ。「於レ物」で「物に於いて」、「無レ不レ陥」で「陥さざる無し」。二重否定で「必ず突き通す」という強い肯定になるよ。',
+      meaning: 'どんなものに対しても、突き通さないものはない。'
+    },
+    {
+      chars: [
+        { c: '以', k: '二', o: 'て' },
+        { c: '子', k: '', o: '' },
+        { c: '之', k: '', o: 'の' },
+        { c: '矛', k: '一', o: 'を' }
+      ],
+      order: [1, 2, 3, 0],
+      kundoku: '子の矛を以て、',
+      point: '「以二子之矛一」は「以」に二点、「矛」に一点。「子の矛を」まで読んでから「以て」に返るよ。',
+      meaning: 'あなたの矛で、'
+    },
+    {
+      chars: [
+        { c: '其', k: '', o: 'の' },
+        { c: '人', k: '', o: '' },
+        { c: '弗', k: 'レ', o: 'ざる' },
+        { c: '能', k: 'レ', o: 'は' },
+        { c: '応', k: '', o: 'ふること' },
+        { c: '也', k: '', o: 'なり' }
+      ],
+      order: [0, 1, 4, 3, 2, 5],
+      kundoku: '其の人応ふること能はざるなり。',
+      point: '「弗レ能レ応」はレ点が2つ続く形。「応ふる」→「能は」→「弗（ざる）」の順に読むよ。',
+      meaning: 'その人は答えることができなかった。'
+    },
+    {
+      chars: [
+        { c: '陥', k: '二', o: 'さば' },
+        { c: '子', k: '', o: '' },
+        { c: '之', k: '', o: 'の' },
+        { c: '盾', k: '一', o: 'を' },
+        { c: '何', k: '', o: 'いかん' },
+        { c: '如', k: '', o: '' }
+      ],
+      order: [1, 2, 3, 0, 4, 5],
+      kundoku: '子の盾を陥さば、何如。',
+      point: '「陥二子之盾一」は「陥」に二点、「盾」に一点。「子の盾を」を先に読んでから「陥さば」に返るよ。',
+      meaning: 'あなたの盾を突いたならば、どうか。'
+    }
+  ];
+
+  /* ================= モード設定 ================= */
+  var MODES = {
+    r1: { label: '読み・意味道場', tag: '読み・意味', count: 10, reviewTitle: 'まちがえた問題の見直し' },
+    story: { label: '物語・テスト対策', tag: '物語・テスト', count: 8, reviewTitle: 'まちがえた問題の見直し' },
+    exam: { label: '総仕上げテスト', tag: '総仕上げ', count: 10, reviewTitle: 'まちがえた問題の見直し' }
+  };
+
+  /* ================= 状態 ================= */
+  var S = {
+    mode: null,
+    items: [],
+    idx: 0,
+    correct: 0,
+    combo: 0,
+    wrong: [],
+    answered: false,
+    // パズル
+    pItems: [],
+    pIdx: 0,
+    pSolved: 0,
+    pMistake: false,
+    pAnswered: false,
+    placed: [],
+    pReview: []
+  };
+
+  /* ================= 画面切り替え ================= */
+  var SCREENS = ['screen-home', 'screen-quiz', 'screen-puzzle', 'screen-result'];
+
+  function showScreen(id) {
+    SCREENS.forEach(function (s) {
+      var el = $(s);
+      if (el) el.classList.toggle('active', s === id);
+    });
+    $('homeBtn').hidden = (id === 'screen-home');
+    window.scrollTo(0, 0);
+  }
+
+  /* ================= スタンプ ================= */
+  var stampTimer = null;
+  function clearStamp() {
+    var el = $('stamp');
+    el.classList.remove('show');
+    if (stampTimer) { clearTimeout(stampTimer); stampTimer = null; }
+  }
+
+  function stamp(text, kind) {
+    var el = $('stamp');
+    el.className = 'stamp' + (kind === 'ng' ? ' ng' : '');
+    el.textContent = text;
+    void el.offsetWidth;
+    el.classList.add('show');
+    if (stampTimer) clearTimeout(stampTimer);
+    stampTimer = setTimeout(function () {
+      el.classList.remove('show');
+    }, 1050);
+  }
+
+  /* ================= 4択クイズ ================= */
+  function startQuiz(mode) {
+    clearStamp();
+    var pool;
+    if (mode === 'exam') {
+      pool = shuffle(Q1.concat(Q3).concat(RR));
+    } else if (mode === 'story') {
+      pool = shuffle(Q3);
+    } else {
+      pool = shuffle(Q1);
+    }
+    var conf = MODES[mode];
+    S.mode = mode;
+    S.items = pool.slice(0, conf.count);
+    S.idx = 0;
+    S.correct = 0;
+    S.combo = 0;
+    S.wrong = [];
+    S.answered = false;
+    showScreen('screen-quiz');
+    renderQuestion();
+  }
+
+  function updateCombo() {
+    var el = $('comboBadge');
+    if (S.combo >= 2) {
+      el.textContent = '🔥 ' + S.combo + 'コンボ';
+      el.classList.add('on');
+      void el.offsetWidth;
+    } else {
+      el.classList.remove('on');
+    }
+  }
+
+  function renderQuestion() {
+    var it = S.items[S.idx];
+    var conf = MODES[S.mode];
+    S.answered = false;
+
+    $('qTag').textContent = '第' + (S.idx + 1) + '問 ／ ' + conf.label;
+    $('qText').textContent = it.q;
+    $('progText').textContent = (S.idx + 1) + ' / ' + S.items.length;
+    $('progFill').style.width = (S.idx / S.items.length * 100) + '%';
+    $('scoreBadge').textContent = S.correct + '問正解';
+    $('feedback').hidden = true;
+    $('feedback').className = 'feedback';
+    $('fbDetail').textContent = '';
+    $('nextBtn').hidden = true;
+    updateCombo();
+
+    var opts = shuffle(it.choices.map(function (t, i) { return { t: t, ok: i === it.a }; }));
+    var marks = ['ア', 'イ', 'ウ', 'エ'];
+    var wrap = $('options');
+    wrap.innerHTML = '';
+    opts.forEach(function (o, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.setAttribute('data-ok', o.ok ? '1' : '0');
+      b.innerHTML = '<span class="mark">' + marks[i] + '</span><span class="opt-t">' + esc(o.t) + '</span>';
+      b.addEventListener('click', function () { answerQuestion(b, o); });
+      wrap.appendChild(b);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function answerQuestion(btn, o) {
+    if (S.answered) return;
+    S.answered = true;
+    var it = S.items[S.idx];
+
+    var all = $('options').querySelectorAll('.opt');
+    for (var i = 0; i < all.length; i++) {
+      all[i].classList.add('locked');
+      if (all[i].getAttribute('data-ok') === '1') all[i].classList.add('correct');
+      else all[i].classList.add('dim');
+    }
+
+    if (o.ok) {
+      S.correct++;
+      S.combo++;
+      btn.classList.add('chosen');
+      btn.classList.remove('dim');
+      btn.classList.add('pop');
+      stamp('○ 正解！', 'ok');
+      sfx('correct');
+    } else {
+      S.combo = 0;
+      btn.classList.add('chosen', 'wrong', 'shake');
+      btn.classList.remove('dim');
+      S.wrong.push({ q: it.q, a: it.choices[it.a], n: it.note });
+      stamp('× ざんねん', 'ng');
+      sfx('wrong');
+    }
+
+    updateCombo();
+    $('scoreBadge').textContent = S.correct + '問正解';
+
+    var fb = $('feedback');
+    fb.hidden = false;
+    fb.className = 'feedback ' + (o.ok ? 'ok' : 'ng');
+    $('fbHead').textContent = o.ok ? '○ 正解！' : '× 正解は「' + it.choices[it.a] + '」';
+    $('fbNote').textContent = it.note;
+    $('fbDetail').textContent = it.detail || '';
+
+    var next = $('nextBtn');
+    next.hidden = false;
+    next.textContent = (S.idx === S.items.length - 1) ? '結果を見る ▶' : '次へ ▶';
+    $('progFill').style.width = ((S.idx + 1) / S.items.length * 100) + '%';
+
+    setTimeout(function () {
+      if (fb.getBoundingClientRect().top < 0 || fb.getBoundingClientRect().bottom > window.innerHeight) {
+        fb.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 120);
+  }
+
+  function nextQuestion() {
+    S.idx++;
+    if (S.idx >= S.items.length) finishQuiz();
+    else renderQuestion();
+  }
+
+  function finishQuiz() {
+    var total = S.items.length;
+    var rate = total ? S.correct / total : 0;
+    var rank = 'C';
+    if (rate >= 1) rank = 'S';
+    else if (rate >= 0.8) rank = 'A';
+    else if (rate >= 0.6) rank = 'B';
+
+    var msg;
+    if (rank === 'S') msg = '完璧！テストはもう安心だね ✨';
+    else if (rank === 'A') msg = 'あと少しで満点！まちがえた問題を見直せばバッチリ。';
+    else if (rank === 'B') msg = '基本はOK。虎の巻でもう一度たしかめよう。';
+    else msg = '虎の巻を読んでから、もう一度チャレンジしてみよう！';
+
+    var key = 'mujun-best-' + S.mode;
+    var prev = read(key);
+    var scorePct = Math.round(rate * 100);
+    var bestMsg = '';
+    if (prev === null || scorePct > prev) {
+      store(key, scorePct);
+      bestMsg = '（自己ベスト更新！）';
+    } else {
+      bestMsg = '（これまでのベスト：' + prev + '点）';
+    }
+
+    showResult({
+      tag: MODES[S.mode].label,
+      badge: rank,
+      badgeClass: rank === 'S' ? '' : 'r-' + rank.toLowerCase(),
+      score: S.correct + ' / ' + total + '問正解（' + scorePct + '点）',
+      msg: msg + bestMsg,
+      reviewTitle: 'まちがえた問題の見直し',
+      review: S.wrong,
+      perfectText: '全問正解！すばらしい！この調子でテストもバッチリだね 🎉'
+    });
+    if (rank === 'S') sfx('win');
+  }
+
+  /* ================= 結果表示 ================= */
+  function showResult(o) {
+    clearStamp();
+    $('resTag').textContent = o.tag;
+    var badge = $('rankBadge');
+    badge.textContent = o.badge;
+    badge.className = 'rankBadge ' + (o.badgeClass || '') + (String(o.badge).length > 1 ? ' text' : '');
+    $('resScore').textContent = o.score;
+    $('resMsg').textContent = o.msg;
+
+    var box = $('reviewBox');
+    box.innerHTML = '';
+    if (o.review && o.review.length) {
+      var h = document.createElement('p');
+      h.className = 'reviewTitle';
+      h.textContent = o.reviewTitle;
+      box.appendChild(h);
+      o.review.forEach(function (r) {
+        var d = document.createElement('div');
+        d.className = 'revItem';
+        d.innerHTML = '<p class="revQ">' + esc(r.q) + '</p>' +
+                      '<p class="revA">正解：' + esc(r.a) + '</p>' +
+                      '<p class="revN">' + esc(r.n) + '</p>';
+        box.appendChild(d);
+      });
+    } else if (o.perfectText) {
+      var p = document.createElement('p');
+      p.className = 'perfect';
+      p.textContent = o.perfectText;
+      box.appendChild(p);
+    }
+    showScreen('screen-result');
+  }
+
+  /* ================= 返り点パズル ================= */
+  function startPuzzle() {
+    clearStamp();
+    S.mode = 'pz';
+    S.pItems = shuffle(PZ);
+    S.pIdx = 0;
+    S.pSolved = 0;
+    S.pReview = [];
+    showScreen('screen-puzzle');
+    renderPuzzle();
+  }
+
+  function renderPuzzle() {
+    var p = S.pItems[S.pIdx];
+    S.placed = [];
+    S.pMistake = false;
+    S.pAnswered = false;
+
+    $('pProgText').textContent = (S.pIdx + 1) + ' / ' + S.pItems.length;
+    $('pProgFill').style.width = (S.pIdx / S.pItems.length * 100) + '%';
+    $('pScoreBadge').textContent = S.pSolved + '問クリア';
+    $('pzFeedback').hidden = true;
+    $('pzNext').hidden = true;
+    $('pzCheck').hidden = false;
+    $('pzUndo').hidden = false;
+    $('pzHintBtn').hidden = false;
+    $('pzHint').textContent = '';
+
+    var hb = $('pzHakubun');
+    hb.innerHTML = '';
+    p.chars.forEach(function (ch) {
+      var d = document.createElement('span');
+      d.className = 'hb-char';
+      d.innerHTML = esc(ch.c) + (ch.k ? '<span class="kaeri">' + esc(ch.k) + '</span>' : '');
+      hb.appendChild(d);
+    });
+
+    var pool = $('pzPool');
+    pool.innerHTML = '';
+    p.chars.forEach(function (ch, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'block';
+      b.setAttribute('data-i', String(i));
+      b.innerHTML = '<span class="bch">' + esc(ch.c) + '</span>' + (ch.o ? '<span class="bok">' + esc(ch.o) + '</span>' : '');
+      b.addEventListener('click', function () { placeBlock(i); });
+      pool.appendChild(b);
+    });
+
+    renderAnswer();
+  }
+
+  function renderAnswer() {
+    var p = S.pItems[S.pIdx];
+    var ans = $('pzAnswer');
+    ans.innerHTML = '';
+    S.placed.forEach(function (idx) {
+      var ch = p.chars[idx];
+      var d = document.createElement('span');
+      d.className = 'slot filled';
+      d.innerHTML = '<span class="bch">' + esc(ch.c) + '</span>' + (ch.o ? '<span class="bok">' + esc(ch.o) + '</span>' : '');
+      ans.appendChild(d);
+    });
+    for (var k = S.placed.length; k < p.chars.length; k++) {
+      var e = document.createElement('span');
+      e.className = 'slot';
+      ans.appendChild(e);
+    }
+    var blocks = $('pzPool').querySelectorAll('.block');
+    for (var i = 0; i < blocks.length; i++) {
+      var used = S.placed.indexOf(Number(blocks[i].getAttribute('data-i'))) >= 0;
+      blocks[i].classList.toggle('used', used);
+    }
+  }
+
+  function placeBlock(i) {
+    if (S.pAnswered) return;
+    if (S.placed.indexOf(i) >= 0) return;
+    S.placed.push(i);
+    sfx('tap');
+    $('pzHint').textContent = '';
+    renderAnswer();
+  }
+
+  function undoBlock() {
+    if (S.pAnswered) return;
+    if (!S.placed.length) { $('pzHint').textContent = 'まだ何もならべていないよ。'; return; }
+    S.placed.pop();
+    sfx('undo');
+    $('pzHint').textContent = '';
+    renderAnswer();
+  }
+
+  function hintBlock() {
+    if (S.pAnswered) return;
+    var p = S.pItems[S.pIdx];
+    var pos = S.placed.length;
+    if (pos >= p.chars.length) { $('pzHint').textContent = '「判定する」を押してみよう！'; return; }
+    var need = p.order[pos];
+    var target = p.chars[need];
+    $('pzHint').textContent = 'つぎに読むのは「' + target.c + '」だよ。';
+    var blocks = $('pzPool').querySelectorAll('.block');
+    for (var i = 0; i < blocks.length; i++) {
+      if (Number(blocks[i].getAttribute('data-i')) === need) {
+        blocks[i].classList.remove('pulse');
+        void blocks[i].offsetWidth;
+        blocks[i].classList.add('pulse');
+      }
+    }
+  }
+
+  function checkPuzzle() {
+    if (S.pAnswered) return;
+    var p = S.pItems[S.pIdx];
+    if (S.placed.length < p.chars.length) {
+      $('pzHint').textContent = 'まだ全部ならべていないよ。のこり' + (p.chars.length - S.placed.length) + '字！';
+      return;
+    }
+
+    var ok = true;
+    var firstBad = -1;
+    for (var i = 0; i < p.chars.length; i++) {
+      if (S.placed[i] !== p.order[i]) { ok = false; firstBad = i; break; }
+    }
+
+    if (!ok) {
+      S.pMistake = true;
+      sfx('wrong');
+      $('pzHint').textContent = (firstBad + 1) + '番目がちがうみたい。「1つ戻す」で直してみよう！';
+      var ansEl = $('pzAnswer');
+      ansEl.classList.remove('shake');
+      void ansEl.offsetWidth;
+      ansEl.classList.add('shake');
+      return;
+    }
+
+    S.pAnswered = true;
+    S.pSolved++;
+    $('pScoreBadge').textContent = S.pSolved + '問クリア';
+    sfx('correct');
+    stamp('○ せいかい！', 'ok');
+
+    var fb = $('pzFeedback');
+    fb.hidden = false;
+    fb.className = 'feedback ok';
+    $('pzFbHead').textContent = '○ 正解！「' + p.kundoku + '」';
+    $('pzKundoku').textContent = '意味：' + p.meaning;
+    $('pzPoint').textContent = p.point;
+
+    $('pzCheck').hidden = true;
+    $('pzUndo').hidden = true;
+    $('pzHintBtn').hidden = true;
+    $('pzHint').textContent = '';
+    var nx = $('pzNext');
+    nx.hidden = false;
+    nx.textContent = (S.pIdx === S.pItems.length - 1) ? '結果を見る ▶' : '次へ ▶';
+    $('pProgFill').style.width = ((S.pIdx + 1) / S.pItems.length * 100) + '%';
+
+    if (S.pMistake) {
+      S.pReview.push({
+        q: p.chars.map(function (c) { return c.c; }).join(''),
+        a: p.kundoku,
+        n: p.point
+      });
+    }
+  }
+
+  function nextPuzzle() {
+    S.pIdx++;
+    if (S.pIdx >= S.pItems.length) finishPuzzle();
+    else renderPuzzle();
+  }
+
+  function finishPuzzle() {
+    var t = S.pItems.length;
+    var rate = S.pSolved / t;
+    var badge;
+    if (S.pSolved === t) badge = '全問クリア！';
+    else if (rate >= 0.7) badge = 'よくできた！';
+    else badge = 'もう一息！';
+    var key = 'mujun-best-pz';
+    var prev = read(key);
+    if (prev === null || S.pSolved > prev) store(key, S.pSolved);
+    sfx(S.pSolved === t ? 'win' : 'correct');
+    showResult({
+      tag: '返り点パズル',
+      badge: badge,
+      badgeClass: 'r-b',
+      score: t + '問中 ' + S.pSolved + '問クリア',
+      msg: 'レ点は「下の一字を先に」、一二点は「一まで読んでから二へ」。',
+      reviewTitle: 'まちがえた問題の書き下し（見直し）',
+      review: S.pReview,
+      perfectText: '全問ノーミス！返り点はもうバッチリだね 🎉'
+    });
+  }
+
+  /* ================= ベスト記録の表示 ================= */
+  function refreshBest() {
+    var parts = [];
+    var r1 = read('mujun-best-r1');
+    var st = read('mujun-best-story');
+    var ex = read('mujun-best-exam');
+    var pz = read('mujun-best-pz');
+    if (r1 !== null) parts.push('読み意味 ' + r1 + '点');
+    if (st !== null) parts.push('物語 ' + st + '点');
+    if (ex !== null) parts.push('総仕上げ ' + ex + '点');
+    if (pz !== null) parts.push('パズル ' + pz + '/' + PZ.length);
+    $('bestLine').textContent = parts.length ? '★ 自己ベスト：' + parts.join('　/　') : '';
+  }
+
+  /* ================= イベント設定 ================= */
+  function bind() {
+    var modes = document.querySelectorAll('.mode');
+    for (var i = 0; i < modes.length; i++) {
+      modes[i].addEventListener('click', function () {
+        var m = this.getAttribute('data-mode');
+        sfx('tap');
+        if (m === 'pz') startPuzzle();
+        else startQuiz(m);
+      });
+    }
+
+    $('nextBtn').addEventListener('click', function () {
+      sfx('tap');
+      nextQuestion();
+    });
+
+    $('pzUndo').addEventListener('click', undoBlock);
+    $('pzHintBtn').addEventListener('click', hintBlock);
+    $('pzCheck').addEventListener('click', checkPuzzle);
+    $('pzNext').addEventListener('click', function () {
+      sfx('tap');
+      nextPuzzle();
+    });
+
+    $('retryBtn').addEventListener('click', function () {
+      sfx('tap');
+      if (S.mode === 'pz') startPuzzle();
+      else startQuiz(S.mode || 'r1');
+    });
+
+    $('toHomeBtn').addEventListener('click', function () {
+      sfx('tap');
+      showScreen('screen-home');
+      refreshBest();
+    });
+
+    $('homeBtn').addEventListener('click', function () {
+      sfx('tap');
+      showScreen('screen-home');
+      refreshBest();
+    });
+
+    $('soundBtn').addEventListener('click', function () {
+      soundOn = !soundOn;
+      $('soundBtn').textContent = soundOn ? '🔊' : '🔇';
+      $('soundBtn').setAttribute('aria-label', soundOn ? '音を消す' : '音を出す');
+      if (soundOn) sfx('tap');
+    });
+
+    $('toranoBtn').addEventListener('click', function () {
+      sfx('tap');
+      $('toranoModal').classList.add('open');
+    });
+    $('toranoClose').addEventListener('click', function () {
+      $('toranoModal').classList.remove('open');
+    });
+    $('toranoModal').addEventListener('click', function (e) {
+      if (e.target === $('toranoModal')) $('toranoModal').classList.remove('open');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') $('toranoModal').classList.remove('open');
+    });
+  }
+
+  /* ================= 起動 ================= */
+  document.addEventListener('DOMContentLoaded', function () {
+    bind();
+    refreshBest();
+  });
+})();
+</script>
+</body>
+</html>
