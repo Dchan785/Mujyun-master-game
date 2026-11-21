@@ -438,7 +438,7 @@ h1,h2,h3,h4,p{margin:0;}
           <span class="mode-go">▶</span>
         </button>
       </div>
-      <p class="foot-note">20〜26番の7首／テスト対策クイズは全32問からランダム<br>外部通信なし・オフラインでもあそべます</p>
+      <p class="foot-note">20〜26番の7首／テスト対策クイズは全33問からランダム<br>外部通信なし・オフラインでもあそべます</p>
     </section>
 
     <section id="scr-play" class="screen">
@@ -888,7 +888,7 @@ function kimariOptions(p){
   var opts = [{ p:p, ok:true }].concat(others.map(function(x){ return { p:x, ok:false }; }));
   opts = shuffle(opts);
   return opts.map(function(o){
-    return { ok:o.ok, html:'<span class="p">'+esc(o.p.kimari)+'</span><span class="kk">'+(o.ok ? esc(o.p.kimariType) : '&nbsp;')+'</span>' };
+    return { ok:o.ok, html:'<span class="p">'+esc(o.p.kimari)+'</span><span class="kk">'+o.p.kimari.length+'字</span>' };
   });
 }
 function kamiOptions(p){
