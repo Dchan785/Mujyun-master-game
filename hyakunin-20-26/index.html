@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff7ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<title>百人一首 20〜26番 マスター｜テスト対策ゲーム</title>
+<style>
+:root{
+  --paper:#fffaf2;
+  --paper2:#fffdf9;
+  --ink:#453d38;
+  --ink2:#8d8078;
+  --shu:#c9455e;
+  --shu-d:#a83550;
+  --sakura:#f4aab9;
+  --sakura-l:#fde8ee;
+  --fuji:#ac9ad2;
+  --fuji-l:#eeebf9;
+  --matcha:#8fb886;
+  --matcha-l:#edf6e9;
+  --kin:#d9b878;
+  --line:#f0e2d6;
+  --line2:#e6d3c4;
+  --shadow:0 3px 0 #efdfd2;
+  --mincho:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  --r:18px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+html{background:var(--paper);}
+body{
+  font-family:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(760px 420px at 12% -6%, #ffeef3 0%, rgba(255,238,243,0) 62%),
+    radial-gradient(660px 400px at 104% 8%, #efecfb 0%, rgba(239,236,251,0) 58%),
+    radial-gradient(700px 460px at 50% 106%, #eef7ea 0%, rgba(238,247,234,0) 62%),
+    repeating-linear-gradient(52deg, rgba(200,170,140,.032) 0 2px, rgba(0,0,0,0) 2px 12px),
+    var(--paper);
+  min-height:100vh;
+  min-height:100dvh;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  touch-action:manipulation;
+  overflow-x:hidden;
+}
+button{font-family:inherit;color:inherit;}
+h1,h2,h3,h4,p{margin:0;}
+.app{max-width:480px;margin:0 auto;padding:0 13px calc(30px + env(safe-area-inset-bottom));}
+
+/* ---------- バー ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) 0 8px;
+  background:linear-gradient(rgba(255,250,242,.96), rgba(255,250,242,.88));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  margin-bottom:10px;
+}
+.iconbtn{
+  width:40px;height:40px;flex:0 0 40px;border-radius:50%;
+  border:2px solid var(--line);background:var(--paper2);
+  font-size:17px;line-height:1;display:grid;place-items:center;
+  box-shadow:0 2px 0 #efdfd2;cursor:pointer;padding:0;
+}
+.iconbtn:active{transform:translateY(1px);box-shadow:none;}
+.iconbtn[hidden]{display:none;}
+.iconbtn.off{color:#c3b6ac;}
+.brand{flex:1;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;}
+.brand-em{font-size:1.05rem;}
+.brand-txt{font-family:var(--mincho);font-size:.98rem;font-weight:700;letter-spacing:.08em;white-space:nowrap;}
+.brand-txt b{color:var(--shu);font-weight:700;}
+
+/* ---------- 画面 ---------- */
+.screen{display:none;padding-bottom:8px;}
+.screen.active{display:block;animation:fadein .26s ease-out both;}
+@keyframes fadein{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* ---------- ホーム ---------- */
+.hero{position:relative;text-align:center;padding:10px 0 14px;}
+.hero-deco{font-size:2.1rem;line-height:1;margin-bottom:2px;filter:drop-shadow(0 4px 6px rgba(201,69,94,.14));}
+.hero-title{
+  font-family:var(--mincho);
+  font-size:clamp(1.52rem,7.4vw,1.95rem);
+  line-height:1.42;letter-spacing:.08em;font-weight:700;color:#3f3a36;
+}
+.hero-title .hl{
+  color:var(--shu);
+  background:linear-gradient(transparent 66%, #ffe3ea 66%);
+  padding:0 .08em;
+}
+.hero-sub{margin-top:6px;font-size:.8rem;color:var(--ink2);letter-spacing:.04em;}
+.hero-sub b{color:#b4778c;}
+
+.card{
+  background:var(--paper2);border:2px solid var(--line);border-radius:var(--r);
+  padding:13px 13px;box-shadow:var(--shadow);
+}
+.prog-card{margin-bottom:14px;padding:12px 13px 13px;}
+.prog-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px;}
+.prog-head .t{font-size:.8rem;font-weight:800;letter-spacing:.06em;color:#8a7370;}
+.prog-head .s{font-size:.72rem;color:var(--ink2);text-align:right;}
+.dots{display:flex;justify-content:space-between;gap:5px;}
+.dot{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:.64rem;color:var(--ink2);
+}
+.dot .d{
+  width:100%;max-width:38px;aspect-ratio:1/1;border-radius:50%;
+  display:grid;place-items:center;font-size:.76rem;font-weight:800;
+  background:#f7efe6;border:2px solid #efe1d5;color:#b3a396;
+}
+.dot.l1 .d{background:#eef7ea;border-color:#c4dcbc;color:#5f8a55;}
+.dot.l2 .d{background:#fde8ee;border-color:#f2b9c8;color:#b8516c;}
+.dot.l3 .d{background:linear-gradient(140deg,#fff2d8,#ffe3ea);border-color:#e8c98a;color:#a8802f;box-shadow:0 0 0 3px rgba(255,231,190,.5);}
+
+.modes{display:flex;flex-direction:column;gap:11px;}
+.mode{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:var(--paper2);border:2px solid var(--line);border-radius:var(--r);
+  padding:12px 12px;font-size:1rem;box-shadow:var(--shadow);
+  cursor:pointer;transition:transform .1s ease, box-shadow .1s ease;min-height:70px;
+}
+.mode:active{transform:translateY(2px);box-shadow:0 1px 0 #efdfd2;}
+.mode-ic{
+  width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center;
+  font-size:22px;border-radius:15px;background:linear-gradient(145deg,var(--c1,#fde8ee),var(--c2,#f7b8c8));
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.04);
+}
+.mode-body{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}
+.mode-body b{font-size:.97rem;letter-spacing:.02em;line-height:1.35;}
+.mode-body small{color:var(--ink2);font-size:.72rem;line-height:1.45;}
+.mode-go{color:#d5c6b8;font-size:1.05rem;flex:0 0 auto;}
+.foot-note{margin:14px 0 2px;text-align:center;font-size:.68rem;color:#b5a79c;line-height:1.7;}
+
+/* ---------- クイズ共通 ---------- */
+.qhead{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.progWrap{flex:1;display:flex;align-items:center;gap:8px;min-width:0;}
+.progBar{flex:1;height:10px;border-radius:999px;background:#f2e6da;overflow:hidden;border:1px solid #eadbcd;}
+.progBar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#f6bcc9,#e2829b);transition:width .3s cubic-bezier(.2,.8,.2,1);}
+.progText{font-size:.7rem;color:var(--ink2);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.hud{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.pill{
+  font-size:.68rem;font-weight:800;padding:4px 10px;border-radius:999px;
+  background:#f6ecdf;color:#8a7057;white-space:nowrap;letter-spacing:.04em;
+}
+.pill.score{background:#eef1fa;color:#6d6a9c;}
+.pill.time{background:#fdeef2;color:#b4516a;}
+.combo{
+  font-size:.7rem;font-weight:800;padding:4px 10px;border-radius:999px;
+  background:#ffe7c4;color:#a15c15;white-space:nowrap;
+  opacity:0;transform:scale(.7);transition:opacity .2s, transform .2s;
+}
+.combo.on{opacity:1;transform:none;animation:comboPulse .45s ease-out;}
+@keyframes comboPulse{0%{transform:scale(1.32)}100%{transform:scale(1)}}
+.timerWrap{height:9px;border-radius:999px;background:#f4e7dc;overflow:hidden;margin:0 0 12px;border:1px solid #eedfd2;}
+.timerWrap[hidden]{display:none;}
+#timerFill{display:block;height:100%;width:100%;background:linear-gradient(90deg,#f8c9d4,#e7788f);transition:width .1s linear;}
+
+/* かるた札 */
+.fuda{
+  position:relative;background:linear-gradient(158deg,#fffdfa 0%,#fff8ef 100%);
+  border:2px solid #ecd6cb;border-radius:16px;padding:15px 14px 14px;
+  box-shadow:0 4px 0 #f1e0d3, 0 12px 26px -20px rgba(120,70,70,.7);
+  overflow:hidden;margin-bottom:12px;
+}
+.fuda::before{
+  content:"";position:absolute;inset:6px;border:1px solid rgba(217,184,120,.5);
+  border-radius:11px;pointer-events:none;
+}
+.fuda-tag{
+  display:inline-block;margin:0 0 9px;padding:2px 10px;border-radius:999px;
+  background:#fdeef2;color:#b0536c;font-size:.66rem;font-weight:800;letter-spacing:.08em;
+}
+.fuda-sub{font-size:.78rem;color:var(--ink2);margin:0 0 7px;letter-spacing:.02em;}
+.poem{
+  font-family:var(--mincho);font-size:1.1rem;line-height:1.95;letter-spacing:.04em;
+  margin:0;font-weight:600;color:#3b3733;
+}
+.poem .k{color:var(--shu);font-weight:700;background:linear-gradient(transparent 64%,#ffe0e7 64%);}
+.poem-kana{font-size:.76rem;color:#a1948b;margin:7px 0 0;line-height:1.8;letter-spacing:.02em;}
+.poem-kana .k{color:#d1798c;}
+.kimari-badge{
+  display:inline-flex;align-items:center;gap:5px;margin-top:9px;
+  padding:3px 11px;border-radius:999px;background:#fff4d9;border:1px solid #f0dcae;
+  font-size:.72rem;font-weight:800;color:#9c7524;font-family:inherit;cursor:pointer;
+}
+.kimari-badge b{font-family:var(--mincho);font-size:.95rem;color:#c9455e;letter-spacing:.06em;}
+.kimari-badge .tg{font-size:.62rem;font-weight:700;color:#b59a63;}
+.kimari-badge.off{background:#f7f1e8;border-color:#e8dccd;color:#a89a8c;}
+.opt .txt .p.q{font-family:inherit;font-size:.93rem;line-height:1.55;font-weight:600;letter-spacing:0;}
+.qtext{font-size:1rem;font-weight:700;line-height:1.7;margin:0;}
+.qtext .big{font-family:var(--mincho);font-size:1.16rem;color:var(--shu);}
+
+/* 選択肢 */
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:2px;}
+.opt{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  background:#fffdf9;border:2px solid var(--line);border-radius:15px;
+  padding:11px 11px;min-height:56px;font-size:.95rem;line-height:1.5;
+  box-shadow:0 3px 0 #f0e1d6;cursor:pointer;transition:transform .08s ease, box-shadow .08s ease;
+}
+.opt:active{transform:translateY(1px);box-shadow:0 1px 0 #f0e1d6;}
+.opt .num{
+  width:25px;height:25px;flex:0 0 25px;border-radius:50%;background:#f9edf1;color:#b4778c;
+  font-size:.72rem;font-weight:800;display:grid;place-items:center;
+}
+.opt .txt{flex:1;min-width:0;}
+.opt .txt .p{font-family:var(--mincho);font-size:1rem;letter-spacing:.02em;}
+.opt .txt .kk{display:block;font-size:.68rem;color:var(--ink2);margin-top:1px;line-height:1.5;}
+.opt.correct{background:#f0f9ec;border-color:#9dc294;box-shadow:0 3px 0 #b9d7b0;}
+.opt.correct .num{background:#dcefd5;color:#4f7d46;}
+.opt.wrong{background:#fdf1f4;border-color:#eaa7b6;box-shadow:0 3px 0 #f2bfca;}
+.opt.wrong .num{background:#fadfe4;color:#ac4b62;}
+.opt.chosen{border-color:var(--fuji);background:#f4f1fc;box-shadow:0 3px 0 #d9d1f0;}
+.opt.dim{opacity:.5;}
+.opts.locked .opt{cursor:default;}
+.opts.locked .opt:active{transform:none;box-shadow:0 3px 0 #f0e1d6;}
+
+/* フィードバック */
+.fb{
+  margin-top:13px;border-radius:16px;padding:12px 13px;border:2px solid var(--line);
+  background:var(--paper2);animation:pop .22s ease-out both;
+}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.985)}to{opacity:1;transform:none}}
+.fb.ok{border-color:#aed0a5;background:#f5fbf2;}
+.fb.ng{border-color:#efb6c1;background:#fdf4f6;}
+.fb-title{font-weight:800;font-size:.92rem;margin:0 0 7px;display:flex;align-items:center;gap:6px;}
+.fb.ok .fb-title{color:#4f7d46;}
+.fb.ng .fb-title{color:#b04a60;}
+.fb-num{margin-left:auto;font-size:.68rem;font-weight:700;color:var(--ink2);}
+.fb p{font-size:.86rem;line-height:1.68;margin:0 0 7px;color:#4d4540;}
+.fb p:last-child{margin-bottom:0;}
+.fb .lbl{font-weight:800;color:#8a6f5e;font-size:.78rem;margin-right:3px;}
+.fb ul{margin:0;padding:0;list-style:none;}
+.fb li{position:relative;padding-left:16px;font-size:.84rem;line-height:1.65;margin-bottom:4px;color:#4d4540;}
+.fb li::before{content:"✿";position:absolute;left:0;top:0;color:#e2a3b3;font-size:.78rem;}
+.fb li:last-child{margin-bottom:0;}
+
+/* ボタン */
+.btn{
+  border:2px solid var(--line2);background:var(--paper2);border-radius:15px;
+  padding:12px 16px;font-size:.98rem;font-weight:800;min-height:52px;
+  box-shadow:var(--shadow);cursor:pointer;transition:transform .1s, box-shadow .1s;
+}
+.btn:active{transform:translateY(2px);box-shadow:none;}
+.btn.primary{background:var(--shu);border-color:var(--shu-d);color:#fff;box-shadow:0 3px 0 var(--shu-d);}
+.btn.primary:active{box-shadow:none;}
+.btn.soft{background:#fdf3f6;border-color:#f1d5dc;color:#a8516a;box-shadow:0 3px 0 #f4dfe4;}
+.btn.wide{width:100%;display:block;}
+.btn[hidden]{display:none;}
+.btnrow{display:flex;gap:9px;margin-top:14px;}
+.btnrow .btn{flex:1;}
+.btnrow .btn.wide{flex:1 1 auto;}
+.linkbtn{background:none;border:none;color:#b4778c;font-size:.78rem;font-weight:800;text-decoration:underline;padding:8px;cursor:pointer;}
+
+/* ---------- 結果 ---------- */
+.result-top{text-align:center;padding:8px 0 6px;}
+.rank-c{
+  width:112px;height:112px;margin:4px auto 10px;border-radius:50%;
+  display:grid;place-items:center;font-family:var(--mincho);font-size:3rem;font-weight:700;
+  color:#fff;position:relative;
+  background:linear-gradient(150deg,#f6b8c6,#b9a6dd);
+  box-shadow:0 8px 0 rgba(180,140,160,.18), inset 0 -6px 14px rgba(255,255,255,.28);
+  animation:rankIn .5s cubic-bezier(.2,1.4,.4,1) both;
+}
+.rank-c.S{background:linear-gradient(150deg,#ffd772,#f0a24e);color:#fff8e8;text-shadow:0 2px 0 rgba(160,90,20,.25);}
+.rank-c.A{background:linear-gradient(150deg,#f8b3c2,#e07f9c);}
+.rank-c.B{background:linear-gradient(150deg,#b9d3ef,#8aa8d8);}
+.rank-c.C{background:linear-gradient(150deg,#cfd8c4,#a8b79c);}
+@keyframes rankIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.result-title{font-family:var(--mincho);font-size:1.24rem;letter-spacing:.06em;margin:0 0 4px;}
+.result-sub{font-size:.82rem;color:var(--ink2);margin:0 0 12px;}
+.stats{display:flex;gap:8px;margin:12px 0 4px;}
+.stat{
+  flex:1;background:var(--paper2);border:2px solid var(--line);border-radius:15px;
+  padding:10px 6px;text-align:center;box-shadow:var(--shadow);
+}
+.stat .v{font-family:var(--mincho);font-size:1.3rem;font-weight:700;color:var(--shu);line-height:1.3;}
+.stat .l{font-size:.66rem;color:var(--ink2);letter-spacing:.04em;}
+.res-sec{margin-top:16px;}
+.res-sec h3{font-size:.86rem;font-weight:800;letter-spacing:.05em;color:#8a7370;margin:0 0 8px;display:flex;align-items:center;gap:6px;}
+.review{
+  background:var(--paper2);border:2px solid var(--line);border-radius:15px;
+  padding:11px 12px;margin-bottom:9px;box-shadow:var(--shadow);
+}
+.review .rn{font-size:.7rem;font-weight:800;color:#b4778c;letter-spacing:.06em;}
+.review .rp{font-family:var(--mincho);font-size:.94rem;line-height:1.75;margin:3px 0 5px;letter-spacing:.02em;}
+.review .rt{font-size:.78rem;color:#6b625b;line-height:1.62;margin:0;}
+.review .rt b{color:#9c7524;}
+
+/* ---------- 図鑑 ---------- */
+.seg{display:flex;gap:6px;background:#f6ece1;border-radius:14px;padding:4px;margin-bottom:13px;border:1px solid #eedfd1;}
+.seg-btn{
+  flex:1;border:none;background:none;padding:8px 6px;border-radius:11px;
+  font-size:.84rem;font-weight:800;color:#9c8b7c;cursor:pointer;min-height:42px;
+}
+.seg-btn.on{background:var(--paper2);color:var(--shu);box-shadow:0 2px 6px rgba(150,110,100,.14);}
+.zcard{
+  position:relative;background:linear-gradient(158deg,#fffdfa,#fff7ee);
+  border:2px solid #ecd6cb;border-radius:18px;padding:16px 15px 14px;
+  box-shadow:0 5px 0 #f1e0d3, 0 14px 30px -22px rgba(120,70,70,.7);
+  cursor:pointer;overflow:hidden;
+}
+.zcard::before{content:"";position:absolute;inset:6px;border:1px solid rgba(217,184,120,.45);border-radius:12px;pointer-events:none;}
+.zcard .zn{font-size:.7rem;font-weight:800;color:#b4778c;letter-spacing:.08em;}
+.zcard .zauthor{font-size:.8rem;color:#7d7168;margin:2px 0 8px;}
+.zcard .zpoem{font-family:var(--mincho);font-size:1.12rem;line-height:1.95;letter-spacing:.04em;margin:0;color:#3b3733;font-weight:600;}
+.zcard .zkimari{display:inline-block;margin-top:8px;font-size:.72rem;font-weight:800;color:#9c7524;background:#fff4d9;border:1px solid #f0dcae;border-radius:999px;padding:2px 10px;}
+.zcard .zkimari b{font-family:var(--mincho);color:var(--shu);font-size:.92rem;letter-spacing:.06em;}
+.zmore{display:none;margin-top:12px;padding-top:11px;border-top:1px dashed #e6d3c4;animation:pop .22s ease-out both;}
+.zcard.open .zmore{display:block;}
+.zmore .zshimo{font-family:var(--mincho);font-size:1.06rem;line-height:1.95;letter-spacing:.04em;margin:0 0 2px;}
+.zmore .zkana{font-size:.72rem;color:#a1948b;margin:0 0 10px;line-height:1.7;}
+.zmore .zlbl{font-size:.7rem;font-weight:800;color:#8a6f5e;letter-spacing:.06em;margin:0 0 3px;}
+.zmore .ztrans{font-size:.83rem;line-height:1.7;margin:0 0 10px;color:#4d4540;}
+.zmore ul{margin:0;padding:0;list-style:none;}
+.zmore li{position:relative;padding-left:15px;font-size:.8rem;line-height:1.62;margin-bottom:4px;color:#4d4540;}
+.zmore li::before{content:"✿";position:absolute;left:0;color:#e2a3b3;font-size:.74rem;}
+.zhint{font-size:.7rem;color:#b8a99d;text-align:center;margin-top:9px;}
+.znav{display:flex;align-items:center;gap:9px;margin-top:13px;}
+.znav .btn{flex:0 0 auto;min-width:52px;}
+.zpos{flex:1;text-align:center;font-size:.8rem;color:var(--ink2);font-weight:700;font-variant-numeric:tabular-nums;}
+.zdots{display:flex;justify-content:center;gap:6px;margin-top:11px;flex-wrap:wrap;}
+.zdot{width:9px;height:9px;border-radius:50%;background:#ecdfd4;}
+.zdot.on{background:var(--sakura);transform:scale(1.25);}
+.zlist-item{
+  background:var(--paper2);border:2px solid var(--line);border-radius:16px;
+  padding:13px 13px 12px;margin-bottom:11px;box-shadow:var(--shadow);
+}
+.zlist-head{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.zlist-n{
+  width:30px;height:30px;flex:0 0 30px;border-radius:10px;display:grid;place-items:center;
+  background:#fdeef2;color:#b0536c;font-family:var(--mincho);font-weight:700;font-size:.92rem;
+}
+.zlist-a{flex:1;min-width:0;font-size:.84rem;font-weight:800;}
+.zlist-a small{display:block;font-weight:600;font-size:.68rem;color:var(--ink2);}
+.zlist-k{font-size:.72rem;font-weight:800;color:#9c7524;background:#fff4d9;border:1px solid #f0dcae;border-radius:999px;padding:2px 9px;white-space:nowrap;}
+.zlist-k b{font-family:var(--mincho);color:var(--shu);font-size:.9rem;}
+.zlist-p{font-family:var(--mincho);font-size:.92rem;line-height:1.85;margin:0 0 6px;letter-spacing:.02em;}
+.zlist-t{font-size:.78rem;line-height:1.65;color:#5a524c;margin:0 0 5px;}
+.zlist-pt{font-size:.75rem;line-height:1.6;color:#7d6b5d;margin:0;padding-left:14px;position:relative;}
+.zlist-pt::before{content:"✿";position:absolute;left:0;color:#e2a3b3;font-size:.7rem;}
+.summary-strip{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px;}
+.chip{
+  font-size:.72rem;font-weight:800;padding:4px 9px;border-radius:999px;
+  background:#fffdf9;border:1px solid #eedfd1;color:#7d7168;
+}
+.chip b{font-family:var(--mincho);color:var(--shu);font-size:.86rem;}
+.tipcard{
+  background:#f9f4fb;border:2px solid #e8e0f4;border-radius:15px;padding:11px 12px;
+  margin-bottom:13px;font-size:.78rem;line-height:1.7;color:#5f5570;
+}
+.tipcard b{color:#7a63a8;}
+
+/* ---------- 演出 ---------- */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:90;overflow:hidden;}
+.petal{position:absolute;font-size:17px;line-height:1;will-change:transform,opacity;animation:fall 1.05s ease-out forwards;}
+@keyframes fall{
+  0%{opacity:0;transform:translate(0,0) scale(.5) rotate(0deg)}
+  18%{opacity:1}
+  100%{opacity:0;transform:translate(var(--dx,0px),var(--dy,80px)) scale(1.1) rotate(var(--rot,120deg))}
+}
+.bigpop{
+  position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);
+  font-family:var(--mincho);font-weight:700;font-size:1.5rem;color:#c9455e;
+  z-index:95;pointer-events:none;animation:bigpop .8s ease-out forwards;
+  text-shadow:0 2px 0 #fff,0 0 16px rgba(255,255,255,.9);
+}
+@keyframes bigpop{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+  25%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+  70%{opacity:1;transform:translate(-50%,-58%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-80%) scale(.95)}
+}
+@media (max-width:360px){
+  .poem{font-size:1.02rem;}
+  .opt{font-size:.9rem;}
+  .mode-body b{font-size:.92rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  .screen.active,.petal,.bigpop,.rank-c,.fb{animation:none !important;}
+}
+</style>
+</head>
+<body>
+<div class="fx" id="fx" aria-hidden="true"></div>
+<div class="app">
+  <header class="topbar">
+    <button class="iconbtn" id="btnBack" type="button" aria-label="もどる" hidden>‹</button>
+    <div class="brand"><span class="brand-em">🎴</span><span class="brand-txt">百人一首 <b>20〜26</b></span></div>
+    <button class="iconbtn" id="btnSound" type="button" aria-label="音のオン・オフ">🔔</button>
+  </header>
+
+  <main>
+    <section id="scr-home" class="screen active">
+      <div class="hero">
+        <div class="hero-deco">🌸</div>
+        <h1 class="hero-title">百人一首<br><span class="hl">20〜26番</span> マスター</h1>
+        <p class="hero-sub">7首をあそんで覚えて、<b>テスト対策</b>もバッチリ</p>
+      </div>
+      <div class="card prog-card">
+        <div class="prog-head">
+          <span class="t">マスター度</span>
+          <span class="s" id="progSummary">まだ 0 / 7 首</span>
+        </div>
+        <div class="dots" id="poemDots"></div>
+      </div>
+      <div class="modes" id="modeList">
+        <button class="mode" type="button" data-mode="karuta">
+          <span class="mode-ic" style="--c1:#fde8ee;--c2:#f5afc0">🃏</span>
+          <span class="mode-body"><b>上の句→下の句 かるた</b><small>上の句を見て、下の句の札を4枚からえらぶ</small></span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" type="button" data-mode="speed">
+          <span class="mode-ic" style="--c1:#eef0fc;--c2:#b3a6dc">⚡</span>
+          <span class="mode-body"><b>決まり字スピード</b><small>6秒以内に決まり字を当てる！コンボで倍々</small></span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" type="button" data-mode="quiz">
+          <span class="mode-ic" style="--c1:#eaf6e6;--c2:#a6cc9b">📝</span>
+          <span class="mode-body"><b>テスト対策クイズ</b><small>訳・作者・掛詞・擬人法・係り結びを12問</small></span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" type="button" data-mode="final">
+          <span class="mode-ic" style="--c1:#fff3da;--c2:#ecc57f">👑</span>
+          <span class="mode-body"><b>仕上げテスト</b><small>20〜26番の総合ランダム10問・S〜C判定</small></span>
+          <span class="mode-go">▶</span>
+        </button>
+        <button class="mode" type="button" data-mode="zukan">
+          <span class="mode-ic" style="--c1:#f3eef9;--c2:#c3b0dd">📖</span>
+          <span class="mode-body"><b>おぼえる図鑑</b><small>7首のカード＆一覧。タップで訳とポイント</small></span>
+          <span class="mode-go">▶</span>
+        </button>
+      </div>
+      <p class="foot-note">20〜26番の7首／テスト対策クイズは全32問からランダム<br>外部通信なし・オフラインでもあそべます</p>
+    </section>
+
+    <section id="scr-play" class="screen">
+      <div class="qhead">
+        <div class="progWrap">
+          <div class="progBar"><i id="progFill"></i></div>
+          <span class="progText" id="progText">1 / 10</span>
+        </div>
+      </div>
+      <div class="hud">
+        <span class="pill" id="modePill">かるた</span>
+        <span class="pill score" id="scorePill">0点</span>
+        <span class="combo" id="comboPill">2連続!</span>
+      </div>
+      <div class="timerWrap" id="timerWrap" hidden><i id="timerFill"></i></div>
+      <div id="playBody"></div>
+    </section>
+
+    <section id="scr-result" class="screen">
+      <div id="resultBody"></div>
+    </section>
+
+    <section id="scr-zukan" class="screen">
+      <div class="seg" id="zukanSeg">
+        <button class="seg-btn on" type="button" data-view="card">カードでめくる</button>
+        <button class="seg-btn" type="button" data-view="list">一覧で見る</button>
+      </div>
+      <div id="zukanBody"></div>
+    </section>
+  </main>
+</div>
+<script>
+/* =========================================================
+   百人一首 20〜26番 マスターゲーム
+   単一HTML・外部通信なし
+   ========================================================= */
+"use strict";
+
+/* ---------------- データ ---------------- */
+var POEMS = [
+  {
+    n: 20,
+    author: "元良親王",
+    authorKana: "もとよししんのう",
+    kimari: "わび",
+    kimariKana: "わび",
+    kimariType: "2字決まり",
+    mark: 2,
+    kami: "わびぬれば 今はた同じ 難波なる",
+    kamiKana: "わびぬれば いまはたおなじ なにはなる",
+    shimo: "みをつくしても 逢はむとぞ思ふ",
+    shimoKana: "みをつくしても あはむとぞおもふ",
+    trans: "思い悩んでしまったので、もうこのままどうなっても同じこと。難波の澪標（みおつくし）のように、この身を尽くしてでもあなたに逢いたいと思う。",
+    points: [
+      "掛詞「みをつくし」…澪標（水路の杭）と「身を尽くし」をかけている。",
+      "「難波（なにわ）」は「何か」を連想させる地名。",
+      "「逢はむ」は「会おう」の意。「む」は意志・推量の助動詞。"
+    ],
+    hint: "「身を尽くしてでも逢いたい」"
+  },
+  {
+    n: 21,
+    author: "素性法師",
+    authorKana: "そせいほうし",
+    kimari: "いまこ",
+    kimariKana: "いまこ",
+    kimariType: "3字決まり",
+    mark: 2,
+    kami: "今来むと いひしばかりに 長月の",
+    kamiKana: "いまこむと いひしばかりに ながつきの",
+    shimo: "有明の月を 待ち出でつるかな",
+    shimoKana: "ありあけのつきを まちいでつるかな",
+    trans: "「今すぐ行くよ」とあなたが言ったばかりに、夜の長い九月（長月）の夜を一晩中待ち続けて、とうとう有明の月が出る夜明けを迎えてしまったなあ。",
+    points: [
+      "「長月」＝旧暦9月。夜が長い季節。",
+      "「有明の月」＝夜明けまで空に残る月。一晩中待ったしるし。",
+      "「待ち出でつるかな」＝待ち続けて（月が）出るのを迎えてしまったなあ。"
+    ],
+    hint: "「今行く」と言われて一晩中待った"
+  },
+  {
+    n: 22,
+    author: "文屋康秀",
+    authorKana: "ぶんやのやすひで",
+    kimari: "ふ",
+    kimariKana: "ふ",
+    kimariType: "一字決まり（むすめふさほせ）",
+    mark: 1,
+    kami: "吹くからに 秋の草木の しをるれば",
+    kamiKana: "ふくからに あきのくさきの しをるれば",
+    shimo: "むべ山風を 嵐といふらむ",
+    shimoKana: "むべやまかぜを あらしといふらむ",
+    trans: "山から風が吹くとすぐに秋の草木がしおれてしまうので、なるほど、だから山風のことを「嵐（山＋風）」といい、「荒らし」というのだろうなあ。",
+    points: [
+      "掛詞「嵐」と「荒らし」（草木を荒らす）。",
+      "漢字の成り立ち「山＋風＝嵐」。",
+      "「むべ」＝なるほど。「吹くからに」＝吹くとすぐに（原因の「から」ではない）。"
+    ],
+    hint: "山＋風＝嵐（荒らし）"
+  },
+  {
+    n: 23,
+    author: "大江千里",
+    authorKana: "おおえのちさと",
+    kimari: "つき",
+    kimariKana: "つき",
+    kimariType: "2字決まり",
+    mark: 2,
+    kami: "月見れば 千々に物こそ 悲しけれ",
+    kamiKana: "つきみれば ちぢにものこそ かなしけれ",
+    shimo: "わが身ひとつの 秋にはあらねど",
+    shimoKana: "わがみひとつの あきにはあらねど",
+    trans: "月を見ていると、あれこれと限りなくもの悲しく思われる。私ひとりのために来た秋というわけではないのだけれど。",
+    points: [
+      "「千々に」＝いろいろと・さまざまに（「ひとつ」と数の対比）。",
+      "係り結び「こそ〜悲しけれ（已然形）」。",
+      "白居易の漢詩がもとになっている。"
+    ],
+    hint: "こそ〜已然形「悲しけれ」"
+  },
+  {
+    n: 24,
+    author: "菅家",
+    authorKana: "かんけ（菅原道真）",
+    kimari: "この",
+    kimariKana: "この",
+    kimariType: "2字決まり",
+    mark: 2,
+    kami: "このたびは 幣も取りあへず 手向山",
+    kamiKana: "このたびは ぬさもとりあへず たむけやま",
+    shimo: "紅葉の錦 神のまにまに",
+    shimoKana: "もみぢのにしき かみのまにまに",
+    trans: "このたびの旅は急なことで、神に捧げる幣（ぬさ）も用意できませんでした。かわりにこの手向山の美しい紅葉を錦の織物として捧げますので、神のお心のままにお受け取りください。",
+    points: [
+      "掛詞「たび（度／旅）」。",
+      "「たむけ（手向山／手向け＝捧げ物）」。",
+      "紅葉を神への錦の幣に見立てる。作者「菅家」＝菅原道真。"
+    ],
+    hint: "紅葉を錦の幣に見立てる"
+  },
+  {
+    n: 25,
+    author: "三条右大臣",
+    authorKana: "さんじょうのうだいじん（藤原定方）",
+    kimari: "なにし",
+    kimariKana: "なにし",
+    kimariType: "3字決まり",
+    mark: 3,
+    kami: "名にし負はば 逢坂山の さねかづら",
+    kamiKana: "なにしおはば あふさかやまの さねかづら",
+    shimo: "人に知られで くるよしもがな",
+    shimoKana: "ひとにしられで くるよしもがな",
+    trans: "「逢って共寝する」という名を持つ逢坂山のさねかずらよ。その名のとおりなら、つるをたぐり寄せるように、人に知られずにあなたのもとへ行く方法があればいいのになあ。",
+    points: [
+      "掛詞「逢坂山（逢ふ）」「さねかづら（さ寝＝共寝）」「くる（繰る＝たぐり寄せる／来る）」。",
+      "「よしもがな」＝手段があればいいなあ（願望）。",
+      "作者「三条右大臣」＝藤原定方。"
+    ],
+    hint: "逢坂山・さねかづら・くるの三つの掛詞"
+  },
+  {
+    n: 26,
+    author: "貞信公",
+    authorKana: "ていしんこう（藤原忠平）",
+    kimari: "をぐ",
+    kimariKana: "をぐ（おぐ）",
+    kimariType: "2字決まり（現代かな「おぐ」）",
+    mark: 2,
+    kami: "小倉山 峰のもみぢ葉 心あらば",
+    kamiKana: "をぐらやま みねのもみぢば こころあらば",
+    shimo: "今ひとたびの みゆき待たなむ",
+    shimoKana: "いまひとたびの みゆきまたなむ",
+    trans: "小倉山の峰の紅葉の葉よ、もしお前に思いやる心があるならば、もう一度の天皇の行幸があるまで（散らずに）待っていてほしいなあ。",
+    points: [
+      "擬人法（「心あらば」＝紅葉に心があるなら）。",
+      "「みゆき」＝天皇や上皇のお出かけ（行幸・御幸）。",
+      "「待たなむ」＝待っていてほしい（他への願望）。作者「貞信公」＝藤原忠平。"
+    ],
+    hint: "紅葉に語りかける擬人法"
+  }
+];
+
+/* テスト対策クイズ（30問） */
+var QUIZ = [
+  {p:20, cat:"意味", q:"「みをつくしても 逢はむとぞ思ふ」の「みをつくし」の意味は？", o:["この身を尽くしてでも","水のように流れて","道に迷いながら","みんなと一緒に"], a:0, e:"「澪標（みおつくし）」と「身を尽くし」の掛詞。身を尽くしてでも逢いたい、という気持ち。"},
+  {p:20, cat:"語句", q:"「難波（なにわ）なる」の「なる」の意味は？", o:["〜にある","〜になる","〜のような","〜という"], a:0, e:"「なる」は「〜にある」の意。「難波」は「何か」を連想させる地名。"},
+  {p:20, cat:"作者", q:"20番「わびぬれば…」の作者は？", o:["元良親王","素性法師","文屋康秀","大江千里"], a:0, e:"元良親王（もとよししんのう）。皇室の歌人。"},
+  {p:21, cat:"意味", q:"「有明の月」とはどんな月？", o:["夜明けまで空に残る月","まん丸の満月","細い三日月","月が出ない夜"], a:0, e:"夜明けまで残る月＝一晩中待ち続けたしるし。"},
+  {p:21, cat:"語句", q:"「長月」は旧暦の何月？", o:["9月","7月","11月","1月"], a:0, e:"長月＝旧暦9月。夜が長い季節。"},
+  {p:21, cat:"意味", q:"21番の歌の情景として正しいものは？", o:["「今行く」と言われ、一晩中待って夜明けを迎えた","月を見ながらひとりで泣いていた","約束の日に会えずに帰った","長い夜に手紙を書いていた"], a:0, e:"「今来む」と言われたばかりに、長い夜を待ち続けた。"},
+  {p:21, cat:"文法", q:"「待ち出でつるかな」の「つる」の意味は？", o:["〜してしまった（完了）","〜したい（希望）","〜だろう（推量）","〜しない（打消）"], a:0, e:"完了の助動詞「つ」の連体形。「待ち出で」＝待ち続けて（月が）出るのを迎えた。"},
+  {p:22, cat:"語句", q:"「むべ」の意味は？", o:["なるほど","むしろ","きっと","おそらく"], a:0, e:"「むべ」＝なるほど。納得する気持ちを表す。"},
+  {p:22, cat:"語句", q:"「吹くからに」の「からに」の意味は？", o:["〜するとすぐに","〜だから","〜なのに","〜しながら"], a:0, e:"原因・理由の「から」ではなく、直後を表す。「吹くとすぐに」。"},
+  {p:22, cat:"技法", q:"「嵐」にこめられた掛詞は？", o:["「荒らし」","「あらたま」","「新し」","「洗い」"], a:0, e:"草木を荒らすことから「嵐」＝「荒らし」。漢字も「山＋風」。"},
+  {p:22, cat:"決まり字", q:"一字決まり「むすめふさほせ」の「ふ」の歌は何番？", o:["22番","20番","26番","23番"], a:0, e:"22番・文屋康秀「吹くからに…」。「ふ」の一字で決まる。"},
+  {p:23, cat:"語句", q:"「千々に」の意味は？", o:["いろいろと・さまざまに","千回も","少しずつ","長い間"], a:0, e:"「わが身ひとつの」の「ひとつ」と数の対比になっている。"},
+  {p:23, cat:"文法", q:"「物こそ悲しけれ」の「こそ〜悲しけれ」の文法は？", o:["係り結び（已然形で結ぶ）","係り結び（連体形で結ぶ）","倒置法","体言止め"], a:0, e:"「こそ」があると文末は已然形。「悲しけれ」が已然形。"},
+  {p:23, cat:"意味", q:"「わが身ひとつの秋にはあらねど」の意味は？", o:["私ひとりだけの秋ではないけれど","私だけ秋が来ないけれど","私の秋はひとつだけれど","私の身に秋が訪れて"], a:0, e:"みんなに秋は来るのに、自分だけがしみじみ悲しい、という気持ち。"},
+  {p:23, cat:"知識", q:"23番の歌のもとになった漢詩を書いたのは？", o:["白居易","李白","杜甫","王維"], a:0, e:"白居易の「白氏文集」の影響を受けた歌。"},
+  {p:24, cat:"語句", q:"「幣（ぬさ）」とは？", o:["神に捧げる捧げ物","旅の道しるべ","和歌を書いた紙","衣のたすき"], a:0, e:"幣＝神に捧げる布や紙など。"},
+  {p:24, cat:"技法", q:"「手向山」にかけられた意味は？", o:["「手向け（神への捧げ物）」","「手向かう（戦う）」","「たむけ（袖））」","「たむけ（別れの言葉）」"], a:0, e:"地名「手向山」と「手向け（捧げ物）」の掛詞。"},
+  {p:24, cat:"技法", q:"この歌では紅葉を何に見立てている？", o:["錦の織物","神の衣","月の光","春の花"], a:0, e:"紅葉を錦の幣（織物）に見立てて神に捧げている。"},
+  {p:24, cat:"作者", q:"「菅家」の作者は？", o:["菅原道真","菅原孝標女","紀貫之","在原業平"], a:0, e:"「菅家」は菅原道真のこと。家名で呼ぶ。"},
+  {p:24, cat:"語句", q:"「神のまにまに」の意味は？", o:["神のお心のままに","神のそばに","神のように","神に願って"], a:0, e:"「まにまに」＝〜のままに・〜に従って。"},
+  {p:25, cat:"技法", q:"「さねかづら」の掛詞は？", o:["「さ寝（共寝すること）」","「さ根（根っこ）」","「さ寝（さびしい）」","「実（み）」"], a:0, e:"「さ寝（共寝）」＋植物名「さねかずら」。"},
+  {p:25, cat:"語句", q:"「よしもがな」の意味は？", o:["手段があればいいのになあ","方法を教えてほしい","きっと会えるだろう","やめておこう"], a:0, e:"「もがな」＝〜があればいいなあ（願望）。"},
+  {p:25, cat:"技法", q:"「逢坂山」にかけられた意味は？", o:["「逢ふ（会う）」","「あふ（扇ぐ）」","「逢（戦）」","「坂（さか）」"], a:0, e:"「逢坂」の「逢ふ」に「あなたに会う」をかける。"},
+  {p:25, cat:"作者", q:"「三条右大臣」の名前は？", o:["藤原定方","藤原忠平","藤原道長","藤原公任"], a:0, e:"三条右大臣＝藤原定方（ふじわらのさだかた）。"},
+  {p:25, cat:"技法", q:"「くるよしもがな」の「くる」の掛詞は？", o:["「繰る（たぐり寄せる）」と「来る」","「来る」だけ","「暗る（くれる）」","「刳る（えぐる）」"], a:0, e:"つるを「繰る」と「（あなたのもとへ）来る」をかけている。"},
+  {p:26, cat:"語句", q:"「みゆき」の意味は？", o:["天皇や上皇のお出かけ（行幸・御幸）","雪の降る日","神のお告げ","都への道"], a:0, e:"「みゆき」＝行幸・御幸。天皇のお出かけ。"},
+  {p:26, cat:"技法", q:"「心あらば」で紅葉を人にたとえる技法は？", o:["擬人法","倒置法","体言止め","直喩"], a:0, e:"紅葉に「心があるなら」と語りかける擬人法。"},
+  {p:26, cat:"文法", q:"「今ひとたびの みゆき待たなむ」の「なむ」の意味は？", o:["〜してほしい（他への願望）","〜だろう（推量）","〜してしまった（完了）","〜しない（打消）"], a:0, e:"「なむ」＝他への願望「〜してほしい」。"},
+  {p:26, cat:"作者", q:"「貞信公」の名前は？", o:["藤原忠平","藤原定方","菅原道真","大江千里"], a:0, e:"貞信公＝藤原忠平（ふじわらのただひら）。"},
+  {p:26, cat:"決まり字", q:"決まり字「をぐ（おぐ）」の歌は何番？", o:["26番","25番","24番","21番"], a:0, e:"26番・貞信公「小倉山…」。現代かなでは「おぐ」。"},
+  {p:0, cat:"知識", q:"「決まり字」とは？", o:["上の句の最初の何文字で歌が決まるかの文字","歌の最後の文字","作者の名前の最初の字","札の色のこと"], a:0, e:"上の句を聞いて、最初の1〜3文字でどの歌か分かる字のこと。"},
+  {p:0, cat:"知識", q:"一字決まり「むすめふさほせ」に含まれない字は？", o:["わ","む","ふ","せ"], a:0, e:"七首の一字決まりは「む・す・め・ふ・さ・ほ・せ」。"},
+  {p:0, cat:"知識", q:"20〜26番のうち、紅葉（もみぢ）が出てくる歌は？", o:["24番と26番","20番と21番","22番と23番","25番だけ"], a:0, e:"24番「紅葉の錦」、26番「峰のもみぢ葉」。"}
+];
+
+/* ---------------- 小さな道具 ---------------- */
+function $(id){ return document.getElementById(id); }
+function shuffle(arr){
+  var a = arr.slice();
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+function pickN(arr,n){ return shuffle(arr).slice(0,n); }
+function poemByN(n){ for(var i=0;i<POEMS.length;i++){ if(POEMS[i].n===n) return POEMS[i]; } return null; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+/* ---------------- 保存（失敗しても止まらない） ---------------- */
+var KEY = "hyakunin2026.v1";
+var store = { sound:true, kimariOn:true, poems:{}, bestSpeed:0, bestFinal:0, plays:0 };
+
+function loadStore(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(!raw) return;
+    var o = JSON.parse(raw);
+    if(!o || typeof o !== "object") return;
+    if(typeof o.sound === "boolean") store.sound = o.sound;
+    if(typeof o.kimariOn === "boolean") store.kimariOn = o.kimariOn;
+    if(typeof o.bestSpeed === "number") store.bestSpeed = o.bestSpeed;
+    if(typeof o.bestFinal === "number") store.bestFinal = o.bestFinal;
+    if(typeof o.plays === "number") store.plays = o.plays;
+    if(o.poems && typeof o.poems === "object"){
+      for(var k in o.poems){
+        if(!Object.prototype.hasOwnProperty.call(o.poems,k)) continue;
+        var s = o.poems[k];
+        if(s && typeof s === "object"){
+          store.poems[k] = {
+            c: typeof s.c === "number" ? s.c : 0,
+            w: typeof s.w === "number" ? s.w : 0
+          };
+        }
+      }
+    }
+  }catch(e){ /* プライベートブラウズ等では保存しない */ }
+}
+function saveStore(){
+  try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){}
+}
+function statOf(n){
+  var k = String(n);
+  if(!store.poems[k]) store.poems[k] = { c:0, w:0 };
+  return store.poems[k];
+}
+function levelOf(n){
+  var s = store.poems[String(n)];
+  if(!s || !s.c) return 0;
+  if(s.c >= 6) return 3;
+  if(s.c >= 3) return 2;
+  return 1;
+}
+function levelLabel(lv){
+  return ["未挑戦","れんしゅう中","いいかんじ","マスター"][lv] || "";
+}
+function levelMark(lv){
+  return ["","🌱","🌸","👑"][lv] || "";
+}
+function addCorrect(n){
+  if(!n) return;
+  var s = statOf(n); s.c++; saveStore(); paintHome();
+}
+function addWrong(n){
+  if(!n) return;
+  var s = statOf(n); s.w++; saveStore(); paintHome();
+}
+function masteredCount(){
+  var c = 0;
+  for(var i=0;i<POEMS.length;i++){ if(levelOf(POEMS[i].n) === 3) c++; }
+  return c;
+}
+
+/* ---------------- 音（なくても動く） ---------------- */
+var AC = null;
+function tone(freq,dur,type,vol){
+  if(!store.sound) return;
+  try{
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    if(!AC) AC = new Ctx();
+    if(AC.state === "suspended" && AC.resume) AC.resume();
+    var o = AC.createOscillator();
+    var g = AC.createGain();
+    o.type = type || "sine";
+    o.frequency.value = freq;
+    var t = AC.currentTime;
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(vol||0.08,t+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g); g.connect(AC.destination);
+    o.start(t); o.stop(t+dur+0.03);
+  }catch(e){}
+}
+function sfxOk(){ tone(784,0.12,"sine",0.07); setTimeout(function(){ tone(1046,0.16,"sine",0.07); },90); }
+function sfxNg(){ tone(233,0.2,"triangle",0.06); }
+function sfxTap(){ tone(680,0.05,"sine",0.035); }
+
+/* ---------------- 演出 ---------------- */
+function burst(kind){
+  var fx = $("fx");
+  if(!fx) return;
+  var chars = kind === "bad" ? ["💧","・","▫️"] : ["🌸","✿","⭐️","🌟","🎉","✧"];
+  var n = kind === "bad" ? 6 : 10;
+  for(var i=0;i<n;i++){
+    var s = document.createElement("span");
+    s.className = "petal";
+    s.textContent = chars[Math.floor(Math.random()*chars.length)];
+    s.style.left = (18 + Math.random()*64) + "%";
+    s.style.top = (26 + Math.random()*18) + "%";
+    s.style.setProperty("--dx",(Math.random()*170-85)+"px");
+    s.style.setProperty("--dy",(60+Math.random()*120)+"px");
+    s.style.setProperty("--rot",(Math.random()*420-210)+"deg");
+    s.style.animationDelay = (Math.random()*0.12)+"s";
+    s.style.fontSize = (13+Math.random()*9)+"px";
+    fx.appendChild(s);
+    (function(el){ setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },1600); })(s);
+  }
+}
+function bigPop(text){
+  var d = document.createElement("div");
+  d.className = "bigpop";
+  d.textContent = text;
+  document.body.appendChild(d);
+  setTimeout(function(){ if(d.parentNode) d.parentNode.removeChild(d); },950);
+}
+
+/* ---------------- 画面移動 ---------------- */
+var SCREENS = ["scr-home","scr-play","scr-result","scr-zukan"];
+var currentScreen = "home";
+
+function go(name){
+  currentScreen = name;
+  for(var i=0;i<SCREENS.length;i++){
+    var el = $(SCREENS[i]);
+    if(!el) continue;
+    el.className = "screen" + (SCREENS[i] === "scr-"+name ? " active" : "");
+  }
+  $("btnBack").hidden = (name === "home");
+  try{ window.scrollTo(0,0); }catch(e){}
+}
+function goHome(){
+  stopTimer();
+  paintHome();
+  go("home");
+}
+
+/* ---------------- ホーム ---------------- */
+function paintHome(){
+  var dots = $("poemDots");
+  if(dots){
+    var html = "";
+    for(var i=0;i<POEMS.length;i++){
+      var p = POEMS[i], lv = levelOf(p.n);
+      html += '<div class="dot l'+lv+'"><span class="d">'+p.n+'</span><span>'+levelMark(lv)+'</span></div>';
+    }
+    dots.innerHTML = html;
+  }
+  var sum = $("progSummary");
+  if(sum){
+    var m = masteredCount();
+    sum.textContent = m > 0 ? ("👑 " + m + " / 7 首マスター") : "まだ 0 / 7 首";
+  }
+  var sp = document.querySelector('[data-mode="speed"] small');
+  if(sp && store.bestSpeed > 0){ sp.textContent = "6秒以内に決まり字を当てる！最高 " + store.bestSpeed + "点"; }
+  var fp = document.querySelector('[data-mode="final"] small');
+  if(fp && store.bestFinal > 0){ fp.textContent = "20〜26番の総合ランダム10問・最高 " + store.bestFinal + " / 10"; }
+  paintSoundBtn();
+}
+function paintSoundBtn(){
+  var b = $("btnSound");
+  if(!b) return;
+  b.textContent = store.sound ? "🔔" : "🔇";
+  b.className = "iconbtn" + (store.sound ? "" : " off");
+}
+
+/* ---------------- セッション ---------------- */
+var S = null;
+var SPEED_TIME = 6.0;
+
+function startMode(mode){
+  stopTimer();
+  store.plays = (store.plays||0) + 1; saveStore();
+  S = {
+    mode: mode,
+    qs: [],
+    i: 0,
+    correct: 0,
+    wrong: [],
+    combo: 0,
+    maxCombo: 0,
+    score: 0,
+    answered: false,
+    timeLeft: SPEED_TIME,
+    timerId: null,
+    lastTick: 0,
+    startAt: Date.now()
+  };
+  if(mode === "karuta") S.qs = buildKaruta();
+  else if(mode === "speed") S.qs = buildSpeed();
+  else if(mode === "quiz") S.qs = buildQuiz();
+  else if(mode === "final") S.qs = buildFinal();
+  else { renderZukan("card"); go("zukan"); return; }
+  go("play");
+  renderQuestion();
+}
+
+function stopTimer(){
+  if(S && S.timerId){ clearInterval(S.timerId); S.timerId = null; }
+  var tw = $("timerWrap");
+  if(tw) tw.hidden = true;
+}
+
+/* ---------------- 問題づくり ---------------- */
+function optionOfShimo(p,ok){
+  return { ok:!!ok, html:'<span class="p">'+esc(p.shimo)+'</span><span class="kk">'+esc(p.shimoKana)+'</span>' };
+}
+function shimoOptions(p){
+  var others = pickN(POEMS.filter(function(x){ return x.n !== p.n; }),3);
+  var opts = [{ p:p, ok:true }].concat(others.map(function(x){ return { p:x, ok:false }; }));
+  opts = shuffle(opts);
+  return opts.map(function(o){ return optionOfShimo(o.p,o.ok); });
+}
+function kimariOptions(p){
+  var others = pickN(POEMS.filter(function(x){ return x.n !== p.n; }),3);
+  var opts = [{ p:p, ok:true }].concat(others.map(function(x){ return { p:x, ok:false }; }));
+  opts = shuffle(opts);
+  return opts.map(function(o){
+    return { ok:o.ok, html:'<span class="p">'+esc(o.p.kimari)+'</span><span class="kk">'+(o.ok ? esc(o.p.kimariType) : '&nbsp;')+'</span>' };
+  });
+}
+function kamiOptions(p){
+  var others = pickN(POEMS.filter(function(x){ return x.n !== p.n; }),3);
+  var opts = [{ p:p, ok:true }].concat(others.map(function(x){ return { p:x, ok:false }; }));
+  opts = shuffle(opts);
+  return opts.map(function(o){
+    return { ok:o.ok, html:'<span class="p">'+esc(o.p.kami)+'</span><span class="kk">'+esc(o.p.author)+"・"+o.p.n+"番</span>" };
+  });
+}
+
+function qShimo(p){
+  return {
+    kind:"shimo",
+    poem:p.n,
+    label:"かるた",
+    promptHtml:
+      '<div class="fuda">'+
+        '<span class="fuda-tag">上の句</span>'+
+        '<p class="poem">'+kamiHtml(p)+'</p>'+
+        '<p class="poem-kana">'+kamiKanaHtml(p)+'</p>'+
+        kimariBadgeHtml(p) +
+      '</div>'+
+      '<p class="qtext" style="margin:2px 0 10px">下の句の札は どれ？</p>',
+    options: shimoOptions(p),
+    expHtml: null
+  };
+}
+function qKimari(p){
+  return {
+    kind:"kimari",
+    poem:p.n,
+    label:"スピード",
+    promptHtml:
+      '<div class="fuda">'+
+        '<span class="fuda-tag">上の句</span>'+
+        '<p class="poem">'+esc(p.kami)+'</p>'+
+        '<p class="poem-kana">'+esc(p.kamiKana)+'</p>'+
+      '</div>'+
+      '<p class="qtext" style="margin:2px 0 10px">この歌の<span class="big">決まり字</span>は？</p>',
+    options: kimariOptions(p),
+    expHtml: null
+  };
+}
+function qPoemFromKimari(p){
+  return {
+    kind:"poem",
+    poem:p.n,
+    label:"スピード",
+    promptHtml:
+      '<div class="fuda" style="text-align:center">'+
+        '<span class="fuda-tag">決まり字</span>'+
+        '<p class="poem" style="font-size:1.62rem;line-height:1.5">'+esc(p.kimari)+"</p>"+
+        '<p class="poem-kana">' + esc(p.kimariType) + '</p>' +
+      '</div>'+
+      '<p class="qtext" style="margin:2px 0 10px">この決まり字の歌は どれ？</p>',
+    options: kamiOptions(p),
+    expHtml: null
+  };
+}
+function qIchiji(){
+  var p = poemByN(22);
+  var others = pickN(POEMS.filter(function(x){ return x.n !== 22; }),3);
+  var opts = [{ p:p, ok:true }].concat(others.map(function(x){ return { p:x, ok:false }; }));
+  opts = shuffle(opts);
+  return {
+    kind:"ichiji",
+    poem:22,
+    label:"スピード",
+    promptHtml:
+      '<div class="fuda">'+
+        '<span class="fuda-tag">一字決まり</span>'+
+        '<p class="qtext">一字決まり「<span class="big">む・す・め・ふ・さ・ほ・せ</span>」<br>20〜26番のうち、<b>1字で決まる歌</b>はどれ？</p>'+
+      '</div>',
+    options: opts.map(function(o){
+      return { ok:o.ok, html:'<span class="p">'+esc(o.p.kami)+'</span><span class="kk">'+esc(o.p.author)+"・"+o.p.n+"番</span>" };
+    }),
+    expHtml: null
+  };
+}
+
+function buildKaruta(){
+  var nums = shuffle(POEMS.map(function(p){ return p.n; }));
+  var qs = [];
+  for(var r=0;r<2;r++){
+    var order = r === 0 ? nums : shuffle(nums);
+    for(var i=0;i<order.length;i++){ qs.push(qShimo(poemByN(order[i]))); }
+  }
+  return qs;
+}
+function buildSpeed(){
+  var nums = shuffle(POEMS.map(function(p){ return p.n; }));
+  var qs = [];
+  for(var i=0;i<nums.length;i++){
+    var p = poemByN(nums[i]);
+    qs.push(i % 2 === 0 ? qKimari(p) : qPoemFromKimari(p));
+  }
+  qs.push(qIchiji());
+  qs.push(qKimari(poemByN(nums[0])));
+  qs.push(qPoemFromKimari(poemByN(nums[1])));
+  return shuffle(qs);
+}
+function shuffleQuizItem(item){
+  var idx = shuffle([0,1,2,3]);
+  var opts = [], a = 0;
+  for(var i=0;i<idx.length;i++){
+    opts.push(item.o[idx[i]]);
+    if(idx[i] === item.a) a = i;
+  }
+  return { q:item.q, opts:opts, a:a, exp:item.e, cat:item.cat, poem:item.p };
+}
+function qQuiz(item){
+  var o = shuffleQuizItem(item);
+  return {
+    kind:"quiz",
+    poem:o.poem,
+    label:o.cat,
+    cat:o.cat,
+    promptHtml:
+      '<div class="fuda">'+
+        '<span class="fuda-tag">'+esc(o.cat)+'</span>'+
+        '<p class="qtext">'+esc(o.q)+'</p>'+
+      '</div>',
+    options: o.opts.map(function(t,i){ return { ok:i === o.a, html:'<span class="p q">'+esc(t)+'</span>' }; }),
+    expHtml: o.exp,
+    raw: o
+  };
+}
+function kimariBadgeHtml(p){
+  if(store.kimariOn){
+    return '<button class="kimari-badge" type="button" data-act="kimari">決まり字 <b>'+esc(p.kimari)+'</b><span class="tg">かくす</span></button>';
+  }
+  return '<button class="kimari-badge off" type="button" data-act="kimari">決まり字を表示する ›</button>';
+}
+function buildQuiz(){
+  var picked = pickN(QUIZ,12);
+  return picked.map(function(it){ return qQuiz(it); });
+}
+function buildFinal(){
+  var nums = shuffle(POEMS.map(function(p){ return p.n; }));
+  var qs = [];
+  qs.push(qShimo(poemByN(nums[0])));
+  qs.push(qShimo(poemByN(nums[1])));
+  qs.push(qKimari(poemByN(nums[2])));
+  qs.push(qKimari(poemByN(nums[3])));
+  var quiz = pickN(QUIZ,6).map(function(it){ return qQuiz(it); });
+  qs = qs.concat(quiz);
+  return shuffle(qs).slice(0,10);
+}
+
+/* ---------------- 上の句の表示 ---------------- */
+function kamiHtml(p){
+  if(!store.kimariOn) return esc(p.kami);
+  var s = p.kami, n = p.mark;
+  return '<span class="k">'+esc(s.slice(0,n))+'</span>'+esc(s.slice(n));
+}
+function kamiKanaHtml(p){
+  if(!store.kimariOn) return esc(p.kamiKana);
+  var s = p.kamiKana, n = p.kimari.length;
+  return '<span class="k">'+esc(s.slice(0,n))+'</span>'+esc(s.slice(n));
+}
+
+/* ---------------- 出題の表示 ---------------- */
+function renderQuestion(){
+  var q = S.qs[S.i];
+  var body = $("playBody");
+  if(!q || !body) return;
+
+  $("modePill").textContent = S.mode === "final" ? "仕上げテスト" : (S.mode === "speed" ? "決まり字スピード" : (S.mode === "quiz" ? "テスト対策" : "かるた"));
+  $("scorePill").hidden = (S.mode === "final");
+  $("scorePill").textContent = S.mode === "speed" ? S.score + "点" : "正解 " + S.correct;
+  $("progText").textContent = (S.i+1) + " / " + S.qs.length;
+  $("progFill").style.width = (S.i / S.qs.length * 100) + "%";
+
+  var letters = ["あ","い","う","え"];
+  var html = q.promptHtml + '<div class="opts" id="opts">';
+  for(var i=0;i<q.options.length;i++){
+    html += '<button class="opt" type="button" data-i="'+i+'">'+
+              '<span class="num">'+(q.kind === "quiz" ? letters[i] : (i+1))+'</span>'+
+              '<span class="txt">'+q.options[i].html+'</span>'+
+            '</button>';
+  }
+  html += '</div>';
+  html += '<div id="fbArea"></div>';
+  body.innerHTML = html;
+
+  S.answered = false;
+  var combo = $("comboPill");
+  combo.className = "combo" + (S.combo >= 2 ? " on" : "");
+  combo.textContent = S.combo + "連続!";
+
+  if(S.mode === "speed") startTimer();
+  else { $("timerWrap").hidden = true; }
+}
+
+/* ---------------- タイマー ---------------- */
+function startimerUI(){
+  var fill = $("timerFill");
+  if(fill) fill.style.width = (S.timeLeft / SPEED_TIME * 100) + "%";
+}
+function startTimer(){
+  stopTimer();
+  $("timerWrap").hidden = false;
+  S.timeLeft = SPEED_TIME;
+  S.lastTick = Date.now();
+  startimerUI();
+  S.timerId = setInterval(function(){
+    var now = Date.now();
+    var dt = (now - S.lastTick) / 1000;
+    S.lastTick = now;
+    S.timeLeft = Math.max(0, S.timeLeft - dt);
+    startimerUI();
+    if(S.timeLeft <= 0){
+      stopTimer();
+      if(!S.answered) answer(-1);
+    }
+  },100);
+}
+
+/* ---------------- 答える ---------------- */
+function answer(idx){
+  if(!S || S.answered) return;
+  var q = S.qs[S.i];
+  if(!q) return;
+  S.answered = true;
+  stopTimer();
+
+  var ok = idx >= 0 && !!q.options[idx] && q.options[idx].ok;
+  var optsEl = $("opts");
+  var btns = optsEl ? optsEl.querySelectorAll(".opt") : [];
+  if(optsEl) optsEl.classList.add("locked");
+
+  var reveal = (S.mode !== "final");
+  for(var i=0;i<btns.length;i++){
+    btns[i].setAttribute("disabled","disabled");
+    if(!reveal) continue;
+    if(q.options[i].ok) btns[i].classList.add("correct");
+    else if(i === idx) btns[i].classList.add("wrong");
+    else btns[i].classList.add("dim");
+  }
+
+  if(ok){
+    S.correct++;
+    S.combo++;
+    if(S.combo > S.maxCombo) S.maxCombo = S.combo;
+    addCorrect(q.poem);
+    if(S.mode === "speed"){
+      var bonus = Math.round(S.timeLeft * 10);
+      S.score += 100 + bonus + Math.min(S.combo,10) * 10;
+    }
+    sfxOk();
+    burst("good");
+    if(S.combo >= 3) bigPop(S.combo + "連続!");
+  } else {
+    S.combo = 0;
+    S.wrong.push({ q:q, idx:idx });
+    addWrong(q.poem);
+    sfxNg();
+    if(idx >= 0) burst("bad");
+  }
+
+  var comboEl = $("comboPill");
+  if(comboEl){
+    comboEl.textContent = S.combo + "連続!";
+    comboEl.className = "combo" + (S.combo >= 2 ? " on" : "");
+  }
+  if(S.mode === "speed") $("scorePill").textContent = S.score + "点";
+  else if(S.mode !== "final") $("scorePill").textContent = "正解 " + S.correct;
+
+  if(S.mode === "final"){
+    if(idx >= 0 && btns[idx]) btns[idx].classList.add("chosen");
+    setTimeout(function(){ nextQuestion(); }, 340);
+    return;
+  }
+
+  var fb = $("fbArea");
+  if(fb) fb.innerHTML = feedbackHtml(q, ok, idx);
+
+  var isLast = (S.i === S.qs.length - 1);
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "btn primary wide";
+  btn.id = "nextBtn";
+  btn.style.marginTop = "14px";
+  btn.textContent = isLast ? "けっかを見る" : "次の問題へ";
+  btn.addEventListener("click", function(){ sfxTap(); nextQuestion(); });
+  if(fb) fb.appendChild(btn);
+  try{ btn.scrollIntoView({ block:"nearest", behavior:"smooth" }); }catch(e){}
+}
+
+function feedbackHtml(q, ok, idx){
+  var p = q.poem ? poemByN(q.poem) : null;
+  var h = '<div class="fb ' + (ok ? "ok" : "ng") + '">';
+  h += '<p class="fb-title">' + (ok ? "⭕️ せいかい！" : "❌ おしい！") +
+       '<span class="fb-num">' + (p ? p.n + "番" : "") + '</span></p>';
+
+  if(!ok && idx < 0) h += '<p><span class="lbl">時間切れ</span></p>';
+
+  if(q.kind === "shimo" && p){
+    h += '<p><span class="lbl">下の句</span>' + esc(p.shimo) + '<br><span class="poem-kana">' + esc(p.shimoKana) + '</span></p>';
+    h += '<p><span class="lbl">訳</span>' + esc(p.trans) + '</p>';
+    h += '<ul>';
+    for(var i=0;i<p.points.length;i++) h += '<li>' + esc(p.points[i]) + '</li>';
+    h += '</ul>';
+  } else if((q.kind === "kimari" || q.kind === "poem" || q.kind === "ichiji") && p){
+    h += '<p><span class="lbl">' + (q.kind === "kimari" ? "決まり字" : "歌") + '</span>' +
+         (q.kind === "kimari" ? "「" + esc(p.kimari) + "」<br>" : "") +
+         esc(p.author) + "・" + p.n + "番</p>";
+    h += '<p><span class="lbl">上の句</span>' + esc(p.kami) + '<br><span class="poem-kana">' + esc(p.kamiKana) + '</span></p>';
+    h += '<p><span class="lbl">訳</span>' + esc(p.trans) + '</p>';
+  } else if(q.kind === "quiz"){
+    if(q.raw){
+      h += '<p><span class="lbl">正解</span>' + esc(q.raw.opts[q.raw.a]) + '</p>';
+      h += '<p>' + esc(q.raw.exp) + '</p>';
+    }
+    if(p && !ok) h += '<p><span class="lbl">' + p.n + '番</span>' + esc(p.kami) + '<br><span class="poem-kana">' + esc(p.kamiKana) + '</span></p>';
+  }
+  h += '</div>';
+  return h;
+}
+
+function nextQuestion(){
+  S.i++;
+  if(S.i >= S.qs.length){ finish(); return; }
+  renderQuestion();
+}
+
+/* ---------------- けっか ---------------- */
+function finish(){
+  stopTimer();
+  var total = S.qs.length;
+  var html = "";
+  if(S.mode === "karuta"){
+    html = resultHeader("かるた クリア！", "全" + total + "問 おつかれさま", "🃏");
+    html += statsHtml([
+      [S.correct + " / " + total, "正解"],
+      [S.maxCombo, "最大コンボ"],
+      [Math.round(S.correct/total*100) + "%", "正解率"]
+    ]);
+    html += reviewHtml("まちがえた歌を もう一度", S.wrong);
+    html += resultButtons("karuta");
+  } else if(S.mode === "speed"){
+    var rank = speedRank(S.score);
+    if(S.score > store.bestSpeed){ store.bestSpeed = S.score; saveStore(); }
+    html = resultHeader("スピード けっか", "スコア " + S.score + "点", "");
+    html += '<div class="result-top"><div class="rank-c ' + rank.letter + '">' + rank.letter + "</div>" + rank.msg + "</div>";
+    html += statsHtml([
+      [S.correct + " / " + total, "正解"],
+      [S.maxCombo, "最大コンボ"],
+      [store.bestSpeed, "最高スコア"]
+    ]);
+    html += reviewHtml("おしかった歌", S.wrong);
+    html += resultButtons("speed");
+  } else if(S.mode === "quiz"){
+    var r = S.correct === total ? "S" : (S.correct >= total-2 ? "A" : (S.correct >= total-4 ? "B" : "C"));
+    html = resultHeader("テスト対策 けっか", "全" + total + "問 おつかれさま", "📝");
+    html += '<div class="result-top"><div class="rank-c ' + r + '">' + r + "</div></div>";
+    html += statsHtml([
+      [S.correct + " / " + total, "正解"],
+      [Math.round(S.correct/total*100) + "%", "正解率"],
+      [S.maxCombo, "最大コンボ"]
+    ]);
+    html += quizReviewHtml(S.wrong);
+    html += resultButtons("quiz");
+  } else if(S.mode === "final"){
+    var f = S.correct;
+    var lr = f >= 10 ? "S" : (f >= 8 ? "A" : (f >= 6 ? "B" : "C"));
+    var msg = { S:"パーフェクト！ 20〜26番は もう完ぺき！", A:"あと少しで満点！ すごい！", B:"いい調子。まちがえた歌を見直そう", C:"ここから伸びる！ 図鑑で復習しよう" }[lr];
+    if(f > store.bestFinal){ store.bestFinal = f; saveStore(); }
+    html = resultHeader("仕上げテスト けっか", "20〜26番 総合10問", "👑");
+    html += '<div class="result-top"><div class="rank-c ' + lr + '">' + lr + "</div><p class=\"result-sub\">" + msg + "</p></div>";
+    html += statsHtml([
+      [f + " / 10", "正解"],
+      [f*10 + "点", "得点"],
+      [store.bestFinal + " / 10", "最高記録"]
+    ]);
+    html += reviewHtml("まちがえた歌（復習）", S.wrong);
+    html += resultButtons("final");
+  }
+  if(S.mode === "quiz" && S.correct === total) burst("good");
+  if(S.mode === "final"){
+    var f2 = S.correct;
+    if(f2 >= 8) burst("good");
+  }
+  $("resultBody").innerHTML = html;
+  go("result");
+  wireResult();
+}
+
+function speedRank(score){
+  if(score >= 2000) return { letter:"S", emoji:"⚡", msg:"<p class=\"result-sub\">神スピード！ 決まり字は完ぺき！</p>" };
+  if(score >= 1600) return { letter:"A", emoji:"✨", msg:"<p class=\"result-sub\">はやい！ その調子！</p>" };
+  if(score >= 1100) return { letter:"B", emoji:"🌟", msg:"<p class=\"result-sub\">いいかんじ。あと少しでA！</p>" };
+  return { letter:"C", emoji:"🌱", msg:"<p class=\"result-sub\">くりかえすと どんどん速くなるよ</p>" };
+}
+function resultHeader(title, sub, emoji){
+  return '<div class="result-top"><div style="font-size:2rem;line-height:1.2">' + (emoji||"") + '</div>' +
+         '<h2 class="result-title">' + esc(title) + '</h2>' +
+         '<p class="result-sub">' + esc(sub) + '</p></div>';
+}
+function statsHtml(rows){
+  var h = '<div class="stats">';
+  for(var i=0;i<rows.length;i++){
+    h += '<div class="stat"><div class="v">' + esc(String(rows[i][0])) + '</div><div class="l">' + esc(rows[i][1]) + '</div></div>';
+  }
+  return h + '</div>';
+}
+function reviewHtml(title, wrong){
+  if(!wrong || !wrong.length) return '<div class="res-sec"><h3>🌸 全問せいかい！ すばらしい</h3></div>';
+  var seen = {}, list = [];
+  for(var i=0;i<wrong.length;i++){
+    var q = wrong[i].q;
+    if(!q.poem || seen[q.poem]) continue;
+    seen[q.poem] = 1;
+    list.push(poemByN(q.poem));
+  }
+  var h = '<div class="res-sec"><h3>✍️ ' + esc(title) + '</h3>';
+  for(var j=0;j<list.length;j++){
+    var p = list[j];
+    if(!p) continue;
+    h += '<div class="review">' +
+           '<div class="rn">' + p.n + '番・' + esc(p.author) + '／決まり字「' + esc(p.kimari) + '」</div>' +
+           '<p class="rp">' + esc(p.kami) + '<br>' + esc(p.shimo) + '</p>' +
+           '<p class="rt"><b>訳</b> ' + esc(p.trans) + '</p>' +
+         '</div>';
+  }
+  return h + '</div>';
+}
+function quizReviewHtml(wrong){
+  if(!wrong || !wrong.length) return '<div class="res-sec"><h3>🌸 全問せいかい！ すばらしい</h3></div>';
+  var h = '<div class="res-sec"><h3>✍️ まちがえた問題</h3>';
+  for(var i=0;i<wrong.length;i++){
+    var q = wrong[i].q;
+    if(!q.raw) continue;
+    h += '<div class="review">' +
+           '<div class="rn">' + esc(q.raw.cat) + (q.poem ? '・' + q.poem + '番' : '') + '</div>' +
+           '<p class="rp" style="font-family:inherit;font-size:.86rem;font-weight:700">' + esc(q.raw.q) + '</p>' +
+           '<p class="rt"><b>正解</b> ' + esc(q.raw.opts[q.raw.a]) + '<br>' + esc(q.raw.exp) + '</p>' +
+         '</div>';
+  }
+  return h + '</div>';
+}
+function resultButtons(mode){
+  var h = '<div class="btnrow" style="margin-top:16px">';
+  h += '<button class="btn primary" type="button" id="btnRetry">もう一度</button>';
+  h += '<button class="btn soft" type="button" id="btnStudy">図鑑で復習</button>';
+  h += '</div>';
+  h += '<button class="btn wide" type="button" id="btnHome2" style="margin-top:9px">ホームへ</button>';
+  return h;
+}
+function wireResult(){
+  var r = $("btnRetry");
+  if(r) r.addEventListener("click", function(){ var m = S ? S.mode : "karuta"; sfxTap(); startMode(m); });
+  var s = $("btnStudy");
+  if(s) s.addEventListener("click", function(){ sfxTap(); renderZukan("card"); go("zukan"); });
+  var h = $("btnHome2");
+  if(h) h.addEventListener("click", function(){ sfxTap(); goHome(); });
+}
+
+/* ---------------- 図鑑 ---------------- */
+var zukanView = "card";
+var zukanIdx = 0;
+
+function renderZukan(view){
+  zukanView = view || zukanView;
+  var segs = $("zukanSeg").querySelectorAll(".seg-btn");
+  for(var i=0;i<segs.length;i++){
+    segs[i].className = "seg-btn" + (segs[i].getAttribute("data-view") === zukanView ? " on" : "");
+  }
+  var body = $("zukanBody");
+  if(!body) return;
+  if(zukanView === "card") body.innerHTML = zukanCardHtml();
+  else body.innerHTML = zukanListHtml();
+  wireZukan();
+}
+
+function zukanCardHtml(){
+  var p = POEMS[Math.max(0,Math.min(POEMS.length-1,zukanIdx))];
+  var lv = levelOf(p.n);
+  var h = '<div class="zcard" id="zcard">' +
+      '<div class="zlist-head" style="margin-bottom:8px">' +
+        '<span class="zn">' + p.n + '番</span>' +
+        '<span class="chip" style="margin-left:auto">' + levelMark(lv) + ' ' + levelLabel(lv) + '</span>' +
+      '</div>' +
+      '<p class="zauthor">' + esc(p.author) + '（' + esc(p.authorKana) + '）</p>' +
+      '<p class="zpoem">' + esc(p.kami) + '</p>' +
+      '<p class="poem-kana">' + esc(p.kamiKana) + '</p>' +
+      '<span class="zkimari">決まり字 <b>' + esc(p.kimari) + '</b></span>' +
+      '<div class="zmore">' +
+        '<p class="zlbl">下の句</p>' +
+        '<p class="zshimo">' + esc(p.shimo) + '</p>' +
+        '<p class="zkana">' + esc(p.shimoKana) + '</p>' +
+        '<p class="zlbl">現代語訳</p>' +
+        '<p class="ztrans">' + esc(p.trans) + '</p>' +
+        '<p class="zlbl">テストのポイント</p>' +
+        '<ul>';
+  for(var i=0;i<p.points.length;i++) h += '<li>' + esc(p.points[i]) + '</li>';
+  h += '</ul></div></div>';
+  h += '<p class="zhint">カードをタップすると 下の句・訳・ポイントが見られるよ</p>';
+  h += '<div class="znav">' +
+         '<button class="btn small" type="button" id="zPrev">‹</button>' +
+         '<span class="zpos" id="zPos">' + (zukanIdx+1) + ' / ' + POEMS.length + '　' + p.n + '番</span>' +
+         '<button class="btn small" type="button" id="zNext">›</button>' +
+       '</div>';
+  h += '<div class="zdots" id="zDots">';
+  for(var d=0;d<POEMS.length;d++){
+    h += '<span class="zdot' + (d === zukanIdx ? ' on' : '') + '" data-d="' + d + '"></span>';
+  }
+  h += '</div>';
+  h += '<div class="btnrow" style="margin-top:16px"><button class="btn soft wide" type="button" id="zListBtn">7首を一覧で見る</button></div>';
+  return h;
+}
+
+function zukanListHtml(){
+  var h = '';
+  h += '<div class="tipcard"><b>決まり字まとめ</b><br>';
+  for(var i=0;i<POEMS.length;i++){
+    h += '<span class="chip" style="margin:3px 4px 0 0">' + POEMS[i].n + '番 <b>' + esc(POEMS[i].kimari) + '</b></span>';
+  }
+  h += '<br>一字決まりは「<b>む・す・め・ふ・さ・ほ・せ</b>」の7字。20〜26番では<b>22番「ふ」</b>だけ。</div>';
+  h += '<div class="tipcard" style="background:#fdf6ec;border-color:#f0e0c8;color:#7a5c33"><b>26番の決まり字</b>は「<b>をぐ</b>」。現代かなづかいでは「<b>おぐ</b>」と書くよ。</div>';
+  for(var j=0;j<POEMS.length;j++){
+    var p = POEMS[j], lv = levelOf(p.n);
+    h += '<div class="zlist-item">' +
+           '<div class="zlist-head">' +
+             '<span class="zlist-n">' + p.n + '</span>' +
+             '<span class="zlist-a">' + esc(p.author) + '<small>' + esc(p.authorKana) + '　' + levelMark(lv) + ' ' + levelLabel(lv) + '</small></span>' +
+             '<span class="zlist-k">決まり字 <b>' + esc(p.kimari) + '</b></span>' +
+           '</div>' +
+           '<p class="zlist-p">' + esc(p.kami) + '<br>' + esc(p.shimo) + '</p>' +
+           '<p class="zlist-t"><span class="poem-kana">' + esc(p.kamiKana) + '<br>' + esc(p.shimoKana) + '</span></p>' +
+           '<p class="zlist-t">' + esc(p.trans) + '</p>';
+    for(var k=0;k<p.points.length;k++) h += '<p class="zlist-pt">' + esc(p.points[k]) + '</p>';
+    h += '</div>';
+  }
+  h += '<p class="foot-note">20〜26番の7首／決まり字・訳・ポイント</p>';
+  return h;
+}
+
+function wireZukan(){
+  var card = $("zcard");
+  if(card) card.addEventListener("click", function(){ card.classList.toggle("open"); });
+  var prev = $("zPrev");
+  if(prev) prev.addEventListener("click", function(){ sfxTap(); zukanIdx = (zukanIdx + POEMS.length - 1) % POEMS.length; renderZukan("card"); });
+  var next = $("zNext");
+  if(next) next.addEventListener("click", function(){ sfxTap(); zukanIdx = (zukanIdx + 1) % POEMS.length; renderZukan("card"); });
+  var dots = $("zDots");
+  if(dots) dots.addEventListener("click", function(e){
+    var t = e.target;
+    if(t && t.getAttribute && t.getAttribute("data-d") !== null){
+      zukanIdx = parseInt(t.getAttribute("data-d"),10) || 0;
+      renderZukan("card");
+    }
+  });
+  var lb = $("zListBtn");
+  if(lb) lb.addEventListener("click", function(){ renderZukan("list"); });
+}
+
+/* ---------------- 起動 ---------------- */
+function init(){
+  loadStore();
+  paintHome();
+
+  var modeList = $("modeList");
+  if(modeList){
+    modeList.addEventListener("click", function(e){
+      var t = e.target;
+      while(t && t !== modeList && !(t.getAttribute && t.getAttribute("data-mode"))) t = t.parentNode;
+      if(!t || t === modeList) return;
+      var mode = t.getAttribute("data-mode");
+      sfxTap();
+      startMode(mode);
+    });
+  }
+
+  $("btnBack").addEventListener("click", function(){ sfxTap(); goHome(); });
+  $("btnSound").addEventListener("click", function(){
+    store.sound = !store.sound;
+    saveStore();
+    paintSoundBtn();
+    if(store.sound) sfxTap();
+  });
+
+  var playBody = $("playBody");
+  if(playBody){
+    playBody.addEventListener("click", function(e){
+      var t = e.target;
+      while(t && t !== playBody && !(t.getAttribute && t.getAttribute("data-i") !== null)) t = t.parentNode;
+      if(!t || t === playBody) return;
+      if(!t.getAttribute) return;
+      var i = parseInt(t.getAttribute("data-i"),10);
+      if(isNaN(i)) return;
+      answer(i);
+    });
+  }
+
+  var seg = $("zukanSeg");
+  if(seg){
+    seg.addEventListener("click", function(e){
+      var t = e.target;
+      if(t && t.getAttribute && t.getAttribute("data-view")){ sfxTap(); renderZukan(t.getAttribute("data-view")); }
+    });
+  }
+
+  /* 決まり字ハイライトの切替（かるた画面のバッジ横に出す） */
+  var pb = $("playBody");
+  if(pb){
+    pb.addEventListener("click", function(e){
+      var t = e.target;
+      while(t && t !== pb && !(t.getAttribute && t.getAttribute("data-act") === "kimari")) t = t.parentNode;
+      if(!t || t === pb) return;
+      store.kimariOn = !store.kimariOn;
+      saveStore();
+      var q = (S && S.qs) ? S.qs[S.i] : null;
+      if(!q || q.kind !== "shimo") return;
+      var poem = poemByN(q.poem);
+      var poemEl = pb.querySelector(".poem");
+      var kanaEl = pb.querySelector(".poem-kana");
+      var badgeEl = pb.querySelector(".kimari-badge");
+      if(poemEl) poemEl.innerHTML = kamiHtml(poem);
+      if(kanaEl) kanaEl.innerHTML = kamiKanaHtml(poem);
+      if(badgeEl){
+        var wrap = document.createElement("div");
+        wrap.innerHTML = kimariBadgeHtml(poem);
+        badgeEl.parentNode.replaceChild(wrap.firstChild, badgeEl);
+      }
+    });
+  }
+}
+
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+else init();
+
+</script>
+</body>
+</html>
