@@ -414,7 +414,7 @@ h1,h2,h3,h4,p{margin:0;}
       <div class="modes" id="modeList">
         <button class="mode" type="button" data-mode="karuta">
           <span class="mode-ic" style="--c1:#fde8ee;--c2:#f5afc0">🃏</span>
-          <span class="mode-body"><b>上の句→下の句 かるた</b><small>上の句を見て、下の句の札を4枚からえらぶ</small></span>
+          <span class="mode-body"><b>上の句→下の句 かるた</b><small>上の句を見て、下の句を4択でえらぶ</small></span>
           <span class="mode-go">▶</span>
         </button>
         <button class="mode" type="button" data-mode="speed">
@@ -824,9 +824,9 @@ function paintHome(){
     sum.textContent = m > 0 ? ("👑 " + m + " / 7 首マスター") : "まだ 0 / 7 首";
   }
   var sp = document.querySelector('[data-mode="speed"] small');
-  if(sp && store.bestSpeed > 0){ sp.textContent = "6秒以内に決まり字を当てる！最高 " + store.bestSpeed + "点"; }
+  if(sp && store.bestSpeed > 0){ sp.textContent = "6秒以内に決まり字を当てる！最高" + store.bestSpeed + "点"; }
   var fp = document.querySelector('[data-mode="final"] small');
-  if(fp && store.bestFinal > 0){ fp.textContent = "20〜26番の総合ランダム10問・最高 " + store.bestFinal + " / 10"; }
+  if(fp && store.bestFinal > 0){ fp.textContent = "20〜26番の総合10問・S〜C判定・最高" + store.bestFinal + "/10"; }
   paintSoundBtn();
 }
 function paintSoundBtn(){
@@ -1263,7 +1263,7 @@ function finish(){
     html += statsHtml([
       [f + " / 10", "正解"],
       [f*10 + "点", "得点"],
-      [store.bestFinal + " / 10", "最高記録"]
+      [store.bestFinal + "/10", "最高記録"]
     ]);
     html += reviewHtml("まちがえた歌（復習）", S.wrong);
     html += resultButtons("final");
