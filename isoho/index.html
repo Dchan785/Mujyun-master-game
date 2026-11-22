@@ -1353,8 +1353,12 @@ function init(){
     store.sound = !store.sound;
     saveStore();
     paintSound();
-    if(!store.sound) spkStop();
-    else { audioCtx(); sfx("tap"); }
+    if(!store.sound){
+      if(current === "listen" && LZ.playing) lzPause();   /* 音を消したら読み上げも止める */
+      else spkStop();
+    }else{
+      audioCtx(); sfx("tap");
+    }
     toast(store.sound ? "🔔 音 ON" : "🔕 音 OFF");
     if(current === "listen") lzPaint();
   });
