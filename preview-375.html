@@ -6,11 +6,10 @@
 <style>
 html,body{margin:0;padding:0;background:#8a8a8a;}
 #wrap{width:375px;height:812px;overflow:hidden;background:#fff;}
-/* スクロールバー(約15px)を外側に出し、中身は 375px 幅で描画する */
-iframe{width:390px;height:812px;border:0;display:block;}
+iframe{width:375px;height:812px;border:0;display:block;overflow:hidden;}
 </style>
 </head>
 <body>
-<div id="wrap"><iframe id="game" sandbox="allow-scripts" src="./hyakunin-20-26/index.html"></iframe></div>
+<div id="wrap"><iframe id="game" width="375" height="812" scrolling="no" sandbox="allow-scripts" src="./hyakunin-20-26/index.html"></iframe></div>
 </body>
 </html>
