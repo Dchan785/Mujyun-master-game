@@ -135,7 +135,7 @@ h1,h2,h3,h4,p{margin:0;}
 .lz-story{font-family:var(--mincho);font-size:.92rem;font-weight:700;letter-spacing:.05em;color:#836a66;}
 .lz-story::before{content:"🪶";margin-right:5px;font-size:.85rem;}
 .lz-count{font-size:.74rem;font-weight:800;color:var(--shu);background:#fff;border:1.5px solid var(--shu-l);padding:3px 9px;border-radius:99px;letter-spacing:.05em;}
-.lz-card{min-height:246px;display:flex;flex-direction:column;padding:15px 14px 13px;margin-bottom:12px;}
+.lz-card{min-height:214px;display:flex;flex-direction:column;padding:15px 14px 13px;margin-bottom:12px;}
 .lz-label{display:flex;align-items:center;gap:6px;font-size:.71rem;font-weight:800;letter-spacing:.09em;color:#b07a86;margin-bottom:9px;}
 .lz-label::before{content:"";width:5px;height:14px;border-radius:3px;background:linear-gradient(#f4aab9,#c65a6e);}
 .lz-main{
@@ -438,7 +438,7 @@ h1,h2,h3,h4,p{margin:0;}
         <span class="setlabel">くり返し</span>
         <div class="chips" id="lsRepeatChips">
           <button class="chip" data-repeat="0">OFF</button>
-          <button class="chip on" data-repeat="1">ON（さいごまで→また最初から）</button>
+          <button class="chip on" data-repeat="1">ON（くり返す）</button>
         </div>
       </div>
     </div>
@@ -513,8 +513,8 @@ var STORIES = {
         point: "「肉」は「ししむら」と読む。「くはへて」＝くわえて。"
       },
       {
-        text: "真ん中ほどにて、その影水に映りて大きに見えければ、",
-        kana: "まんなかほどにて、そのかげみづにうつりて、おほきにみえければ、",
+        text: "真ん中ほどにて、その影、水に映りて大きに見えければ、",
+        kana: "まんなかほどにて、そのかげ、みづにうつりて、おほきにみえければ、",
         trans: "川の真ん中あたりで、その肉の影が水に映って大きく見えたので、",
         point: "「見えければ」＝見えたので。「ければ」は理由を表す。"
       },
@@ -538,6 +538,7 @@ var STORIES = {
       }
     ],
     lesson: "欲張って他人のものを欲しがると、自分のものまで失ってしまう。",
+    pronounTitle: "「これ・かれ」はどれ？",
     lessonLong: "手に入れようとしたものだけでなく、今あるものまで失う。",
     pronouns: [
       { w: "これ", m: "犬がくわえている肉（本物）" },
@@ -545,14 +546,14 @@ var STORIES = {
       { w: "その影", m: "犬自身の影" }
     ],
     kanaTable: [
-      ["くはへて", "くわえて", "「は」→「わ」"],
-      ["くはゆる", "くわえる", "「は」→「わ」"],
-      ["ゆゑに", "わけに", "「ゑ」→「え」"],
-      ["おほきなる", "おおきなる", "「ほ」→「お」"],
-      ["みづ", "みず", "「づ」→「ず」"],
-      ["失ふ", "失う", "「ふ」→「う」"],
-      ["かうむる", "こうむる", "「au」→「ou」"],
-      ["ぢうよくしん", "じゅうよくしん", "「ぢう」→「じゅう」"]
+      ["くはへて", "くわえて", "は→わ"],
+      ["くはゆる", "くわえる", "は→わ"],
+      ["ゆゑに", "わけに", "ゑ→え"],
+      ["おほきなる", "おおきなる", "ほ→お"],
+      ["みづ", "みず", "づ→ず"],
+      ["失ふ", "失う", "ふ→う"],
+      ["かうむる", "こうむる", "au→ou"],
+      ["ぢうよくしん", "じゅうよくしん", "ぢう→じゅう"]
     ],
     words: [
       ["ししむら", "獣の肉。ここでは犬がくわえている肉"],
@@ -632,21 +633,22 @@ var STORIES = {
       }
     ],
     lesson: "人から受けた恩は、どんな形でも返そうとする心を持つべき。",
+    pronounTitle: "「これ」は何を指す？",
     lessonLong: "恩を受けたら、いつかその恩に報いようとする心を持つべきだ。",
     pronouns: [
-      { w: "これ（蟻）", m: "かみ切って川に落とした枝の先" },
-      { w: "これ（鳩）", m: "蟻が人の足にかみついたこと" },
+      { w: "これ（蟻が乗った）", m: "かみ切って川に落とした枝の先" },
+      { w: "これ（鳩が悟った）", m: "蟻が人の足にかみついたこと" },
       { w: "そ（そのもの）", m: "竿を持っていた人（鳩を捕らえようとした人）" }
     ],
     kanaTable: [
-      ["にはかに", "にわかに", "「は」→「わ」"],
-      ["こずゑ", "こずえ", "「ゑ」→「え」"],
-      ["あはれなる", "あわれなる", "「は」→「わ」"],
-      ["食ひ切つて", "くいきって", "「ひ」→「い」"],
-      ["誘ひ", "さそい", "「ひ」→「い」"],
-      ["おびえあがつて", "おびえあがって", "「つ」→「っ」"],
-      ["いづく", "いずく", "「づ」→「ず」"],
-      ["報ひ", "むくい", "「ひ」→「い」"]
+      ["にはかに", "にわかに", "は→わ"],
+      ["こずゑ", "こずえ", "ゑ→え"],
+      ["あはれなる", "あわれなる", "は→わ"],
+      ["食ひ切つて", "くいきって", "ひ→い"],
+      ["誘ひ", "さそい", "ひ→い"],
+      ["おびえあがつて", "おびえあがって", "つ→っ"],
+      ["いづく", "いずく", "づ→ず"],
+      ["報ひ", "むくい", "ひ→い"]
     ],
     words: [
       ["ありけり", "あった（「けり」＝過去）"],
@@ -1234,7 +1236,7 @@ function quizFinish(){
 var RANK_TITLE = { S: "パーフェクト！", A: "すごい！あと少し", B: "いい調子！", C: "ここから伸びる！" };
 var RANK_MSG = {
   S: "本文も語句もバッチリ。テスト本番でも大丈夫そう！ 教訓を自分の言葉で言えるか、最後に声に出して確認してみよう。",
-  A: "あと1〜2問！ まちがえた問題を「📖 要点まとめ」で見直すと、そのまま満点が見えてくるよ。",
+  A: "あと少し！ まちがえた問題を「📖 要点まとめ」で見直すと、そのまま満点が見えてくるよ。",
   B: "まちがえたところが、のびしろ。まずは歴史的仮名遣い（くはへて→くわえて、こずゑ→こずえ）を復習しよう。",
   C: "まずは 🎧 聞き流しで2話を1回ずつ聞いてみよう。耳で流れをつかむと、言葉がすっと入ってくるよ。"
 };
@@ -1303,7 +1305,7 @@ function renderSummary(key){
   });
   h += "</div></div>";
 
-  h += '<div class="card sum-card"><div class="sum-t yb">「これ・かれ」はどれ？</div><div class="wordlist">';
+  h += '<div class="card sum-card"><div class="sum-t yb">' + esc(st.pronounTitle || "指示語") + '</div><div class="wordlist">';
   st.pronouns.forEach(function(p){ h += '<div class="word"><span class="w">' + esc(p.w) + '</span><span class="m">' + esc(p.m) + "</span></div>"; });
   h += "</div></div>";
 
