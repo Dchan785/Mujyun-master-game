@@ -358,6 +358,159 @@ h1,h2,h3,h4,p{margin:0;}
 }
 .tipcard b{color:#7a63a8;}
 
+/* ---------- 車内モード（ホームの入口） ---------- */
+.drive-sec{
+  margin:0 0 15px;border-radius:20px;padding:11px 11px 12px;
+  background:linear-gradient(158deg,#f2f9ff 0%,#eaf7f0 100%);
+  border:2px solid #cfe4f0;box-shadow:0 4px 0 #dcecf5;
+}
+.drive-head{display:flex;align-items:center;gap:9px;margin:1px 2px 9px;}
+.drive-head .ic{
+  width:40px;height:40px;flex:0 0 40px;border-radius:13px;display:grid;place-items:center;
+  font-size:21px;background:linear-gradient(150deg,#dff0ff,#c9e8d6);
+}
+.drive-head .tt{flex:1;min-width:0;font-size:.9rem;font-weight:800;letter-spacing:.02em;line-height:1.35;}
+.drive-head .tt small{display:block;font-size:.67rem;font-weight:600;color:#6d8595;letter-spacing:.02em;margin-top:1px;}
+.drive-modes{display:flex;flex-direction:column;gap:9px;}
+.dmode{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:#fff;border:2px solid #d8e8f0;border-radius:17px;padding:10px 12px;
+  min-height:76px;box-shadow:0 3px 0 #dfeaf1;cursor:pointer;
+  transition:transform .1s ease, box-shadow .1s ease;
+}
+.dmode:active{transform:translateY(2px);box-shadow:0 1px 0 #dfeaf1;}
+.dmode .d-ic{
+  width:47px;height:47px;flex:0 0 47px;border-radius:15px;display:grid;place-items:center;
+  font-size:22px;background:linear-gradient(150deg,#e6f4ff,#cfeadd);
+}
+.dmode .d-body{flex:1;min-width:0;}
+.dmode b{display:block;font-size:.96rem;line-height:1.35;font-weight:800;}
+.dmode small{display:block;font-size:.7rem;color:#6d8595;line-height:1.45;margin-top:2px;}
+.dmode .d-go{margin-left:auto;color:#a9c4d3;font-size:1.02rem;flex:0 0 auto;}
+
+/* ---------- 車内・聞き流し ---------- */
+.dv-stage{
+  position:relative;text-align:center;border-radius:22px;padding:13px 14px 15px;
+  background:linear-gradient(165deg,#f5faff 0%,#eef9f2 68%,#fffaf3 100%);
+  border:2px solid #d5e8f1;box-shadow:0 4px 0 #dfeef5;
+  min-height:292px;display:flex;flex-direction:column;
+}
+.dv-top{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.dv-badge{font-size:.67rem;font-weight:800;padding:3px 10px;border-radius:999px;background:#e3f1fa;color:#4a7c99;letter-spacing:.04em;}
+.dv-count{margin-left:auto;font-size:.7rem;font-weight:800;color:#7d94a2;font-variant-numeric:tabular-nums;}
+.dv-num{font-family:var(--mincho);font-size:1.4rem;font-weight:700;color:#3c6b84;letter-spacing:.06em;line-height:1.3;}
+.dv-author{font-size:.8rem;color:#6f8794;margin-bottom:9px;}
+.dv-label{
+  display:inline-block;margin:0 auto 8px;padding:2px 12px;border-radius:999px;
+  background:#fff4d9;border:1px solid #f0dcae;color:#9c7524;
+  font-size:.67rem;font-weight:800;letter-spacing:.08em;
+}
+.dv-text{
+  font-family:var(--mincho);font-size:clamp(1.24rem,6vw,1.56rem);line-height:1.95;letter-spacing:.05em;
+  font-weight:600;color:#33403c;display:flex;align-items:center;justify-content:center;
+  flex:1;min-height:3.6em;padding:0 2px;
+}
+.dv-text.trans{font-family:inherit;font-size:1rem;line-height:1.8;text-align:left;letter-spacing:0;font-weight:600;color:#3f4a45;min-height:4.8em;}
+.dv-sub{margin-top:8px;font-size:.74rem;color:#7a8f9a;line-height:1.6;min-height:1.2em;}
+.dv-sub b{font-family:var(--mincho);color:var(--shu);font-size:.9rem;letter-spacing:.06em;}
+.dv-ctrl{display:flex;gap:9px;margin-top:13px;}
+.dv-ctrl button{border:2px solid #cfdfe9;background:#fff;border-radius:20px;box-shadow:0 3px 0 #dde9f1;cursor:pointer;font-family:inherit;transition:transform .1s ease, box-shadow .1s ease;}
+.dv-ctrl button:active{transform:translateY(2px);box-shadow:none;}
+.dv-skip{flex:0 0 68px;min-height:84px;font-size:1.4rem;color:#5c7b8d;line-height:1;}
+.dv-play{
+  flex:1;min-height:84px;font-size:1.24rem;font-weight:800;letter-spacing:.04em;color:#2f6b52;
+  background:linear-gradient(160deg,#e2f6e9,#c3e8d1)!important;border-color:#9fd2b4!important;box-shadow:0 4px 0 #b2dcc2!important;
+}
+.dv-play.on{color:#a83f57;background:linear-gradient(160deg,#ffe7ec,#ffc9d6)!important;border-color:#f0a9b9!important;box-shadow:0 4px 0 #f4c3cf!important;}
+.dv-note{margin:9px 0 0;text-align:center;font-size:.71rem;color:#7d94a2;line-height:1.6;min-height:1.2em;}
+.dv-note.warn{color:#b06a3a;}
+.dv-sets{display:flex;flex-direction:column;gap:8px;margin-top:13px;}
+.dv-opt{background:#fffdf9;border:2px solid var(--line);border-radius:15px;padding:8px 10px 9px;box-shadow:0 2px 0 #f0e4d8;}
+.dv-opt .k{display:block;font-size:.67rem;font-weight:800;color:#8f8378;letter-spacing:.06em;margin:0 0 5px 2px;}
+.dv-chips{display:flex;gap:6px;}
+.dv-chip{
+  flex:1;min-width:0;min-height:46px;padding:4px 4px;border-radius:12px;
+  border:2px solid #ece0d4;background:#fff;color:#9b9188;
+  font-size:.82rem;font-weight:800;line-height:1.25;cursor:pointer;font-family:inherit;
+}
+.dv-chip.on{background:#e9f6ee;border-color:#9fd2b4;color:#327455;box-shadow:inset 0 -2px 0 #cfe9d9;}
+.dv-chip:active{transform:translateY(1px);}
+
+/* ---------- 車内・耳でかるた ---------- */
+.dk-top{display:flex;align-items:center;gap:7px;margin-bottom:9px;flex-wrap:wrap;}
+.dk-prog{margin-left:auto;font-size:.72rem;font-weight:800;color:#7d94a2;font-variant-numeric:tabular-nums;}
+.dk-card{
+  background:linear-gradient(160deg,#f6fbff,#f0f9f3);border:2px solid #d5e8f1;border-radius:20px;
+  padding:13px 13px 14px;box-shadow:0 4px 0 #dfeef5;text-align:center;min-height:146px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.dk-tag{font-size:.67rem;font-weight:800;color:#4a7c99;letter-spacing:.06em;margin-bottom:6px;}
+.dk-kami{font-family:var(--mincho);font-size:clamp(1.06rem,5.2vw,1.3rem);line-height:1.9;letter-spacing:.04em;font-weight:600;color:#33403c;margin:0;}
+.dk-kana{font-size:.73rem;color:#8fa3ad;line-height:1.6;margin:5px 0 0;}
+.dk-hidden{display:none;flex-direction:column;align-items:center;gap:5px;padding:8px 0;}
+.dk-hidden.on{display:flex;}
+.dk-hidden .e{font-size:2.1rem;line-height:1;}
+.dk-hidden .t{font-family:var(--mincho);font-size:1.12rem;font-weight:700;color:#4a7c99;letter-spacing:.08em;}
+.dk-hidden .s{font-size:.72rem;color:#8fa3ad;}
+.dk-replay{
+  width:100%;min-height:76px;margin-top:10px;border-radius:18px;cursor:pointer;font-family:inherit;
+  font-size:1.1rem;font-weight:800;letter-spacing:.03em;color:#31678f;
+  background:linear-gradient(160deg,#eaf6ff,#d6ecf8);border:2px solid #b6d8ec;box-shadow:0 4px 0 #cbe4f2;
+  transition:transform .1s ease, box-shadow .1s ease;
+}
+.dk-replay:active{transform:translateY(2px);box-shadow:none;}
+.dk-switch{
+  width:100%;min-height:58px;margin-top:10px;border-radius:16px;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:10px;padding:8px 13px;text-align:left;
+  background:#fffdf9;border:2px solid var(--line);box-shadow:0 3px 0 #f0e4d8;
+  font-size:.87rem;font-weight:800;color:#8a7f75;line-height:1.35;
+}
+.dk-switch .knob{width:50px;height:29px;flex:0 0 50px;border-radius:999px;background:#e8ddd2;position:relative;transition:background .18s;}
+.dk-switch .knob::after{
+  content:"";position:absolute;top:3px;left:3px;width:23px;height:23px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18);transition:transform .18s;
+}
+.dk-switch.on{color:#327455;background:#f1fbf5;border-color:#b9dfc8;}
+.dk-switch.on .knob{background:#6cbb91;}
+.dk-switch.on .knob::after{transform:translateX(21px);}
+.dk-q{margin:14px 0 8px;text-align:center;font-size:.85rem;font-weight:800;color:#8a7f75;letter-spacing:.04em;}
+.dk-opts{display:flex;flex-direction:column;gap:11px;}
+.dk-opt{
+  width:100%;min-height:98px;padding:11px 12px;border-radius:20px;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:11px;text-align:left;
+  background:#fffdfa;border:2px solid #e6dcd2;box-shadow:0 4px 0 #efe4da;
+  transition:transform .08s ease, box-shadow .08s ease;
+}
+.dk-opt:active{transform:translateY(2px);box-shadow:0 2px 0 #efe4da;}
+.dk-opt .lb{
+  width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:grid;place-items:center;
+  background:#eef4f8;color:#587d92;font-size:1rem;font-weight:800;
+}
+.dk-opt .tx{flex:1;min-width:0;}
+.dk-opt .tx .p{display:block;font-family:var(--mincho);font-size:clamp(.98rem,4.7vw,1.14rem);line-height:1.7;letter-spacing:.02em;font-weight:600;}
+.dk-opt .tx .kk{display:block;font-size:.67rem;color:#9a9089;margin-top:2px;line-height:1.5;}
+.dk-opts.locked .dk-opt{cursor:default;}
+.dk-opts.locked .dk-opt:active{transform:none;box-shadow:0 4px 0 #efe4da;}
+.dk-opt.correct{background:#f1faf3;border-color:#9dc294;box-shadow:0 4px 0 #b9d7b0;}
+.dk-opt.correct .lb{background:#dcf0e2;color:#3f7a58;}
+.dk-opt.wrong{background:#fdf2f5;border-color:#eaa7b6;box-shadow:0 4px 0 #f2bfca;}
+.dk-opt.wrong .lb{background:#fadfe4;color:#ac4b62;}
+.dk-opt.dim{opacity:.45;}
+.dk-fb{margin-top:13px;border-radius:18px;padding:13px 14px;border:2px solid #aed0a5;background:#f4fcf6;animation:pop .2s ease-out both;}
+.dk-fb.ng{border-color:#efb6c1;background:#fdf4f6;}
+.dk-fb-t{font-size:1.14rem;font-weight:800;color:#3f7a58;margin:0 0 5px;letter-spacing:.03em;}
+.dk-fb.ng .dk-fb-t{color:#b04a60;}
+.dk-fb-k{font-size:.98rem;font-weight:800;color:#6b5b4f;margin:0 0 4px;}
+.dk-fb-k b{font-family:var(--mincho);color:var(--shu);font-size:1.22rem;letter-spacing:.06em;}
+.dk-fb-s{font-family:var(--mincho);font-size:.99rem;line-height:1.75;margin:0;color:#3f3a36;}
+.dk-next{
+  width:100%;min-height:72px;margin-top:12px;border-radius:18px;cursor:pointer;font-family:inherit;
+  font-size:1.06rem;font-weight:800;color:#fff;background:var(--shu);border:2px solid var(--shu-d);
+  box-shadow:0 4px 0 var(--shu-d);letter-spacing:.04em;
+}
+.dk-next:active{transform:translateY(2px);box-shadow:none;}
+.dk-done{margin-top:4px;}
+
 /* ---------- 演出 ---------- */
 .fx{position:fixed;inset:0;pointer-events:none;z-index:90;overflow:hidden;}
 .petal{position:absolute;font-size:17px;line-height:1;will-change:transform,opacity;animation:fall 1.05s ease-out forwards;}
@@ -403,6 +556,24 @@ h1,h2,h3,h4,p{margin:0;}
         <div class="hero-deco">🌸</div>
         <h1 class="hero-title">百人一首<br><span class="hl">20〜26番</span> マスター</h1>
         <p class="hero-sub">7首をあそんで覚えて、<b>テスト対策</b>もバッチリ</p>
+      </div>
+      <div class="drive-sec">
+        <div class="drive-head">
+          <span class="ic">🚗</span>
+          <span class="tt">車内で覚える（音声モード）<small>画面を見なくてもOK・大きく押せるボタン</small></span>
+        </div>
+        <div class="drive-modes" id="driveList">
+          <button class="dmode" type="button" data-mode="listen">
+            <span class="d-ic">🎧</span>
+            <span class="d-body"><b>車内・聞き流し</b><small>上の句→下の句→訳を自動で読み上げ</small></span>
+            <span class="d-go">▶</span>
+          </button>
+          <button class="dmode" type="button" data-mode="drive">
+            <span class="d-ic">🚗</span>
+            <span class="d-body"><b>車内・耳でかるた</b><small>音声で出題・特大2択ボタンで答える</small></span>
+            <span class="d-go">▶</span>
+          </button>
+        </div>
       </div>
       <div class="card prog-card">
         <div class="prog-head">
@@ -467,6 +638,95 @@ h1,h2,h3,h4,p{margin:0;}
         <button class="seg-btn" type="button" data-view="list">一覧で見る</button>
       </div>
       <div id="zukanBody"></div>
+    </section>
+
+    <section id="scr-listen" class="screen">
+      <div class="dv-stage">
+        <div class="dv-top">
+          <span class="dv-badge">🎧 車内・聞き流し</span>
+          <span class="dv-count" id="dvCount">1 / 7</span>
+        </div>
+        <div class="dv-num" id="dvNum">20番</div>
+        <div class="dv-author" id="dvAuthor">元良親王</div>
+        <div><span class="dv-label" id="dvLabel">上の句</span></div>
+        <div class="dv-text" id="dvText">わびぬれば 今はた同じ 難波なる</div>
+        <div class="dv-sub" id="dvSub">わびぬれば いまはたおなじ なにはなる</div>
+      </div>
+      <div class="dv-ctrl">
+        <button type="button" class="dv-skip" id="dvPrev" aria-label="前の歌へ">⏮</button>
+        <button type="button" class="dv-play" id="dvPlay">▶ 再生する</button>
+        <button type="button" class="dv-skip" id="dvNext" aria-label="次の歌へ">⏭</button>
+      </div>
+      <p class="dv-note" id="dvNote">画面を見なくてもOK。耳だけで覚えられます。</p>
+      <div class="dv-sets" id="dvSets">
+        <div class="dv-opt">
+          <span class="k">じゅんばん</span>
+          <div class="dv-chips">
+            <button type="button" class="dv-chip" data-set="order" data-val="seq">20〜26番順</button>
+            <button type="button" class="dv-chip" data-set="order" data-val="shuffle">シャッフル</button>
+          </div>
+        </div>
+        <div class="dv-opt">
+          <span class="k">よみの速さ</span>
+          <div class="dv-chips">
+            <button type="button" class="dv-chip" data-set="rate" data-val="slow">ゆっくり</button>
+            <button type="button" class="dv-chip" data-set="rate" data-val="normal">ふつう</button>
+            <button type="button" class="dv-chip" data-set="rate" data-val="fast">はやめ</button>
+          </div>
+        </div>
+        <div class="dv-opt">
+          <span class="k">上の句のあとの あいだ</span>
+          <div class="dv-chips">
+            <button type="button" class="dv-chip" data-set="gap" data-val="1500">1.5秒</button>
+            <button type="button" class="dv-chip" data-set="gap" data-val="3000">3秒</button>
+          </div>
+        </div>
+        <div class="dv-opt">
+          <span class="k">現代語訳も読む</span>
+          <div class="dv-chips">
+            <button type="button" class="dv-chip" data-set="trans" data-val="1">読む</button>
+            <button type="button" class="dv-chip" data-set="trans" data-val="0">読まない</button>
+          </div>
+        </div>
+        <div class="dv-opt">
+          <span class="k">くりかえし再生</span>
+          <div class="dv-chips">
+            <button type="button" class="dv-chip" data-set="repeat" data-val="1">ON</button>
+            <button type="button" class="dv-chip" data-set="repeat" data-val="0">OFF</button>
+          </div>
+        </div>
+      </div>
+      <p class="foot-note">声は iPhone の読み上げ機能を使います（通信なし）<br>音が出ないときは マナーモード（消音）と 🔔 を確認してね</p>
+    </section>
+
+    <section id="scr-drive" class="screen">
+      <div class="dk-top">
+        <span class="pill">🚗 耳でかるた</span>
+        <span class="pill score" id="dkScore">正解 0</span>
+        <span class="dk-prog" id="dkProg">1 / 7</span>
+      </div>
+      <div id="dkPlayArea">
+        <div class="dk-card">
+          <div class="dk-tag" id="dkTag">♪ 上の句が流れます</div>
+          <div id="dkShow">
+            <p class="dk-kami" id="dkKami"></p>
+            <p class="dk-kana" id="dkKana"></p>
+          </div>
+          <div class="dk-hidden" id="dkHidden">
+            <span class="e">🎧</span>
+            <span class="t">音だけで挑戦中</span>
+            <span class="s">上の句と歌番号はかくしています</span>
+          </div>
+        </div>
+        <button type="button" class="dk-replay" id="dkReplay">🔊 もう一度聞く</button>
+        <button type="button" class="dk-switch" id="dkHide" aria-pressed="false">
+          <span class="knob"></span><span>上の句を隠す（耳だけで挑戦！）</span>
+        </button>
+        <p class="dk-q">下の句は どっち？</p>
+        <div class="dk-opts" id="dkOpts"></div>
+        <div id="dkFb"></div>
+      </div>
+      <div class="dk-done" id="dkDone"></div>
     </section>
   </main>
 </div>
@@ -788,7 +1048,7 @@ function bigPop(text){
 }
 
 /* ---------------- 画面移動 ---------------- */
-var SCREENS = ["scr-home","scr-play","scr-result","scr-zukan"];
+var SCREENS = ["scr-home","scr-play","scr-result","scr-zukan","scr-listen","scr-drive"];
 var currentScreen = "home";
 
 function go(name){
@@ -803,6 +1063,9 @@ function go(name){
 }
 function goHome(){
   stopTimer();
+  drvStop();
+  DRV.started = false;
+  DRV.finishedAll = false;
   paintHome();
   go("home");
 }
@@ -842,6 +1105,7 @@ var SPEED_TIME = 6.0;
 
 function startMode(mode){
   stopTimer();
+  if(mode === "listen" || mode === "drive"){ spkCancel(); SPK_TOKEN++; }
   store.plays = (store.plays||0) + 1; saveStore();
   S = {
     mode: mode,
@@ -858,6 +1122,8 @@ function startMode(mode){
     lastTick: 0,
     startAt: Date.now()
   };
+  if(mode === "listen"){ startListen(); return; }
+  if(mode === "drive"){ startDrive(); return; }
   if(mode === "karuta") S.qs = buildKaruta();
   else if(mode === "speed") S.qs = buildSpeed();
   else if(mode === "quiz") S.qs = buildQuiz();
@@ -1447,6 +1713,499 @@ function wireZukan(){
   if(lb) lb.addEventListener("click", function(){ renderZukan("list"); });
 }
 
+/* =========================================================
+   車内・音声モード
+   🎧 聞き流し：上の句 → 間 → 決まり字と下の句 → 現代語訳 を自動読み上げ
+   🚗 耳でかるた：音声で出題・特大2択
+   Web Speech API が無い／失敗しても、表示＋タイマーで止まらず進む
+   ========================================================= */
+var HAS_SPEECH = !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+var SPK_TOKEN = 0;
+var VOICE_JA = null;
+
+function loadVoices(){
+  if(!HAS_SPEECH) return;
+  try{
+    var vs = window.speechSynthesis.getVoices() || [];
+    for(var i=0;i<vs.length;i++){
+      var v = vs[i];
+      if(v && v.lang && String(v.lang).toLowerCase().indexOf("ja") === 0){ VOICE_JA = v; return; }
+    }
+  }catch(e){}
+}
+try{
+  if(HAS_SPEECH){
+    loadVoices();
+    if(window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+    else window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+}catch(e){}
+
+function spkCancel(){
+  if(!HAS_SPEECH) return;
+  /* 何も鳴っていないときに cancel→speak を続けると iOS で声が落ちることがある */
+  try{
+    if(window.speechSynthesis.speaking || window.speechSynthesis.pending) window.speechSynthesis.cancel();
+  }catch(e){}
+}
+/* 1つ読み上げる。最初の speak はタップ処理の中から同期的に呼ぶ（iOS Safari 対策） */
+function spkSay(text, rate, onEnd){
+  if(!HAS_SPEECH || !text) return false;
+  try{
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = "ja-JP";
+    loadVoices();
+    if(VOICE_JA) u.voice = VOICE_JA;
+    u.rate = rate || 1;
+    u.pitch = 1;
+    if(onEnd){ u.onend = onEnd; u.onerror = onEnd; }
+    window.speechSynthesis.speak(u);
+    return true;
+  }catch(e){ return false; }
+}
+/* 続けて読み上げる（2つ目以降は onend から） */
+function spkChain(parts, rate){
+  spkCancel();
+  var k = 0;
+  function next(){
+    if(k >= parts.length) return;
+    var t = parts[k++];
+    var ok = spkSay(t, rate, function(){ setTimeout(next, 240); });
+    if(!ok) return;
+  }
+  next();
+}
+function ensureSound(){
+  if(!store.sound){ store.sound = true; saveStore(); paintSoundBtn(); }
+}
+
+/* ---------------- 🎧 聞き流し ---------------- */
+var DRV = {
+  playing:false, started:false, finishedAll:false, noSpeech:false,
+  order:[], i:0, phase:0,
+  rate:1, gap:1500, readTrans:true, repeat:false, shuffleOn:false,
+  gapTimer:null, watchdog:null
+};
+
+function drvMaxPhase(){ return DRV.readTrans ? 3 : 2; }
+function drvBuildOrder(){
+  var nums = [];
+  for(var i=0;i<POEMS.length;i++) nums.push(POEMS[i].n);
+  DRV.order = DRV.shuffleOn ? shuffle(nums) : nums;
+}
+function drvPhaseInfo(p){
+  if(DRV.phase === 0){
+    return { label:"上の句", disp:p.kami, read:p.kamiKana, sub:esc(p.kamiKana), trans:false };
+  }
+  if(DRV.phase === 1){
+    return { label:"決まり字と下の句", disp:p.shimo,
+             read:"決まり字、" + p.kimari + "。" + p.shimoKana,
+             sub:'決まり字「' + esc(p.kimari) + '」<br>' + esc(p.shimoKana), trans:false };
+  }
+  return { label:"現代語訳", disp:p.trans, read:p.trans,
+           sub:'決まり字「' + esc(p.kimari) + '」', trans:true };
+}
+function rateKey(r){
+  if(r < 0.95) return "slow";
+  if(r > 1.1) return "fast";
+  return "normal";
+}
+
+function drvStop(){
+  DRV.playing = false;
+  clearTimeout(DRV.gapTimer); DRV.gapTimer = null;
+  clearTimeout(DRV.watchdog); DRV.watchdog = null;
+  SPK_TOKEN++;
+  spkCancel();
+}
+
+function startListen(){
+  drvStop();
+  DRV.i = 0; DRV.phase = 0;
+  DRV.started = false; DRV.finishedAll = false; DRV.noSpeech = false;
+  drvBuildOrder();
+  go("listen");
+  drvPaint();
+}
+
+function drvPaint(){
+  if(!DRV.order.length) drvBuildOrder();
+  var p = poemByN(DRV.order[DRV.i]);
+  if(!p) p = POEMS[0];
+  var info = drvPhaseInfo(p);
+  if($("dvCount")) $("dvCount").textContent = (DRV.i+1) + " / " + DRV.order.length;
+  if($("dvNum")) $("dvNum").textContent = p.n + "番";
+  if($("dvAuthor")) $("dvAuthor").textContent = p.author;
+  if($("dvLabel")) $("dvLabel").textContent = info.label;
+  if($("dvText")){
+    $("dvText").textContent = info.disp;
+    $("dvText").className = "dv-text" + (info.trans ? " trans" : "");
+  }
+  if($("dvSub")) $("dvSub").innerHTML = info.sub;
+  var play = $("dvPlay");
+  if(play){
+    play.textContent = DRV.playing ? "⏸ 一時停止" : (DRV.started ? "▶ つづきから" : "▶ 再生する");
+    play.className = "dv-play" + (DRV.playing ? " on" : "");
+  }
+  var note = $("dvNote");
+  if(note){
+    if(!store.sound){
+      note.textContent = "🔇 音がオフです。🔔を押すか「再生」をタップすると音が出ます";
+      note.className = "dv-note warn";
+    } else if(DRV.finishedAll){
+      note.textContent = "7首ぜんぶ読みおわりました。▶で最初から、⏭で好きな歌から聞けます";
+      note.className = "dv-note";
+    } else if(DRV.noSpeech){
+      note.textContent = "この環境では声が出ないため、文字表示とタイマーで進めています";
+      note.className = "dv-note warn";
+    } else if(DRV.playing){
+      note.textContent = "🔊 読み上げ中…（画面を見なくてOK）";
+      note.className = "dv-note";
+    } else {
+      note.textContent = "画面を見なくてもOK。耳だけで覚えられます。";
+      note.className = "dv-note";
+    }
+  }
+  drvPaintSets();
+}
+
+function drvPaintSets(){
+  var sets = $("dvSets");
+  if(!sets) return;
+  var btns = sets.querySelectorAll(".dv-chip");
+  for(var i=0;i<btns.length;i++){
+    var b = btns[i];
+    var k = b.getAttribute("data-set");
+    var v = b.getAttribute("data-val");
+    var on = false;
+    if(k === "order") on = (v === "shuffle") === DRV.shuffleOn;
+    else if(k === "rate") on = (rateKey(DRV.rate) === v);
+    else if(k === "gap") on = (parseInt(v,10) === DRV.gap);
+    else if(k === "trans") on = ((v === "1") === DRV.readTrans);
+    else if(k === "repeat") on = ((v === "1") === DRV.repeat);
+    b.className = "dv-chip" + (on ? " on" : "");
+  }
+}
+
+/* 今のフレーズを1つ読み、終わったら間をおいて次へ */
+function drvStep(){
+  clearTimeout(DRV.gapTimer); DRV.gapTimer = null;
+  clearTimeout(DRV.watchdog); DRV.watchdog = null;
+  if(!DRV.playing) return;
+  var p = poemByN(DRV.order[DRV.i]);
+  if(!p){ drvStop(); return; }
+  var info = drvPhaseInfo(p);
+  drvPaint();
+
+  var token = ++SPK_TOKEN;
+  var ended = false, finished = false;
+  function done(){
+    if(finished) return;
+    finished = true;
+    clearTimeout(DRV.watchdog); DRV.watchdog = null;
+    if(token !== SPK_TOKEN || !DRV.playing) return;
+    if(!ended && store.sound && HAS_SPEECH) DRV.noSpeech = true;
+    drvAfterSpeak();
+  }
+  if(store.sound && spkSay(info.read, DRV.rate, function(){ ended = true; done(); })){
+    DRV.watchdog = setTimeout(done, Math.max(2800, info.read.length * 460 / (DRV.rate || 1) + 1600));
+  } else {
+    DRV.noSpeech = (store.sound && !HAS_SPEECH);
+    DRV.watchdog = setTimeout(done, Math.max(1800, info.read.length * 180 / (DRV.rate || 1)));
+  }
+}
+
+function drvAfterSpeak(){
+  if(!DRV.playing) return;
+  var gap = (DRV.phase === 0) ? DRV.gap : 900;
+  clearTimeout(DRV.gapTimer);
+  DRV.gapTimer = setTimeout(function(){
+    DRV.gapTimer = null;
+    if(!DRV.playing) return;
+    DRV.phase++;
+    if(DRV.phase >= drvMaxPhase()){
+      DRV.phase = 0;
+      DRV.i++;
+      if(DRV.i >= DRV.order.length){
+        if(DRV.repeat){
+          DRV.i = 0;
+          if(DRV.shuffleOn) drvBuildOrder();
+        } else {
+          DRV.i = 0;
+          DRV.playing = false;
+          DRV.started = false;
+          DRV.finishedAll = true;
+          drvPaint();
+          return;
+        }
+      }
+    }
+    drvStep();
+  }, gap);
+}
+
+/* 再生／一時停止（タップの中で最初の speak を呼ぶ） */
+function drvPlay(){
+  if(DRV.playing){ drvPause(); return; }
+  ensureSound();
+  if(!DRV.started || DRV.finishedAll){
+    DRV.i = 0; DRV.phase = 0;
+    DRV.started = true;
+  }
+  DRV.finishedAll = false;
+  DRV.noSpeech = false;
+  DRV.playing = true;
+  drvStep();
+}
+function drvPause(){
+  DRV.playing = false;
+  clearTimeout(DRV.gapTimer); DRV.gapTimer = null;
+  clearTimeout(DRV.watchdog); DRV.watchdog = null;
+  SPK_TOKEN++;
+  spkCancel();
+  drvPaint();
+}
+
+/* 前へ／次へ（step: -1 = 前, +1 = 次） */
+function drvSkip(step){
+  clearTimeout(DRV.gapTimer); DRV.gapTimer = null;
+  clearTimeout(DRV.watchdog); DRV.watchdog = null;
+  var len = DRV.order.length || 1;
+  DRV.i = (DRV.i + step + len) % len;
+  DRV.phase = 0;
+  DRV.finishedAll = false;
+  if(DRV.playing){ DRV.started = true; drvStep(); }
+  else { SPK_TOKEN++; spkCancel(); drvPaint(); }
+}
+
+/* 設定の切替 */
+function drvSetApply(k, v){
+  if(k === "order"){
+    var wasPlaying = DRV.playing;
+    DRV.shuffleOn = (v === "shuffle");
+    drvBuildOrder();
+    DRV.i = 0; DRV.phase = 0; DRV.finishedAll = false;
+    clearTimeout(DRV.gapTimer); DRV.gapTimer = null;
+    clearTimeout(DRV.watchdog); DRV.watchdog = null;
+    SPK_TOKEN++; spkCancel();
+    if(wasPlaying){ DRV.playing = true; DRV.started = true; drvStep(); }
+    else { DRV.playing = false; }
+  } else if(k === "rate"){
+    DRV.rate = (v === "slow") ? 0.82 : ((v === "fast") ? 1.18 : 1);
+    if(DRV.playing){ clearTimeout(DRV.watchdog); DRV.watchdog = null; SPK_TOKEN++; spkCancel(); drvStep(); }
+  } else if(k === "gap"){
+    DRV.gap = (parseInt(v,10) === 3000) ? 3000 : 1500;
+  } else if(k === "trans"){
+    DRV.readTrans = (v === "1");
+    if(DRV.phase >= drvMaxPhase()){
+      DRV.phase = 0;
+      if(DRV.playing){
+        DRV.i = (DRV.i + 1) % (DRV.order.length || 1);
+        clearTimeout(DRV.gapTimer); clearTimeout(DRV.watchdog);
+        SPK_TOKEN++; spkCancel();
+        drvStep();
+      }
+    }
+  } else if(k === "repeat"){
+    DRV.repeat = (v === "1");
+  }
+  drvPaint();
+}
+
+/* ---------------- 🚗 耳でかるた ---------------- */
+var DQ = null;
+
+function buildDriveQuestions(){
+  var nums = shuffle(POEMS.map(function(p){ return p.n; }));
+  var qs = [];
+  for(var i=0;i<nums.length;i++){
+    var p = poemByN(nums[i]);
+    var other = pickN(POEMS.filter(function(x){ return x.n !== p.n; }),1)[0];
+    var opts = shuffle([{ p:p, ok:true }, { p:other, ok:false }]);
+    qs.push({ poem:p.n, options:opts });
+  }
+  return qs;
+}
+
+function startDrive(){
+  drvStop();
+  ensureSound();
+  DQ = { qs:buildDriveQuestions(), i:0, correct:0, wrong:[], answered:false, hideKami:false, finished:false };
+  if($("dkPlayArea")) $("dkPlayArea").style.display = "";
+  if($("dkDone")) $("dkDone").innerHTML = "";
+  go("drive");
+  renderDrive();
+  driveSpeakPrompt();
+}
+
+function renderDrive(){
+  if(!DQ) return;
+  var q = DQ.qs[DQ.i];
+  var p = poemByN(q.poem);
+  if(!p) return;
+  if($("dkProg")) $("dkProg").textContent = (DQ.i+1) + " / " + DQ.qs.length;
+  if($("dkScore")) $("dkScore").textContent = "正解 " + DQ.correct;
+  if($("dkTag")) $("dkTag").textContent = DQ.hideKami ? "♪ 音だけで挑戦" : "♪ 上の句が流れます";
+  if($("dkKami")) $("dkKami").textContent = p.kami;
+  if($("dkKana")) $("dkKana").textContent = p.kamiKana;
+  if($("dkShow")) $("dkShow").style.display = DQ.hideKami ? "none" : "";
+  if($("dkHidden")) $("dkHidden").className = "dk-hidden" + (DQ.hideKami ? " on" : "");
+  var hs = $("dkHide");
+  if(hs){
+    hs.className = "dk-switch" + (DQ.hideKami ? " on" : "");
+    hs.setAttribute("aria-pressed", DQ.hideKami ? "true" : "false");
+  }
+  var letters = ["あ","い"];
+  var h = "";
+  for(var i=0;i<q.options.length;i++){
+    var op = q.options[i];
+    h += '<button class="dk-opt" type="button" data-i="' + i + '">' +
+           '<span class="lb">' + letters[i] + '</span>' +
+           '<span class="tx"><span class="p">' + esc(op.p.shimo) + '</span>' +
+             '<span class="kk">' + esc(op.p.shimoKana) + '</span>' +
+           '</span>' +
+         '</button>';
+  }
+  var opts = $("dkOpts");
+  if(opts){ opts.className = "dk-opts"; opts.innerHTML = h; }
+  if($("dkFb")) $("dkFb").innerHTML = "";
+  DQ.answered = false;
+}
+
+/* 出題の読み上げ（隠すモードでは選択肢も読む＝耳だけで遊べる） */
+function driveSpeakPrompt(){
+  if(!DQ || DQ.finished) return;
+  if(!store.sound) return;
+  var q = DQ.qs[DQ.i];
+  var p = poemByN(q.poem);
+  if(!p) return;
+  var parts = ["上の句。" + p.kamiKana];
+  if(DQ.hideKami){
+    parts.push("えらんでね。あ、" + q.options[0].p.shimoKana + "。い、" + q.options[1].p.shimoKana + "。");
+  }
+  spkChain(parts, 1.0);
+}
+
+function answerDrive(i){
+  if(!DQ || DQ.answered || DQ.finished) return;
+  var q = DQ.qs[DQ.i];
+  var p = poemByN(q.poem);
+  if(!p) return;
+  DQ.answered = true;
+  var ok = !!(q.options[i] && q.options[i].ok);
+  var optsEl = $("dkOpts");
+  var btns = optsEl ? optsEl.querySelectorAll(".dk-opt") : [];
+  if(optsEl) optsEl.classList.add("locked");
+  for(var b=0;b<btns.length;b++){
+    btns[b].setAttribute("disabled","disabled");
+    if(q.options[b] && q.options[b].ok) btns[b].classList.add("correct");
+    else if(b === i) btns[b].classList.add("wrong");
+    else btns[b].classList.add("dim");
+  }
+
+  if(ok){
+    DQ.correct++;
+    addCorrect(p.n);
+    sfxOk();
+    burst("good");
+    bigPop("せいかい！");
+  } else {
+    DQ.wrong.push({ poem:p.n });
+    addWrong(p.n);
+    sfxNg();
+    if(i >= 0) burst("bad");
+  }
+  if($("dkScore")) $("dkScore").textContent = "正解 " + DQ.correct;
+
+  var fb = $("dkFb");
+  if(fb){
+    fb.innerHTML = '<div class="dk-fb' + (ok ? '' : ' ng') + '">' +
+        '<p class="dk-fb-t">' + (ok ? "⭕️ 正解！" : "❌ おしい！") + '</p>' +
+        '<p class="dk-fb-k">決まり字は「<b>' + esc(p.kimari) + '</b>」</p>' +
+        '<p class="dk-fb-s">' + esc(p.shimo) + '</p>' +
+      '</div>';
+    var isLast = (DQ.i === DQ.qs.length - 1);
+    var nb = document.createElement("button");
+    nb.type = "button";
+    nb.className = "dk-next";
+    nb.id = "dkNextBtn";
+    nb.textContent = isLast ? "けっかを見る 👀" : "つぎの歌へ ▶";
+    nb.addEventListener("click", function(){ nextDrive(); });
+    fb.appendChild(nb);
+    try{ nb.scrollIntoView({ block:"nearest", behavior:"smooth" }); }catch(e){}
+  }
+
+  if(store.sound){
+    var say = ok ? ("正解。決まり字は、" + p.kimari + "。")
+                 : ("おしい。決まり字は、" + p.kimari + "。" + p.shimoKana);
+    spkChain([say], 1.0);
+  }
+}
+
+function nextDrive(){
+  if(!DQ) return;
+  sfxTap();
+  DQ.i++;
+  if(DQ.i >= DQ.qs.length){ finishDrive(); return; }
+  renderDrive();
+  driveSpeakPrompt();
+}
+
+function finishDrive(){
+  if(!DQ) return;
+  DQ.finished = true;
+  var total = DQ.qs.length;
+  var f = DQ.correct;
+  var rank = (f >= total) ? "S" : (f >= total-2 ? "A" : (f >= total-4 ? "B" : "C"));
+  var msg = {
+    S:"パーフェクト！ 耳でも もう完ぺき！",
+    A:"あと少しで全部！ すごい！",
+    B:"いい調子。もう一回やってみよう",
+    C:"くりかえすと どんどん覚えられるよ"
+  }[rank];
+  if($("dkPlayArea")) $("dkPlayArea").style.display = "none";
+  if($("dkFb")) $("dkFb").innerHTML = "";
+  var seen = {}, list = [];
+  for(var i=0;i<DQ.wrong.length;i++){
+    var n = DQ.wrong[i].poem;
+    if(seen[n]) continue;
+    seen[n] = 1;
+    list.push(poemByN(n));
+  }
+  var h = '<div class="result-top"><div class="rank-c ' + rank + '">' + rank + '</div>' +
+          '<p class="result-sub">' + esc(msg) + '</p></div>';
+  h += statsHtml([[f + " / " + total, "正解"], [Math.round(f/total*100) + "%", "正解率"], [total, "出題"]]);
+  h += '<div class="res-sec"><h3>✍️ おぼえよう</h3>';
+  if(!list.length){
+    h += '<p class="foot-note">全問せいかい！ すばらしい 🌸</p>';
+  } else {
+    for(var j=0;j<list.length;j++){
+      var p = list[j];
+      if(!p) continue;
+      h += '<div class="review">' +
+             '<div class="rn">' + p.n + '番・' + esc(p.author) + '／決まり字「' + esc(p.kimari) + '」</div>' +
+             '<p class="rp">' + esc(p.kami) + '<br>' + esc(p.shimo) + '</p>' +
+             '<p class="rt"><b>訳</b> ' + esc(p.trans) + '</p>' +
+           '</div>';
+    }
+  }
+  h += '</div>';
+  h += '<div class="btnrow" style="margin-top:14px">' +
+         '<button class="btn primary" type="button" id="dkAgain">もう一度</button>' +
+         '<button class="btn" type="button" id="dkHome">ホームへ</button>' +
+       '</div>';
+  var done = $("dkDone");
+  if(done) done.innerHTML = h;
+  var ag = $("dkAgain");
+  if(ag) ag.addEventListener("click", function(){ startDrive(); });
+  var hm = $("dkHome");
+  if(hm) hm.addEventListener("click", function(){ sfxTap(); goHome(); });
+  if(f >= total - 2) burst("good");
+  if(store.sound){
+    spkChain(["ぜんぶ おわりました。" + f + "問 せいかい。おつかれさま。"], 1.0);
+  }
+}
+
 /* ---------------- 起動 ---------------- */
 function init(){
   loadStore();
@@ -1469,8 +2228,69 @@ function init(){
     store.sound = !store.sound;
     saveStore();
     paintSoundBtn();
-    if(store.sound) sfxTap();
+    if(store.sound){ sfxTap(); }
+    else {
+      /* 音を消したら読み上げも止める */
+      SPK_TOKEN++;
+      spkCancel();
+      if(DRV.playing){
+        DRV.playing = false;
+        clearTimeout(DRV.gapTimer); DRV.gapTimer = null;
+        clearTimeout(DRV.watchdog); DRV.watchdog = null;
+      }
+      drvPaint();
+    }
   });
+
+  /* 車内モードの入口 */
+  var driveList = $("driveList");
+  if(driveList){
+    driveList.addEventListener("click", function(e){
+      var t = e.target;
+      while(t && t !== driveList && !(t.getAttribute && t.getAttribute("data-mode"))) t = t.parentNode;
+      if(!t || t === driveList) return;
+      sfxTap();
+      startMode(t.getAttribute("data-mode"));
+    });
+  }
+
+  /* 🎧 聞き流し */
+  if($("dvPlay")) $("dvPlay").addEventListener("click", function(){ drvPlay(); });
+  if($("dvPrev")) $("dvPrev").addEventListener("click", function(){ sfxTap(); drvSkip(-1); });
+  if($("dvNext")) $("dvNext").addEventListener("click", function(){ sfxTap(); drvSkip(1); });
+  var dvSets = $("dvSets");
+  if(dvSets){
+    dvSets.addEventListener("click", function(e){
+      var t = e.target;
+      while(t && t !== dvSets && !(t.getAttribute && t.getAttribute("data-set"))) t = t.parentNode;
+      if(!t || t === dvSets) return;
+      sfxTap();
+      drvSetApply(t.getAttribute("data-set"), t.getAttribute("data-val"));
+    });
+  }
+
+  /* 🚗 耳でかるた */
+  if($("dkReplay")) $("dkReplay").addEventListener("click", function(){
+    sfxTap(); ensureSound(); driveSpeakPrompt();
+  });
+  if($("dkHide")) $("dkHide").addEventListener("click", function(){
+    if(!DQ || DQ.finished || DQ.answered) return;
+    DQ.hideKami = !DQ.hideKami;
+    sfxTap();
+    renderDrive();
+    driveSpeakPrompt();
+  });
+  var dkOpts = $("dkOpts");
+  if(dkOpts){
+    dkOpts.addEventListener("click", function(e){
+      var t = e.target;
+      while(t && t !== dkOpts && !(t.getAttribute && t.getAttribute("data-i") !== null)) t = t.parentNode;
+      if(!t || t === dkOpts) return;
+      var i = parseInt(t.getAttribute("data-i"),10);
+      if(isNaN(i)) return;
+      answerDrive(i);
+    });
+  }
 
   var playBody = $("playBody");
   if(playBody){
