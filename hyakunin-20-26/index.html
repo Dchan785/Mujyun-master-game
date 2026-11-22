@@ -408,7 +408,7 @@ h1,h2,h3,h4,p{margin:0;}
 .dv-text{
   font-family:var(--mincho);font-size:clamp(1.24rem,6vw,1.56rem);line-height:1.95;letter-spacing:.05em;
   font-weight:600;color:#33403c;display:flex;align-items:center;justify-content:center;
-  flex:1;min-height:3.6em;padding:0 2px;
+  flex:1;min-height:3.6em;padding:0 2px;white-space:pre-line;
 }
 .dv-text.trans{font-family:inherit;font-size:1rem;line-height:1.8;text-align:left;letter-spacing:0;font-weight:600;color:#3f4a45;min-height:4.8em;}
 .dv-sub{margin-top:8px;font-size:.74rem;color:#7a8f9a;line-height:1.6;min-height:1.2em;}
@@ -437,7 +437,7 @@ h1,h2,h3,h4,p{margin:0;}
 .dv-chip:active{transform:translateY(1px);}
 
 /* ---------- 車内・耳でかるた ---------- */
-.dk-top{display:flex;align-items:center;gap:7px;margin-bottom:9px;flex-wrap:wrap;}
+.dk-top{display:flex;align-items:center;gap:7px;margin:2px 0 9px;flex-wrap:wrap;}
 .dk-prog{margin-left:auto;font-size:.72rem;font-weight:800;color:#7d94a2;font-variant-numeric:tabular-nums;}
 .dk-card{
   background:linear-gradient(160deg,#f6fbff,#f0f9f3);border:2px solid #d5e8f1;border-radius:20px;
@@ -1779,6 +1779,27 @@ function ensureSound(){
   if(!store.sound){ store.sound = true; saveStore(); paintSoundBtn(); }
 }
 
+/* 聞き流し中は画面を消さない（対応していなければ何もしない） */
+var WAKE = null;
+function wakeOn(){
+  try{
+    if(!navigator.wakeLock || !navigator.wakeLock.request) return;
+    navigator.wakeLock.request("screen").then(function(s){
+      WAKE = s;
+      if(s.addEventListener) s.addEventListener("release", function(){ WAKE = null; });
+    }).catch(function(){});
+  }catch(e){}
+}
+function wakeOff(){
+  try{ if(WAKE && WAKE.release) WAKE.release(); }catch(e){}
+  WAKE = null;
+}
+try{
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible" && DRV && DRV.playing) wakeOn();
+  });
+}catch(e){}
+
 /* ---------------- 🎧 聞き流し ---------------- */
 var DRV = {
   playing:false, started:false, finishedAll:false, noSpeech:false,
@@ -1794,11 +1815,14 @@ function drvBuildOrder(){
   DRV.order = DRV.shuffleOn ? shuffle(nums) : nums;
 }
 function drvPhaseInfo(p){
+  /* 「わびぬれば 今はた同じ 難波なる」→ 句ごとに改行して大きくゆったり見せる */
+  var kamiLines = p.kami.split(" ").join("\n");
+  var shimoLines = p.shimo.split(" ").join("\n");
   if(DRV.phase === 0){
-    return { label:"上の句", disp:p.kami, read:p.kamiKana, sub:esc(p.kamiKana), trans:false };
+    return { label:"上の句", disp:kamiLines, read:p.kamiKana, sub:esc(p.kamiKana), trans:false };
   }
   if(DRV.phase === 1){
-    return { label:"決まり字と下の句", disp:p.shimo,
+    return { label:"決まり字と下の句", disp:shimoLines,
              read:"決まり字、" + p.kimari + "。" + p.shimoKana,
              sub:'決まり字「' + esc(p.kimari) + '」<br>' + esc(p.shimoKana), trans:false };
   }
@@ -1817,6 +1841,7 @@ function drvStop(){
   clearTimeout(DRV.watchdog); DRV.watchdog = null;
   SPK_TOKEN++;
   spkCancel();
+  wakeOff();
 }
 
 function startListen(){
@@ -1935,6 +1960,7 @@ function drvAfterSpeak(){
           DRV.playing = false;
           DRV.started = false;
           DRV.finishedAll = true;
+          wakeOff();
           drvPaint();
           return;
         }
@@ -1955,6 +1981,7 @@ function drvPlay(){
   DRV.finishedAll = false;
   DRV.noSpeech = false;
   DRV.playing = true;
+  wakeOn();
   drvStep();
 }
 function drvPause(){
@@ -1963,6 +1990,7 @@ function drvPause(){
   clearTimeout(DRV.watchdog); DRV.watchdog = null;
   SPK_TOKEN++;
   spkCancel();
+  wakeOff();
   drvPaint();
 }
 
@@ -2070,6 +2098,7 @@ function renderDrive(){
   if(opts){ opts.className = "dk-opts"; opts.innerHTML = h; }
   if($("dkFb")) $("dkFb").innerHTML = "";
   DQ.answered = false;
+  try{ window.scrollTo(0,0); }catch(e){}
 }
 
 /* 出題の読み上げ（隠すモードでは選択肢も読む＝耳だけで遊べる） */
@@ -2172,8 +2201,11 @@ function finishDrive(){
     seen[n] = 1;
     list.push(poemByN(n));
   }
-  var h = '<div class="result-top"><div class="rank-c ' + rank + '">' + rank + '</div>' +
-          '<p class="result-sub">' + esc(msg) + '</p></div>';
+  var h = '<div class="result-top"><div style="font-size:1.9rem;line-height:1.2">🚗</div>' +
+          '<h2 class="result-title">耳でかるた けっか</h2>' +
+          '<p class="result-sub">全' + total + '問 おつかれさま</p></div>';
+  h += '<div class="result-top" style="padding-top:0"><div class="rank-c ' + rank + '">' + rank + '</div>' +
+       '<p class="result-sub">' + esc(msg) + '</p></div>';
   h += statsHtml([[f + " / " + total, "正解"], [Math.round(f/total*100) + "%", "正解率"], [total, "出題"]]);
   h += '<div class="res-sec"><h3>✍️ おぼえよう</h3>';
   if(!list.length){
