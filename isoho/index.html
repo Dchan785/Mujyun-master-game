@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff9f1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<title>伊曽保物語 車内マスター｜「犬と肉」「鳩と蟻」テスト対策</title>
+<style>
+:root{
+  --paper:#fff9f1;
+  --paper2:#fffdf8;
+  --ink:#453f3a;
+  --ink2:#8d8178;
+  --shu:#c65a6e;
+  --shu-d:#a8445a;
+  --shu-l:#fde9ee;
+  --ai:#6d86a8;
+  --ai-l:#e9f0f8;
+  --matcha:#7cab80;
+  --matcha-l:#eef7ec;
+  --yamabuki:#d3a558;
+  --yamabuki-l:#fdf3e0;
+  --fuji:#a293c9;
+  --fuji-l:#f0ecfa;
+  --line:#f1e3d6;
+  --line2:#e7d2c1;
+  --shadow:0 3px 0 #efdfd1;
+  --mincho:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  --r:20px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+html{background:var(--paper);}
+body{
+  font-family:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(760px 420px at 10% -6%, #ffeef2 0%, rgba(255,238,242,0) 62%),
+    radial-gradient(680px 400px at 104% 6%, #eceffb 0%, rgba(236,239,251,0) 58%),
+    radial-gradient(720px 470px at 50% 106%, #eef7ea 0%, rgba(238,247,234,0) 62%),
+    repeating-linear-gradient(52deg, rgba(200,170,140,.032) 0 2px, rgba(0,0,0,0) 2px 12px),
+    var(--paper);
+  min-height:100vh;min-height:100dvh;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  touch-action:manipulation;
+  overflow-x:hidden;
+}
+button{font-family:inherit;color:inherit;}
+h1,h2,h3,h4,p{margin:0;}
+.app{max-width:480px;margin:0 auto;padding:0 13px calc(28px + env(safe-area-inset-bottom));}
+
+/* ---------- 上のバー ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) 0 8px;
+  background:linear-gradient(rgba(255,249,241,.97), rgba(255,249,241,.9));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  margin-bottom:10px;
+}
+.iconbtn{
+  width:42px;height:42px;flex:0 0 42px;border-radius:50%;
+  border:2px solid var(--line);background:var(--paper2);
+  font-size:18px;line-height:1;display:grid;place-items:center;
+  box-shadow:0 2px 0 #efdfd1;cursor:pointer;padding:0;
+}
+.iconbtn:active{transform:translateY(1px);box-shadow:none;}
+.iconbtn[hidden]{display:none;}
+.iconbtn.off{color:#c9bcb2;}
+.brand{flex:1;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;}
+.brand-em{font-size:1.02rem;}
+.brand-txt{font-family:var(--mincho);font-size:.96rem;font-weight:700;letter-spacing:.07em;white-space:nowrap;}
+.brand-txt b{color:var(--shu);font-weight:700;}
+
+/* ---------- 画面 ---------- */
+.screen{display:none;padding-bottom:10px;}
+.screen.active{display:block;animation:fadein .26s ease-out both;}
+@keyframes fadein{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* ---------- ホーム ---------- */
+.hero{position:relative;text-align:center;padding:8px 0 12px;}
+.hero-deco{font-size:2rem;line-height:1;margin-bottom:4px;filter:drop-shadow(0 4px 6px rgba(198,90,110,.14));}
+.hero-title{
+  font-family:var(--mincho);
+  font-size:clamp(1.5rem,7.4vw,1.92rem);
+  line-height:1.42;letter-spacing:.07em;font-weight:700;color:#3f3a36;
+}
+.hero-title .hl{color:var(--shu);background:linear-gradient(transparent 66%, #ffe2e9 66%);padding:0 .08em;}
+.hero-sub{margin-top:7px;font-size:.8rem;color:var(--ink2);letter-spacing:.03em;}
+.hero-sub b{color:#b5728a;}
+
+.card{
+  background:var(--paper2);border:2px solid var(--line);border-radius:var(--r);
+  padding:13px;box-shadow:var(--shadow);
+}
+.intro{margin-bottom:13px;padding:12px 13px;}
+.intro-t{font-family:var(--mincho);font-size:.88rem;font-weight:700;letter-spacing:.06em;color:#8a6f6c;margin-bottom:6px;}
+.intro ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:5px;}
+.intro li{font-size:.78rem;color:#7d7069;line-height:1.55;display:flex;gap:6px;align-items:flex-start;}
+.intro li span{flex:0 0 auto;font-size:.85rem;}
+
+.modes{display:flex;flex-direction:column;gap:11px;}
+.mode{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:var(--paper2);border:2px solid var(--line);border-radius:var(--r);
+  padding:13px 12px;font-size:1rem;box-shadow:var(--shadow);
+  cursor:pointer;transition:transform .1s ease, box-shadow .1s ease;min-height:76px;
+}
+.mode:active{transform:translateY(2px);box-shadow:0 1px 0 #efdfd1;}
+.mode-ic{
+  width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;
+  font-size:23px;border-radius:16px;background:linear-gradient(145deg,var(--c1,#fde9ee),var(--c2,#f6b9c8));
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.04);
+}
+.mode-body{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}
+.mode-body b{font-size:.98rem;letter-spacing:.01em;line-height:1.34;}
+.mode-body small{color:var(--ink2);font-size:.71rem;line-height:1.45;}
+.mode-go{color:#d7c8ba;font-size:1.05rem;flex:0 0 auto;}
+.mode.new{position:relative;}
+.mode.new::after{
+  content:"NEW";position:absolute;top:-8px;right:10px;font-size:.56rem;font-weight:800;
+  letter-spacing:.08em;color:#fff;background:var(--shu);padding:2px 7px;border-radius:99px;
+  box-shadow:0 2px 6px rgba(198,90,110,.35);
+}
+.foot-note{margin:15px 0 2px;text-align:center;font-size:.67rem;color:#b7a99d;line-height:1.75;}
+.best{margin:13px 0 0;text-align:center;font-size:.75rem;font-weight:700;color:#9b8b80;background:#fffdf9;border:1.5px dashed var(--line2);border-radius:12px;padding:8px 10px;}
+.best[hidden]{display:none;}
+/* ---------- 聞き流し ---------- */
+.lz-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 2px 9px;}
+.lz-story{font-family:var(--mincho);font-size:.92rem;font-weight:700;letter-spacing:.05em;color:#836a66;}
+.lz-story::before{content:"🪶";margin-right:5px;font-size:.85rem;}
+.lz-count{font-size:.74rem;font-weight:800;color:var(--shu);background:#fff;border:1.5px solid var(--shu-l);padding:3px 9px;border-radius:99px;letter-spacing:.05em;}
+.lz-card{min-height:246px;display:flex;flex-direction:column;padding:15px 14px 13px;margin-bottom:12px;}
+.lz-label{display:flex;align-items:center;gap:6px;font-size:.71rem;font-weight:800;letter-spacing:.09em;color:#b07a86;margin-bottom:9px;}
+.lz-label::before{content:"";width:5px;height:14px;border-radius:3px;background:linear-gradient(#f4aab9,#c65a6e);}
+.lz-main{
+  font-family:var(--mincho);font-size:clamp(1.28rem,5.6vw,1.5rem);line-height:1.78;
+  letter-spacing:.05em;color:#3b3733;flex:1;word-break:normal;overflow-wrap:anywhere;
+}
+.lz-main.trans{font-family:inherit;font-size:clamp(1rem,4.4vw,1.12rem);line-height:1.85;letter-spacing:.01em;color:#4a443f;}
+.lz-main .pt{display:block;margin-top:10px;font-family:inherit;font-size:.8rem;line-height:1.7;color:#8a7a72;letter-spacing:0;}
+.lz-sub{margin-top:10px;font-size:.76rem;color:#9c8d85;line-height:1.7;border-top:1px dashed var(--line2);padding-top:9px;}
+.lz-sub b{color:#b5728a;font-weight:700;}
+.lz-note{margin-top:9px;font-size:.68rem;color:#b0a398;line-height:1.6;text-align:center;}
+.lz-note.warn{color:#bf7f52;}
+
+.lz-controls{display:grid;grid-template-columns:1fr 1.55fr 1fr;gap:8px;margin-bottom:12px;}
+.lz-skip{
+  min-height:66px;border-radius:18px;border:2px solid var(--line);background:var(--paper2);
+  font-size:.86rem;font-weight:800;letter-spacing:.02em;box-shadow:var(--shadow);cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:0;
+}
+.lz-skip span{font-size:1.15rem;line-height:1;}
+.lz-skip:active{transform:translateY(2px);box-shadow:none;}
+.lz-play{
+  min-height:66px;border-radius:18px;border:2px solid #d894a4;
+  background:linear-gradient(#f0839a,#c65a6e);color:#fff;
+  font-size:1.02rem;font-weight:800;letter-spacing:.04em;
+  box-shadow:0 4px 0 #a8445a, 0 8px 18px rgba(198,90,110,.24);cursor:pointer;padding:0;
+}
+.lz-play:active{transform:translateY(3px);box-shadow:0 1px 0 #a8445a;}
+.lz-play.on{background:linear-gradient(#ae91c8,#8a6ba6);border-color:#a58cc0;box-shadow:0 4px 0 #6f5488,0 8px 18px rgba(138,107,166,.22);}
+
+.lz-sets{display:flex;flex-direction:column;gap:9px;background:#fffdf9;border:2px solid var(--line);border-radius:18px;padding:11px 12px;}
+.setrow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;}
+.setlabel{flex:0 0 auto;font-size:.7rem;font-weight:800;letter-spacing:.07em;color:#a2938a;min-width:38px;}
+.chips{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.chip{
+  min-height:40px;padding:0 13px;border-radius:99px;border:2px solid var(--line2);background:#fff;
+  font-size:.79rem;font-weight:700;color:#8d8178;cursor:pointer;letter-spacing:.02em;
+}
+.chip.on{background:linear-gradient(#ffe9ee,#fbd4de);border-color:#eea2b4;color:#a8445a;box-shadow:0 2px 0 #f0c3ce;}
+.chip:active{transform:translateY(1px);}
+
+/* ---------- クイズ／テスト共通 ---------- */
+.qz-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 2px 8px;}
+.qz-count{font-size:.74rem;font-weight:800;color:var(--shu);background:#fff;border:1.5px solid var(--shu-l);padding:3px 9px;border-radius:99px;letter-spacing:.05em;}
+.qz-score{font-size:.74rem;font-weight:800;color:#7cab80;background:#fff;border:1.5px solid var(--matcha-l);padding:3px 9px;border-radius:99px;}
+.qz-replay{
+  width:100%;min-height:58px;border-radius:16px;border:2px solid #b9cbe0;
+  background:linear-gradient(#f2f7fd,#e4eefa);color:#4f6c90;
+  font-size:.94rem;font-weight:800;letter-spacing:.03em;box-shadow:0 3px 0 #cfdded;
+  cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.qz-replay:active{transform:translateY(2px);box-shadow:none;}
+.qz-card{padding:13px 14px;margin-bottom:11px;}
+.qz-tag{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.06em;color:#8a7ab0;background:var(--fuji-l);border:1.5px solid #ddd4f2;padding:2px 9px;border-radius:99px;margin-bottom:8px;}
+.qz-q{font-size:clamp(1.02rem,4.6vw,1.16rem);font-weight:700;line-height:1.62;letter-spacing:.01em;color:#3f3a36;min-height:calc(1.62em * 2);}
+.qz-q .qk{font-family:var(--mincho);color:var(--shu);font-weight:700;}
+.qz-q.hidden{filter:blur(7px);opacity:.4;user-select:none;-webkit-user-select:none;}
+.qz-hint{margin-top:7px;font-size:.68rem;color:#b7a99d;display:none;}
+.qz-hint.on{display:block;}
+
+.qz-choices{display:flex;flex-direction:column;gap:9px;margin-bottom:10px;}
+.choice{
+  width:100%;min-height:84px;display:flex;align-items:center;gap:11px;text-align:left;
+  background:#fff;border:2px solid var(--line2);border-radius:18px;padding:11px 13px;
+  font-size:clamp(.98rem,4.3vw,1.06rem);font-weight:700;line-height:1.45;color:#453f3a;
+  box-shadow:0 3px 0 #efdfd1;cursor:pointer;transition:transform .1s,background .15s,border-color .15s;
+}
+.choice:active{transform:translateY(2px);box-shadow:none;}
+.choice .num{
+  flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:#f6efe6;border:1.5px solid #ecddcd;font-size:.86rem;font-weight:800;color:#a8998c;
+}
+.choice.correct{background:linear-gradient(#eff9ec,#e3f4de);border-color:#9ecb96;box-shadow:0 3px 0 #cfe6c9;color:#3f6b38;}
+.choice.correct .num{background:#b7dcb0;border-color:#9ecb96;color:#fff;}
+.choice.wrong{background:linear-gradient(#fdeff1,#fbe2e6);border-color:#e9a8b5;box-shadow:0 3px 0 #f0c8d0;color:#9e4356;}
+.choice.wrong .num{background:#e9a8b5;border-color:#e9a8b5;color:#fff;}
+.choice.dim{opacity:.55;}
+.choice:disabled{cursor:default;}
+
+.qz-fb{
+  display:none;border-radius:16px;padding:11px 13px;margin-bottom:10px;
+  font-size:.84rem;line-height:1.7;border:2px solid transparent;
+}
+.qz-fb.on{display:block;animation:fadein .2s ease-out both;}
+.qz-fb.ok{background:#f1f9ee;border-color:#c7e3c0;color:#4a7343;}
+.qz-fb.ng{background:#fdf1f3;border-color:#f0cbd2;color:#9a5c68;}
+.qz-fb b{font-weight:800;}
+.qz-fb .fb-ttl{font-size:.92rem;font-weight:800;display:block;margin-bottom:3px;}
+
+.qz-foot{display:flex;gap:9px;align-items:stretch;}
+.qz-toggle{
+  flex:1;min-height:58px;border-radius:16px;border:2px solid var(--line2);background:#fff;
+  font-size:.82rem;font-weight:800;color:#8d8178;cursor:pointer;box-shadow:0 3px 0 #efdfd1;padding:0 8px;
+}
+.qz-toggle.on{background:linear-gradient(#fdf3e0,#fbe8c8);border-color:#e6c98e;color:#a07c33;box-shadow:0 3px 0 #eeddba;}
+.qz-toggle:active{transform:translateY(2px);box-shadow:none;}
+.qz-next{
+  flex:1.25;min-height:58px;border-radius:16px;border:2px solid #d894a4;
+  background:linear-gradient(#f0839a,#c65a6e);color:#fff;font-size:.92rem;font-weight:800;
+  box-shadow:0 3px 0 #a8445a;cursor:pointer;padding:0 8px;
+}
+.qz-next:active{transform:translateY(2px);box-shadow:none;}
+.qz-next[hidden]{display:none;}
+
+/* ---------- 結果 ---------- */
+.rs-wrap{text-align:center;padding:16px 0 6px;}
+.rs-rank{
+  width:132px;height:132px;margin:6px auto 12px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--mincho);font-size:3.6rem;font-weight:700;letter-spacing:.02em;
+  background:radial-gradient(circle at 34% 28%, #fff7e5, #f7dfa8 62%, #e8c477);
+  border:4px solid #fff;color:#8a5f19;
+  box-shadow:0 0 0 5px #fbefcf, 0 10px 26px rgba(211,165,88,.34);
+  animation:pop .45s cubic-bezier(.2,1.5,.4,1) both;
+}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.rs-rank.rA{background:radial-gradient(circle at 34% 28%,#f4fbff,#d3e7f7 62%,#a9c9e4);color:#34597d;box-shadow:0 0 0 5px #e3f0fb,0 10px 26px rgba(109,134,168,.28);}
+.rs-rank.rB{background:radial-gradient(circle at 34% 28%,#fff6f8,#f7d6df 62%,#eeb4c4);color:#96506a;box-shadow:0 0 0 5px #fde9ee,0 10px 26px rgba(198,90,110,.24);}
+.rs-rank.rC{background:radial-gradient(circle at 34% 28%,#fcfaf6,#eae0d3 62%,#d9c7b3);color:#7b6a58;box-shadow:0 0 0 5px #f3ebe0,0 10px 26px rgba(150,130,110,.2);}
+.rs-title{font-family:var(--mincho);font-size:1.22rem;font-weight:700;letter-spacing:.06em;color:#4a423c;}
+.rs-score{margin-top:5px;font-size:.92rem;font-weight:800;color:var(--shu);letter-spacing:.04em;}
+.rs-msg{margin:12px auto 0;max-width:330px;font-size:.82rem;line-height:1.75;color:#8a7d74;background:#fffdf9;border:2px solid var(--line);border-radius:16px;padding:11px 13px;text-align:left;}
+.rs-actions{display:flex;flex-direction:column;gap:9px;margin-top:15px;}
+.btn-big{
+  width:100%;min-height:62px;border-radius:18px;border:2px solid #d894a4;
+  background:linear-gradient(#f0839a,#c65a6e);color:#fff;font-size:.98rem;font-weight:800;
+  letter-spacing:.03em;box-shadow:0 4px 0 #a8445a;cursor:pointer;
+}
+.btn-big.ghost{background:var(--paper2);color:#6d86a8;border-color:#b9cbe0;box-shadow:0 4px 0 #cfdded;}
+.btn-big:active{transform:translateY(2px);box-shadow:none;}
+
+/* ---------- まとめ ---------- */
+.seg{display:flex;gap:6px;background:#fffdf9;border:2px solid var(--line);border-radius:99px;padding:4px;margin-bottom:12px;}
+.seg button{
+  flex:1;min-height:46px;border-radius:99px;border:0;background:transparent;
+  font-size:.84rem;font-weight:800;color:#9d8f86;cursor:pointer;letter-spacing:.02em;
+}
+.seg button.on{background:linear-gradient(#f0839a,#c65a6e);color:#fff;box-shadow:0 2px 8px rgba(198,90,110,.28);}
+.sum-head{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+.sum-emoji{font-size:1.6rem;}
+.sum-h{font-family:var(--mincho);font-size:1.06rem;font-weight:700;letter-spacing:.05em;color:#4a423c;}
+.sum-card{padding:13px 14px;margin-bottom:11px;}
+.sum-t{display:flex;align-items:center;gap:6px;font-size:.76rem;font-weight:800;letter-spacing:.08em;color:#b07a86;margin-bottom:8px;}
+.sum-t::before{content:"";width:5px;height:13px;border-radius:3px;background:linear-gradient(#f4aab9,#c65a6e);}
+.sum-t.ai{color:#5f7ea3;}
+.sum-t.ai::before{background:linear-gradient(#a9c4e0,#6d86a8);}
+.sum-t.mc{color:#5f8a55;}
+.sum-t.mc::before{background:linear-gradient(#b7dcb0,#7cab80);}
+.sum-t.yb{color:#a07c33;}
+.sum-t.yb::before{background:linear-gradient(#f2d79f,#d3a558);}
+.plain{font-family:var(--mincho);font-size:1.02rem;line-height:1.95;letter-spacing:.03em;color:#3f3a36;}
+.plain .ruby{display:block;font-family:inherit;font-size:.72rem;color:#a89a91;letter-spacing:.02em;margin-top:1px;}
+.plain .sent{display:block;margin-bottom:10px;}
+.plain .sent:last-child{margin-bottom:0;}
+.trans-txt{font-size:.88rem;line-height:1.85;color:#58514b;}
+.trans-txt p{margin:0 0 7px;}
+.trans-txt p:last-child{margin-bottom:0;}
+.wordlist{display:flex;flex-direction:column;gap:0;}
+.word{
+  display:flex;gap:9px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line);
+  font-size:.82rem;line-height:1.6;
+}
+.word:last-child{border-bottom:0;}
+.word .w{flex:0 0 auto;font-family:var(--mincho);font-weight:700;color:#a8445a;letter-spacing:.02em;}
+.word .m{color:#6f645d;}
+.kana-tbl{display:flex;flex-direction:column;gap:6px;font-size:.8rem;}
+.kana-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fffaf6;border:1.5px solid #f6eade;border-radius:12px;padding:6px 10px;}
+.kana-row .from{font-family:var(--mincho);font-weight:700;color:#a8445a;letter-spacing:.02em;}
+.kana-row .arrow{color:#cdbcae;font-size:.72rem;}
+.kana-row .to{font-weight:800;color:#5f8a55;}
+.kana-row .note{font-size:.7rem;color:#a89a91;margin-left:auto;}
+.lesson-box{background:linear-gradient(150deg,#fff7ea,#fff1f4);border:2px solid #f3ddc4;border-radius:16px;padding:12px 13px;font-size:.9rem;line-height:1.8;color:#6b5546;font-weight:700;}
+.lesson-box .em{font-size:1.05rem;margin-right:4px;}
+.tip-box{background:#f4f8fd;border:2px solid #dbe7f5;border-radius:14px;padding:10px 12px;font-size:.79rem;line-height:1.75;color:#5b7391;}
+.sum-nav{display:flex;gap:8px;margin-top:4px;}
+
+/* ---------- トースト ---------- */
+.toast{
+  position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,20px);
+  background:rgba(62,54,49,.94);color:#fff;font-size:.8rem;font-weight:700;letter-spacing:.02em;
+  padding:10px 16px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;
+  z-index:80;box-shadow:0 8px 20px rgba(0,0,0,.2);white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis;
+}
+.toast.on{opacity:1;transform:translate(-50%,0);}
+
+@media (max-width:359px){
+  .lz-controls{grid-template-columns:1fr 1.4fr 1fr;}
+  .lz-skip{font-size:.76rem;}
+  .mode-body b{font-size:.92rem;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important;}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button id="btnBack" class="iconbtn" aria-label="もどる" hidden>‹</button>
+    <div class="brand"><span class="brand-em">📖</span><span class="brand-txt">伊曽保物語 <b>マスター</b></span></div>
+    <button id="btnSound" class="iconbtn" aria-label="音のオン・オフ">🔔</button>
+  </header>
+
+  <!-- ================= ホーム ================= -->
+  <section id="scHome" class="screen active">
+    <div class="hero">
+      <div class="hero-deco">🪶</div>
+      <h1 class="hero-title">伊曽保物語で<br><span class="hl">車マスター</span></h1>
+      <p class="hero-sub">「犬と肉」「鳩と蟻」を <b>耳だけで</b> 覚えよう</p>
+    </div>
+
+    <div class="card intro">
+      <div class="intro-t">この2話をマスターしよう</div>
+      <ul>
+        <li><span>🐕</span><div><b>犬と肉のこと</b>…欲ばると、今あるものまで失う</div></li>
+        <li><span>🕊️</span><div><b>鳩と蟻のこと</b>…受けた恩は、どんな形でも返したい</div></li>
+      </ul>
+    </div>
+
+    <div class="modes">
+      <button class="mode new" data-go="listen" style="--c1:#e9f0f8;--c2:#bcd2ea;">
+        <div class="mode-ic">🎧</div>
+        <div class="mode-body">
+          <b>車内・聞き流し</b>
+          <small>画面を見ずにOK。古文の読み→現代語訳を自動で読み上げ</small>
+        </div>
+        <div class="mode-go">›</div>
+      </button>
+
+      <button class="mode" data-go="ear" style="--c1:#fde9ee;--c2:#f6b9c8;">
+        <div class="mode-ic">🚗</div>
+        <div class="mode-body">
+          <b>車内・耳でクイズ</b>
+          <small>音声で出題・特大ボタンで回答。問題文を隠して耳だけ挑戦も</small>
+        </div>
+        <div class="mode-go">›</div>
+      </button>
+
+      <button class="mode" data-go="test" style="--c1:#fdf3e0;--c2:#f0d49b;">
+        <div class="mode-ic">⚡</div>
+        <div class="mode-body">
+          <b>仕上げテスト 10問</b>
+          <small>ランダム10問で S〜C ランク判定。テスト直前に</small>
+        </div>
+        <div class="mode-go">›</div>
+      </button>
+
+      <button class="mode" data-go="summary" style="--c1:#eef7ec;--c2:#c4dfbb;">
+        <div class="mode-ic">📖</div>
+        <div class="mode-body">
+          <b>サクッと要点まとめ</b>
+          <small>本文・現代語訳・歴史的仮名遣い・教訓をひと画面で</small>
+        </div>
+        <div class="mode-go">›</div>
+      </button>
+    </div>
+
+    <p class="best" id="homeBest" hidden></p>
+
+    <p class="foot-note">音が出ないときは 🔔 をタップ<br>イヤホンでも、スピーカーでも使えます</p>
+  </section>
+
+  <!-- ================= 聞き流し ================= -->
+  <section id="scListen" class="screen">
+    <div class="lz-top">
+      <div class="lz-story" id="lsStory">犬と肉のこと</div>
+      <div class="lz-count" id="lsCount">1 / 5</div>
+    </div>
+
+    <div class="card lz-card">
+      <div class="lz-label" id="lsLabel">古文（よみ）</div>
+      <div class="lz-main" id="lsMain">…</div>
+      <div class="lz-sub" id="lsSub"></div>
+      <div class="lz-note" id="lsNote"></div>
+    </div>
+
+    <div class="lz-controls">
+      <button id="lsPrev" class="lz-skip"><span>⏮</span>前へ</button>
+      <button id="lsPlay" class="lz-play">▶ 再生する</button>
+      <button id="lsNext" class="lz-skip"><span>⏭</span>次へ</button>
+    </div>
+
+    <div class="lz-sets">
+      <div class="setrow">
+        <span class="setlabel">お話</span>
+        <div class="chips" id="lsStoryChips">
+          <button class="chip on" data-story="dog">犬と肉</button>
+          <button class="chip" data-story="ant">鳩と蟻</button>
+          <button class="chip" data-story="both">両方</button>
+        </div>
+      </div>
+      <div class="setrow">
+        <span class="setlabel">速さ</span>
+        <div class="chips" id="lsRateChips">
+          <button class="chip" data-rate="0.8">ゆっくり</button>
+          <button class="chip on" data-rate="1">ふつう</button>
+          <button class="chip" data-rate="1.2">はやめ</button>
+        </div>
+      </div>
+      <div class="setrow">
+        <span class="setlabel">くり返し</span>
+        <div class="chips" id="lsRepeatChips">
+          <button class="chip" data-repeat="0">OFF</button>
+          <button class="chip on" data-repeat="1">ON（さいごまで→また最初から）</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= クイズ／テスト ================= -->
+  <section id="scQuiz" class="screen">
+    <div class="qz-top">
+      <div class="qz-count" id="qzCount">1 / 24</div>
+      <div class="qz-score" id="qzScore">○ 0</div>
+    </div>
+
+    <button id="qzReplay" class="qz-replay">🔊 もう一度聞く</button>
+
+    <div class="card qz-card">
+      <span class="qz-tag" id="qzTag">語句の意味</span>
+      <div class="qz-q" id="qzQ">…</div>
+      <div class="qz-hint" id="qzHint">🙈 問題文を隠しています。音声だけで考えてみよう</div>
+    </div>
+
+    <div class="qz-choices" id="qzChoices"></div>
+
+    <div class="qz-fb" id="qzFb"></div>
+
+    <div class="qz-foot">
+      <button id="qzHide" class="qz-toggle">🙈 問題文を隠す</button>
+      <button id="qzNext" class="qz-next">次へ →</button>
+    </div>
+  </section>
+
+  <!-- ================= 結果 ================= -->
+  <section id="scResult" class="screen">
+    <div class="rs-wrap">
+      <div class="rs-rank" id="rsRank">S</div>
+      <div class="rs-title" id="rsTitle">パーフェクト！</div>
+      <div class="rs-score" id="rsScore">10 / 10 問正解</div>
+      <div class="rs-msg" id="rsMsg"></div>
+      <div class="rs-actions">
+        <button id="rsAgain" class="btn-big">もう一度チャレンジ</button>
+        <button id="rsSummary" class="btn-big ghost">📖 要点まとめを見る</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= まとめ ================= -->
+  <section id="scSummary" class="screen">
+    <div class="seg" id="smSeg">
+      <button class="on" data-story="dog">🐕 犬と肉</button>
+      <button data-story="ant">🕊️ 鳩と蟻</button>
+    </div>
+    <div id="smBody"></div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   データ：2話の本文・訳・語句・教訓
+   ========================================================= */
+var STORIES = {
+  dog: {
+    key: "dog",
+    title: "犬と肉のこと",
+    short: "犬と肉",
+    emoji: "🐕",
+    sentences: [
+      {
+        text: "ある犬、肉をくはへて川を渡る。",
+        kana: "あるいぬ、ししむらをくはへて、かはをわたる。",
+        trans: "ある犬が、肉をくわえて川を渡る。",
+        point: "「肉」は「ししむら」と読む。「くはへて」＝くわえて。"
+      },
+      {
+        text: "真ん中ほどにて、その影水に映りて大きに見えければ、",
+        kana: "まんなかほどにて、そのかげみづにうつりて、おほきにみえければ、",
+        trans: "川の真ん中あたりで、その肉の影が水に映って大きく見えたので、",
+        point: "「見えければ」＝見えたので。「ければ」は理由を表す。"
+      },
+      {
+        text: "「わがくはゆる所の肉より大きなる」と心得て、これを捨ててかれを取らんとす。",
+        kana: "わがくはゆる所のししむらよりおほきなるとこころえて、これをすててかれをとらんとす。",
+        trans: "「自分がくわえている肉よりも大きい」と思って、くわえていた肉を捨てて、水に映った影の肉を取ろうとする。",
+        point: "「これ」＝くわえている肉、「かれ」＝水に映った影の肉。「取らんとす」の「む」は意志で「取ろうとする」。"
+      },
+      {
+        text: "かるがゆゑに、二つながらこれを失ふ。",
+        kana: "かるがゆゑに、ふたつながらこれをうしなふ。",
+        trans: "そういうわけで、二つとも失ってしまう。",
+        point: "「かるがゆゑに」＝そういうわけで（「かる」＝か＋ある、「ゆゑ」＝理由）。"
+      },
+      {
+        text: "そのごとく、重欲心の輩は、他の財をうらやみ、ことにふれてむさぼるほどに、たちまち天罰をかうむる。わが持つところの財をも失ふことありけり。",
+        kana: "そのごとく、ぢうよくしんのともがらは、たのたからをうらやみ、ことにふれてむさぼるほどに、たちまちてんばつをかうむる。わがもつところのたからをも、うしなふことありけり。",
+        trans: "そのように、欲の深い者たちは、他人の財をうらやみ、何かにつけて欲しがるうちに、すぐに天罰を受ける。自分が持っている財まで失うことがある。",
+        point: "「かうむる」＝受ける。「輩」＝ともがら（者たち）。ここが教訓につながる部分。"
+      }
+    ],
+    lesson: "欲張って他人のものを欲しがると、自分のものまで失ってしまう。",
+    lessonLong: "手に入れようとしたものだけでなく、今あるものまで失う。",
+    pronouns: [
+      { w: "これ", m: "犬がくわえている肉（本物）" },
+      { w: "かれ", m: "水に映った影の肉（取れない）" },
+      { w: "その影", m: "犬自身の影" }
+    ],
+    kanaTable: [
+      ["くはへて", "くわえて", "「は」→「わ」"],
+      ["くはゆる", "くわえる", "「は」→「わ」"],
+      ["ゆゑに", "わけに", "「ゑ」→「え」"],
+      ["おほきなる", "おおきなる", "「ほ」→「お」"],
+      ["みづ", "みず", "「づ」→「ず」"],
+      ["失ふ", "失う", "「ふ」→「う」"],
+      ["かうむる", "こうむる", "「au」→「ou」"],
+      ["ぢうよくしん", "じゅうよくしん", "「ぢう」→「じゅう」"]
+    ],
+    words: [
+      ["ししむら", "獣の肉。ここでは犬がくわえている肉"],
+      ["くはへて", "くわえて（口に咥えて）"],
+      ["心得て", "思って・判断して"],
+      ["取らんとす", "取ろうとする（「む」＝意志）"],
+      ["かるがゆゑに", "そういうわけで"],
+      ["二つながら", "二つとも"],
+      ["重欲心", "欲の深い心"],
+      ["輩", "ともがら。仲間・者たち"],
+      ["ことにふれて", "何かにつけて"],
+      ["むさぼる", "欲しがる"],
+      ["天罰をかうむる", "天罰を受ける（「かうむる」＝受ける）"],
+      ["ありけり", "あった（「けり」＝過去）"]
+    ]
+  },
+
+  ant: {
+    key: "ant",
+    title: "鳩と蟻のこと",
+    short: "鳩と蟻",
+    emoji: "🕊️",
+    sentences: [
+      {
+        text: "ある川のほとりに、蟻遊ぶことありけり。",
+        kana: "あるかはのほとりに、ありあそぶことありけり。",
+        trans: "ある川のほとりで、蟻が遊んでいた。",
+        point: "「ありけり」の「けり」は過去で「〜ていた」。"
+      },
+      {
+        text: "にはかに水かさ増さりきて、かの蟻を誘ひ流る。",
+        kana: "にはかにみづかさまさりきて、かのおのありをさそひながる。",
+        trans: "急に水かさが増してきて、その蟻をさらって流す。",
+        point: "「にはかに」＝急に（今の「にわかに」）。「誘ひ流る」＝さらって流す。"
+      },
+      {
+        text: "浮きぬ沈みぬするところに、鳩、こずゑよりこれを見て、",
+        kana: "うきぬしづみぬするところに、はと、こずゑよりこれを見て、",
+        trans: "蟻が浮いたり沈んだりしているところに、鳩が木の枝の先からこの様子を見て、",
+        point: "「こずゑ」＝木の枝の先。"
+      },
+      {
+        text: "「あはれなるありさまかな」と、こずゑをちと食ひ切つて、川の中に落としければ、蟻、これに乗つて渚に上がりぬ。",
+        kana: "あはれなるありさまかなと、こずゑをちとくひきつて、かはのなかにおとしければ、あり、これにのつてなぎさにあがりぬ。",
+        trans: "「気の毒な様子だなあ」と、枝の先を少しかみ切って川の中に落としたので、蟻はそれに乗って岸に上がった。",
+        point: "「あはれなる」＝気の毒な・しみじみ心を動かされる。「渚」＝水ぎわ・岸。"
+      },
+      {
+        text: "かかりけるところに、ある人、竿の先にとりもちを付けて、かの鳩を刺さんとす。",
+        kana: "かかりけるところに、あるひと、さをのさきにとりもちをつけて、かのはとをささんとす。",
+        trans: "そうしているときに、ある人が、竿の先に鳥もちをつけて、その鳩を捕らえようとする。",
+        point: "「かかりけるところに」＝そうしているときに。「刺さんとす」＝捕らえようとする。"
+      },
+      {
+        text: "蟻、心に思ふやう、「ただ今の恩を送らむものを」と思ひ、かの人の足にしつかと食ひつきければ、",
+        kana: "あり、こころにおもふやう、ただいまのおんをおくらむものをとおもひ、かのひとのあしにしつかとくひつきければ、",
+        trans: "蟻は心に思うことには、「たった今の恩を返したいものだなあ」と思って、その人の足にしっかりとかみついたので、",
+        point: "「ただ今の恩」＝たった今助けてもらった恩。「送らむ」＝返したい（「む」＝意志）。"
+      },
+      {
+        text: "おびえあがつて竿をかしこに投げ捨てけり。そのものの色や知る。",
+        kana: "おびえあがつて、さををかしこになげすてけり。そのもののいろやしる。",
+        trans: "その人はびっくりして恐れて、竿をあちらに投げ捨てた。その人はこの事情を知っただろうか、いや、知るまい。",
+        point: "「かしこ」＝あちら・その場。「色や知る」＝事情を知っただろうか（反語で「知らない」）。"
+      },
+      {
+        text: "しかるに、鳩これを悟りて、いづくともなく飛び去りぬ。",
+        kana: "しかるに、はとこれをさとりて、いづくともなくとびさりぬ。",
+        trans: "ところが鳩は、このことを悟って、どこへともなく飛び去った。",
+        point: "「しかるに」＝ところが。「いづくともなく」＝どこへともなく。"
+      },
+      {
+        text: "そのごとく、人の恩を受けたらん者は、いかさまにも、その報ひをせばやと思ふ志を持つべし。",
+        kana: "そのごとく、ひとのおんをうけたらんものは、いかさまにも、そのむくひをせばやとおもふこころざしをもつべし。",
+        trans: "そのように、人から恩を受けた者は、どんな形でも、その恩返しをしたいと思う気持ちを持つべきである。",
+        point: "「報ひ」＝恩返し。「せばや」＝したいものだ。「べし」＝〜べきだ。"
+      }
+    ],
+    lesson: "人から受けた恩は、どんな形でも返そうとする心を持つべき。",
+    lessonLong: "恩を受けたら、いつかその恩に報いようとする心を持つべきだ。",
+    pronouns: [
+      { w: "これ（蟻）", m: "かみ切って川に落とした枝の先" },
+      { w: "これ（鳩）", m: "蟻が人の足にかみついたこと" },
+      { w: "そ（そのもの）", m: "竿を持っていた人（鳩を捕らえようとした人）" }
+    ],
+    kanaTable: [
+      ["にはかに", "にわかに", "「は」→「わ」"],
+      ["こずゑ", "こずえ", "「ゑ」→「え」"],
+      ["あはれなる", "あわれなる", "「は」→「わ」"],
+      ["食ひ切つて", "くいきって", "「ひ」→「い」"],
+      ["誘ひ", "さそい", "「ひ」→「い」"],
+      ["おびえあがつて", "おびえあがって", "「つ」→「っ」"],
+      ["いづく", "いずく", "「づ」→「ず」"],
+      ["報ひ", "むくい", "「ひ」→「い」"]
+    ],
+    words: [
+      ["ありけり", "あった（「けり」＝過去）"],
+      ["にはかに", "急に"],
+      ["水かさ増さりきて", "水かさが増してきて"],
+      ["誘ひ流る", "さらって流す"],
+      ["浮きぬ沈みぬ", "浮いたり沈んだり"],
+      ["こずゑ", "木の枝の先"],
+      ["あはれなる", "気の毒な・しみじみ心を動かされる"],
+      ["ちと", "ちょっと・少し"],
+      ["渚", "なぎさ。水ぎわ・岸"],
+      ["かかりけるところに", "そうしているときに"],
+      ["とりもち", "鳥をつかまえるための粘り気のあるもの"],
+      ["刺さんとす", "捕らえようとする"],
+      ["ただ今の恩", "たった今受けた恩"],
+      ["送らむ", "返したい（「む」＝意志）"],
+      ["しつかと", "しっかりと"],
+      ["おびえあがつて", "びっくりして恐れて"],
+      ["かしこに", "あちらに"],
+      ["そのものの色や知る", "その人は事情を知っただろうか、いや知らない（反語）"],
+      ["しかるに", "ところが"],
+      ["悟りて", "気づいて"],
+      ["いづくともなく", "どこへともなく"],
+      ["報ひ", "むくい。恩返し"],
+      ["せばや", "したいものだ"],
+      ["志", "こころざし。気持ち"]
+    ]
+  }
+};
+
+/* =========================================================
+   クイズ（24問）— 語句・仮名遣い・指示語・内容・教訓
+   ========================================================= */
+var QUESTIONS = [
+  { s:"dog", tag:"読み方", q:"「肉」は何と読みますか。", c:["ししむら","にく","みそ"], a:0, e:"「ししむら」と読みます。獣の肉のことです。" },
+  { s:"dog", tag:"仮名遣い", q:"「くはへて」を現代仮名遣いにすると？", c:["くわえて","くはえて","こわえて"], a:0, e:"「くわえて」。「は」を「わ」と読みます。" },
+  { s:"dog", tag:"内容理解", q:"犬は川を渡るとき、何をしていましたか。", c:["肉をくわえていた","肉を探していた","水を飲んでいた"], a:0, e:"肉をくわえて川を渡っていました。" },
+  { s:"dog", tag:"文法", q:"「取らんとす」の「む」はどんな意味ですか。", c:["意志（〜しよう）","過去（〜した）","打消（〜しない）"], a:0, e:"「む」は意志で、「取ろうとする」という意味です。" },
+  { s:"dog", tag:"語句の意味", q:"「かるがゆゑに」の意味は？", c:["そういうわけで","それでも","そのかわりに"], a:0, e:"「かる」＝か＋ある、「ゆゑ」＝理由で、「そういうわけで」。" },
+  { s:"dog", tag:"指示語", q:"「これを捨てて」の「これ」は何を指しますか。", c:["くわえている肉","水に映った影の肉","川の水"], a:0, e:"「これ」は犬がくわえている本物の肉です。" },
+  { s:"dog", tag:"指示語", q:"「かれを取らんとす」の「かれ」は何を指しますか。", c:["水に映った影の肉","くわえている肉","他の犬"], a:0, e:"「かれ」は水に映った影の肉。実際には取れません。" },
+  { s:"dog", tag:"語句の意味", q:"「天罰をかうむる」の「かうむる」の意味は？", c:["受ける","与える","逃れる"], a:0, e:"「かうむる」＝受ける。天罰を受ける、という意味です。" },
+  { s:"dog", tag:"語句の意味", q:"「重欲心の輩」の「輩」は何と読み、どんな意味ですか。", c:["ともがら・者たち","やから・家来","むれ・動物の群れ"], a:0, e:"「ともがら」と読み、仲間・者たちという意味です。" },
+  { s:"dog", tag:"内容理解", q:"犬がもとの肉を失ったのはなぜですか。", c:["影の肉を取ろうとして肉を捨てたから","肉が川に落ちたから","他の犬に取られたから"], a:0, e:"影の肉のほうが大きいと思い、くわえていた肉を捨てたからです。" },
+  { s:"dog", tag:"教訓", q:"「犬と肉」の教訓はどれですか。", c:["欲張ると、今あるものまで失う","急いで渡ると失敗する","他人を助けると自分も助かる"], a:0, e:"欲張って他人のものを欲しがると、自分のものまで失ってしまう、という教訓です。" },
+  { s:"dog", tag:"仮名遣い", q:"「おほきに」を現代仮名遣いにすると？", c:["おおきに","おほきに","おうきに"], a:0, e:"「おおきに」。「ほ」を「お」と読みます。" },
+
+  { s:"ant", tag:"語句の意味", q:"「にはかに」の意味は？", c:["急に","しずかに","たしかに"], a:0, e:"「急に」。今の「にわかに」です。" },
+  { s:"ant", tag:"語句の意味", q:"「こずゑ」の意味は？", c:["木の枝の先","川の岸","石の上"], a:0, e:"「こずゑ」＝木の枝の先です。" },
+  { s:"ant", tag:"内容理解", q:"「あはれなるありさまかな」はどんな気持ちですか。", c:["気の毒だなあ","うらやましいなあ","おかしいなあ"], a:0, e:"「あはれなり」は「気の毒だ・しみじみ心を動かされる」という気持ちです。" },
+  { s:"ant", tag:"内容理解", q:"鳩はどうやって蟻を助けましたか。", c:["枝の先をかみ切って川に落とした","くちばしでつかんで運んだ","水を止めた"], a:0, e:"枝の先を少し食い切って川に落とし、蟻はそれに乗って岸に上がりました。" },
+  { s:"ant", tag:"語句の意味", q:"「ただ今の恩」とはどんな恩ですか。", c:["たった今助けてもらった恩","昔もらった恩","これからの恩"], a:0, e:"鳩に助けてもらった、たった今の恩のことです。" },
+  { s:"ant", tag:"文法", q:"「送らむ」はどんな意味ですか。", c:["恩を返したい","恩を送った","恩を忘れる"], a:0, e:"「む」は意志で、「（恩を）返したい」という意味です。" },
+  { s:"ant", tag:"内容理解", q:"蟻は恩返しに何をしましたか。", c:["鳩を捕らえようとする人の足にかみついた","鳩に枝を運んだ","人を川に落とした"], a:0, e:"竿を持つ人の足にしっかとかみつき、人は竿を投げ捨てました。" },
+  { s:"ant", tag:"内容理解", q:"「そのものの色や知る」の意味は？", c:["その人は事情を知っただろうか、いや知らない","その人はよく知っていた","その人は色を見分けた"], a:0, e:"反語で「知らないだろう」という意味です。" },
+  { s:"ant", tag:"語句の意味", q:"「いづくともなく」の意味は？", c:["どこへともなく","いつまでも","だれにも見られず"], a:0, e:"「いづくともなく」＝どこへともなく。行き先もわからないまま、という意味です。" },
+  { s:"ant", tag:"語句の意味", q:"「報ひ」の意味は？", c:["恩返し・報い","知らせ","かくれ場所"], a:0, e:"「むくい」と読み、恩返し・報いという意味です。" },
+  { s:"ant", tag:"教訓", q:"「鳩と蟻」の教訓はどれですか。", c:["受けた恩はどんな形でも返そうとする心を持つ","水の近くで遊ばない","鳥もちには近づかない"], a:0, e:"人から受けた恩は、どんな形でも返そうとする心を持つべき、という教訓です。" },
+  { s:"ant", tag:"内容理解", q:"この話で、先に助けたのはどちらですか。", c:["鳩が蟻を助けた","蟻が鳩を助けた","二人とも助け合っていない"], a:0, e:"前半は鳩が蟻を助け、後半は蟻が鳩を助けます。" }
+];
+
+/* =========================================================
+   基本ヘルパー
+   ========================================================= */
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function plain(s){ return String(s == null ? "" : s).replace(/<[^>]*>/g, ""); }
+function shuffle(a){
+  var r = a.slice();
+  for(var i = r.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = r[i]; r[i] = r[j]; r[j] = t; }
+  return r;
+}
+
+/* =========================================================
+   保存（音の設定・前回の記録）
+   ========================================================= */
+var STORE_KEY = "isoho-car-master-v1";
+var store = { sound: true, best: null };
+try{
+  var rawStore = localStorage.getItem(STORE_KEY);
+  if(rawStore){
+    var parsed = JSON.parse(rawStore);
+    if(parsed && typeof parsed === "object"){
+      if(typeof parsed.sound === "boolean") store.sound = parsed.sound;
+      if(parsed.best) store.best = parsed.best;
+    }
+  }
+}catch(e){}
+function saveStore(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+
+/* =========================================================
+   効果音（Web Audio API・インライン）
+   ========================================================= */
+var AC = null;
+function audioCtx(){
+  try{
+    if(!AC){
+      var C = window.AudioContext || window.webkitAudioContext;
+      if(C) AC = new C();
+    }
+    if(AC && AC.state === "suspended") AC.resume();
+  }catch(e){ AC = null; }
+  return AC;
+}
+function sfx(kind){
+  if(!store.sound) return;
+  var ac = audioCtx();
+  if(!ac) return;
+  try{
+    var t0 = ac.currentTime;
+    function note(freq, dur, start, vol){
+      var o = ac.createOscillator(), g = ac.createGain();
+      o.type = "sine";
+      o.frequency.setValueAtTime(freq, t0 + start);
+      g.gain.setValueAtTime(0.0001, t0 + start);
+      g.gain.exponentialRampToValueAtTime(vol, t0 + start + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + start + dur);
+      o.connect(g); g.connect(ac.destination);
+      o.start(t0 + start); o.stop(t0 + start + dur + 0.03);
+    }
+    if(kind === "ok"){ note(880, 0.16, 0, 0.12); note(1320, 0.2, 0.09, 0.1); }
+    else if(kind === "ng"){ note(320, 0.18, 0, 0.09); note(230, 0.24, 0.09, 0.08); }
+    else if(kind === "tap"){ note(760, 0.05, 0, 0.035); }
+    else if(kind === "rank"){ note(523, 0.24, 0, 0.1); note(659, 0.24, 0.11, 0.1); note(784, 0.24, 0.22, 0.1); note(1047, 0.34, 0.33, 0.1); }
+  }catch(e){}
+}
+
+/* =========================================================
+   読み上げ（Web Speech API）
+   ・iOS対策：最初の speak はタップ処理の中で同期的に呼ぶ
+   ・声が出ない／onendが来ない環境でもタイマーで進む
+   ========================================================= */
+var HAS_SPEECH = !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+var VOICE_JA = null;
+var SPK = { gen: 0, wd: null };
+
+function loadVoices(){
+  if(!HAS_SPEECH) return;
+  try{
+    var vs = window.speechSynthesis.getVoices() || [];
+    for(var i = 0; i < vs.length; i++){
+      var v = vs[i];
+      if(v && v.lang && String(v.lang).toLowerCase().indexOf("ja") === 0){ VOICE_JA = v; return; }
+    }
+  }catch(e){}
+}
+if(HAS_SPEECH){
+  loadVoices();
+  try{
+    if(window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener("voiceschanged", loadVoices);
+    else window.speechSynthesis.onvoiceschanged = loadVoices;
+  }catch(e){}
+}
+
+function clearWd(){ if(SPK.wd){ clearTimeout(SPK.wd); SPK.wd = null; } }
+function spkStop(){
+  SPK.gen++;
+  clearWd();
+  try{
+    if(HAS_SPEECH && (window.speechSynthesis.speaking || window.speechSynthesis.pending)) window.speechSynthesis.cancel();
+  }catch(e){}
+}
+/* 1文を読み上げ、終わったら onDone。戻り値: 実際に声を使ったか */
+function spkSpeak(text, rate, onDone){
+  var gen = ++SPK.gen;
+  var done = false;
+  var body = String(text || "").replace(/\s+/g, " ").trim();
+  var r = rate || 1;
+  var est = Math.max(1500, body.length * (r < 0.95 ? 235 : 168));
+
+  function finish(){
+    if(done || gen !== SPK.gen) return;
+    done = true;
+    clearWd();
+    if(onDone) onDone();
+  }
+  clearWd();
+  if(!body) { SPK.wd = setTimeout(finish, 200); return false; }
+  if(!store.sound || !HAS_SPEECH){ SPK.wd = setTimeout(finish, est); return false; }
+
+  try{
+    var u = new SpeechSynthesisUtterance(body);
+    u.lang = "ja-JP";
+    loadVoices();
+    if(VOICE_JA) u.voice = VOICE_JA;
+    u.rate = r; u.pitch = 1; u.volume = 1;
+    u.onend = finish;
+    u.onerror = finish;
+    window.speechSynthesis.speak(u);
+    /* 見張り：onend が来なくても進む（鳴っている間は延長） */
+    (function arm(ms){
+      SPK.wd = setTimeout(function(){
+        if(gen !== SPK.gen || done) return;
+        try{ if(window.speechSynthesis.speaking){ arm(2200); return; } }catch(e){}
+        finish();
+      }, ms);
+    })(est * 1.35 + 2400);
+    return true;
+  }catch(e){
+    SPK.wd = setTimeout(finish, est);
+    return false;
+  }
+}
+
+/* 画面スリープ防止（聞き流し中） */
+var WAKE = null;
+function wakeOn(){
+  try{
+    if(!navigator.wakeLock || !navigator.wakeLock.request) return;
+    navigator.wakeLock.request("screen").then(function(s){
+      WAKE = s;
+      if(s && s.addEventListener) s.addEventListener("release", function(){ WAKE = null; });
+    }).catch(function(){});
+  }catch(e){}
+}
+function wakeOff(){ try{ if(WAKE && WAKE.release) WAKE.release(); }catch(e){} WAKE = null; }
+
+/* =========================================================
+   トースト・画面遷移
+   ========================================================= */
+var toastTimer = null;
+function toast(msg){
+  var t = $("toast");
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove("on"); }, 2000);
+}
+
+var SCREEN_IDS = { home: "scHome", listen: "scListen", quiz: "scQuiz", result: "scResult", summary: "scSummary" };
+var current = "home";
+function go(name){
+  if(current === "listen" && name !== "listen") lzPause();
+  if(current === "quiz" && name !== "quiz"){ clearTimeout(QZ.autoT); spkStop(); }
+  for(var k in SCREEN_IDS){
+    var el = $(SCREEN_IDS[k]);
+    if(el) el.classList.toggle("active", k === name);
+  }
+  current = name;
+  $("btnBack").hidden = (name === "home");
+  try{ window.scrollTo(0, 0); }catch(e){}
+  if(name === "summary") renderSummary(SM.story);
+}
+function paintSound(){
+  var b = $("btnSound");
+  if(!b) return;
+  b.textContent = store.sound ? "🔔" : "🔕";
+  b.className = "iconbtn" + (store.sound ? "" : " off");
+  b.setAttribute("aria-label", store.sound ? "音をオフにする" : "音をオンにする");
+}
+
+/* =========================================================
+   🎧 車内・聞き流し
+   ========================================================= */
+var LZ = {
+  story: "dog", rate: 1, repeat: true,
+  order: [], i: 0, phase: 0,
+  playing: false, started: false, finished: false, noSpeech: false,
+  timer: null
+};
+
+function lzBuild(){
+  var keys = (LZ.story === "both") ? ["dog", "ant"] : [LZ.story];
+  var arr = [];
+  keys.forEach(function(k){
+    STORIES[k].sentences.forEach(function(s, idx){ arr.push({ k: k, idx: idx }); });
+  });
+  LZ.order = arr;
+}
+function lzCurrent(){
+  var o = LZ.order[LZ.i];
+  if(!o) return null;
+  return { story: STORIES[o.k], sen: STORIES[o.k].sentences[o.idx] };
+}
+
+function lzPaint(){
+  var c = lzCurrent();
+  if(!c) return;
+  $("lsStory").textContent = c.story.title;
+  $("lsCount").textContent = (LZ.i + 1) + " / " + LZ.order.length;
+
+  if(LZ.phase === 0){
+    $("lsLabel").textContent = "古文（音で聞く）";
+    $("lsMain").className = "lz-main";
+    $("lsMain").textContent = c.sen.text;
+    $("lsSub").innerHTML = "よみ：<b>" + esc(c.sen.kana) + "</b>";
+  }else{
+    $("lsLabel").textContent = "現代語訳とポイント";
+    $("lsMain").className = "lz-main trans";
+    $("lsMain").innerHTML = esc(c.sen.trans) + '<span class="pt">💡 ' + esc(c.sen.point) + "</span>";
+    $("lsSub").innerHTML = "古文：<b>" + esc(c.sen.text) + "</b>";
+  }
+
+  var play = $("lsPlay");
+  play.textContent = LZ.playing ? "⏸ 一時停止" : (LZ.started ? "▶ つづきから" : "▶ 再生する");
+  play.className = "lz-play" + (LZ.playing ? " on" : "");
+
+  var note = $("lsNote");
+  if(!store.sound){
+    note.textContent = "🔇 音がオフです。🔔を押すか「再生」をタップすると音が出ます";
+    note.className = "lz-note warn";
+  }else if(LZ.noSpeech){
+    note.textContent = "この環境では声が出ないため、文字表示とタイマーで進めています";
+    note.className = "lz-note warn";
+  }else if(LZ.finished){
+    note.textContent = LZ.repeat ? "くり返しON：また最初から読みます" : "さいごまで読みおわりました。▶で最初から";
+    note.className = "lz-note";
+  }else if(LZ.playing){
+    note.textContent = "🔊 読み上げ中…（画面を見なくてOK）";
+    note.className = "lz-note";
+  }else{
+    note.textContent = "画面を見なくてもOK。耳だけで覚えられます。";
+    note.className = "lz-note";
+  }
+}
+
+function lzStep(){
+  if(!LZ.playing) return;
+  var c = lzCurrent();
+  if(!c){ lzFinish(); return; }
+  LZ.finished = false;
+  lzPaint();
+
+  var text;
+  if(LZ.phase === 0){
+    text = c.sen.kana;
+  }else{
+    text = c.sen.trans + "。" + c.sen.point;
+  }
+  var used = spkSpeak(text, LZ.rate, lzAfterSpeak);
+  if(!used && !store.sound) { /* 音オフは案内のみ */ }
+  if(!used && store.sound && !HAS_SPEECH) LZ.noSpeech = true;
+  LZ.started = true;
+}
+
+function lzAfterSpeak(){
+  if(!LZ.playing) return;
+  clearTimeout(LZ.timer);
+  var gap = (LZ.phase === 0) ? 1200 : 750;
+  if(LZ.rate < 0.95) gap += 250;
+  LZ.timer = setTimeout(function(){
+    if(!LZ.playing) return;
+    if(LZ.phase === 0){
+      LZ.phase = 1;
+      lzStep();
+    }else{
+      LZ.phase = 0;
+      LZ.i++;
+      if(LZ.i >= LZ.order.length){ lzFinish(); return; }
+      lzStep();
+    }
+  }, gap);
+}
+
+function lzFinish(){
+  if(LZ.repeat){
+    clearTimeout(LZ.timer);
+    LZ.finished = false;
+    LZ.timer = setTimeout(function(){
+      if(!LZ.playing) return;
+      LZ.i = 0; LZ.phase = 0;
+      lzStep();
+    }, 1500);
+    return;
+  }
+  LZ.playing = false;
+  LZ.finished = true;
+  LZ.started = false;
+  LZ.i = 0; LZ.phase = 0;
+  spkStop();
+  wakeOff();
+  lzPaint();
+}
+
+function lzStart(){
+  if(!LZ.order.length || LZ.i >= LZ.order.length){ lzBuild(); LZ.i = 0; LZ.phase = 0; }
+  if(!store.sound){
+    store.sound = true; saveStore(); paintSound();
+    audioCtx(); sfx("tap");
+  }else{
+    audioCtx();
+  }
+  LZ.playing = true;
+  LZ.finished = false;
+  clearTimeout(LZ.timer);
+  lzStep();          /* タップの中で同期的に最初の speak を呼ぶ */
+  wakeOn();
+}
+function lzPause(){
+  LZ.playing = false;
+  clearTimeout(LZ.timer);
+  LZ.timer = null;
+  spkStop();
+  wakeOff();
+  if(current === "listen") lzPaint();
+}
+function lzToggle(){
+  sfx("tap");
+  if(LZ.playing) lzPause();
+  else lzStart();
+  lzPaint();
+}
+function lzMove(delta){
+  sfx("tap");
+  if(!LZ.order.length) lzBuild();
+  clearTimeout(LZ.timer);
+  spkStop();
+  LZ.i = (LZ.i + LZ.order.length + delta) % LZ.order.length;
+  LZ.phase = 0;
+  LZ.finished = false;
+  if(LZ.playing){ lzStep(); }
+  else { LZ.started = false; lzPaint(); }
+}
+function lzSetStory(v){
+  LZ.story = v;
+  clearTimeout(LZ.timer);
+  spkStop();
+  lzBuild();
+  LZ.i = 0; LZ.phase = 0; LZ.finished = false; LZ.started = false;
+  if(LZ.playing){ lzStep(); } else lzPaint();
+}
+function lzSetRate(v){
+  LZ.rate = v;
+  if(LZ.playing){ spkStop(); clearTimeout(LZ.timer); lzStep(); }
+}
+
+function openListen(storyKey){
+  if(storyKey && STORIES[storyKey]) LZ.story = storyKey;
+  lzBuild();
+  LZ.i = 0; LZ.phase = 0; LZ.finished = false; LZ.started = false;
+  LZ.playing = false;
+  spkStop();
+  paintListenChips();
+  go("listen");
+  lzPaint();
+}
+function paintListenChips(){
+  var sc = $("lsStoryChips");
+  if(sc){
+    var bs = sc.querySelectorAll(".chip");
+    for(var i = 0; i < bs.length; i++) bs[i].classList.toggle("on", bs[i].getAttribute("data-story") === LZ.story);
+  }
+  var rc = $("lsRateChips");
+  if(rc){
+    var br = rc.querySelectorAll(".chip");
+    for(var j = 0; j < br.length; j++) br[j].classList.toggle("on", parseFloat(br[j].getAttribute("data-rate")) === LZ.rate);
+  }
+  var rp = $("lsRepeatChips");
+  if(rp){
+    var bp = rp.querySelectorAll(".chip");
+    for(var k = 0; k < bp.length; k++) bp[k].classList.toggle("on", (bp[k].getAttribute("data-repeat") === "1") === !!LZ.repeat);
+  }
+}
+
+/* =========================================================
+   🚗 耳でクイズ / ⚡ 仕上げテスト
+   ========================================================= */
+var QZ = {
+  mode: "ear", list: [], i: 0, correct: 0,
+  answered: false, hideQ: false, auto: true,
+  autoT: null, lock: 0
+};
+
+function quizStart(mode){
+  QZ.mode = (mode === "test") ? "test" : "ear";
+  QZ.hideQ = false;
+  QZ.answered = false;
+  QZ.i = 0;
+  QZ.correct = 0;
+  QZ.lock = 0;
+  if(QZ.mode === "test"){
+    QZ.list = shuffle(QUESTIONS).slice(0, 10);
+    QZ.auto = false;
+  }else{
+    QZ.list = shuffle(QUESTIONS);
+    QZ.auto = true;
+  }
+  clearTimeout(QZ.autoT);
+  spkStop();
+  if(!store.sound){ store.sound = true; saveStore(); paintSound(); }
+  audioCtx();
+  go("quiz");
+  quizPaint();
+  quizRead();          /* タップの中で同期読み上げ */
+}
+
+function quizPaint(){
+  var q = QZ.list[QZ.i];
+  if(!q) return;
+  $("qzCount").textContent = (QZ.i + 1) + " / " + QZ.list.length;
+  $("qzScore").textContent = (QZ.mode === "test" ? "⚡ " : "○ ") + QZ.correct;
+  $("qzTag").textContent = (QZ.mode === "test" ? "仕上げテスト・" : "") + q.tag;
+  $("qzQ").innerHTML = esc(q.q);
+  $("qzQ").className = "qz-q" + (QZ.hideQ ? " hidden" : "");
+  $("qzHint").className = "qz-hint" + (QZ.hideQ ? " on" : "");
+
+  var wrap = $("qzChoices");
+  wrap.innerHTML = "";
+  q.c.forEach(function(text, idx){
+    var b = document.createElement("button");
+    b.className = "choice";
+    b.innerHTML = '<span class="num">' + "ABC".charAt(idx) + '</span><span>' + esc(text) + "</span>";
+    b.onclick = function(){ quizAnswer(idx, b); };
+    wrap.appendChild(b);
+  });
+
+  var fb = $("qzFb");
+  fb.className = "qz-fb";
+  fb.innerHTML = "";
+  $("qzNext").hidden = true;
+  $("qzHide").className = "qz-toggle" + (QZ.hideQ ? " on" : "");
+  $("qzHide").textContent = QZ.hideQ ? "👀 問題文を表示" : "🙈 問題文を隠す";
+  QZ.answered = false;
+  clearTimeout(QZ.autoT);
+}
+
+function quizRead(){
+  var q = QZ.list[QZ.i];
+  if(!q) return;
+  spkStop();
+  spkSpeak((QZ.mode === "test" ? "第" + (QZ.i + 1) + "問。" : "問題。") + plain(q.q), 1, null);
+}
+
+function quizAnswer(idx, el){
+  if(QZ.answered) return;
+  QZ.answered = true;
+  var q = QZ.list[QZ.i];
+  var qi = QZ.i;
+  var right = (idx === q.a);
+  if(right) QZ.correct++;
+
+  var btns = $("qzChoices").querySelectorAll(".choice");
+  for(var i = 0; i < btns.length; i++){
+    btns[i].disabled = true;
+    if(i === q.a) btns[i].classList.add("correct");
+    else if(i === idx) btns[i].classList.add("wrong");
+    else btns[i].classList.add("dim");
+  }
+  sfx(right ? "ok" : "ng");
+  $("qzScore").textContent = (QZ.mode === "test" ? "⚡ " : "○ ") + QZ.correct;
+
+  var fb = $("qzFb");
+  fb.className = "qz-fb on " + (right ? "ok" : "ng");
+  fb.innerHTML = '<span class="fb-ttl">' + (right ? "🎉 正解！" : "😢 ざんねん…") + "</span>" + esc(q.e);
+
+  var nx = $("qzNext");
+  nx.hidden = false;
+  nx.textContent = (qi + 1 >= QZ.list.length) ? "結果を見る →" : "次へ →";
+
+  spkStop();
+  var rep = right ? ("正解。" + q.e) : ("ざんねん。正解は、" + q.c[q.a] + "。" + q.e);
+  spkSpeak(rep, 1, function(){
+    if(!QZ.auto || !QZ.answered || QZ.i !== qi) return;
+    clearTimeout(QZ.autoT);
+    QZ.autoT = setTimeout(function(){
+      if(QZ.auto && QZ.answered && QZ.i === qi) quizNext();
+    }, 1400);
+  });
+}
+
+function quizNext(){
+  clearTimeout(QZ.autoT);
+  if(QZ.i + 1 >= QZ.list.length){ quizFinish(); return; }
+  QZ.i++;
+  spkStop();
+  quizPaint();
+  quizRead();
+}
+
+function quizFinish(){
+  spkStop();
+  clearTimeout(QZ.autoT);
+  var n = QZ.correct, total = QZ.list.length;
+  var ratio = total ? n / total : 0;
+  var rank;
+  if(QZ.mode === "test"){
+    rank = (n >= 10) ? "S" : (n >= 8) ? "A" : (n >= 6) ? "B" : "C";
+  }else{
+    rank = (ratio >= 0.9) ? "S" : (ratio >= 0.75) ? "A" : (ratio >= 0.55) ? "B" : "C";
+  }
+  showResult(rank, n, total);
+}
+
+var RANK_TITLE = { S: "パーフェクト！", A: "すごい！あと少し", B: "いい調子！", C: "ここから伸びる！" };
+var RANK_MSG = {
+  S: "本文も語句もバッチリ。テスト本番でも大丈夫そう！ 教訓を自分の言葉で言えるか、最後に声に出して確認してみよう。",
+  A: "あと1〜2問！ まちがえた問題を「📖 要点まとめ」で見直すと、そのまま満点が見えてくるよ。",
+  B: "まちがえたところが、のびしろ。まずは歴史的仮名遣い（くはへて→くわえて、こずゑ→こずえ）を復習しよう。",
+  C: "まずは 🎧 聞き流しで2話を1回ずつ聞いてみよう。耳で流れをつかむと、言葉がすっと入ってくるよ。"
+};
+
+function showResult(rank, n, total){
+  var rk = $("rsRank");
+  rk.textContent = rank;
+  rk.className = "rs-rank" + (rank === "S" ? "" : " r" + rank);
+  $("rsTitle").textContent = (QZ.mode === "test") ? RANK_TITLE[rank] : "耳でクイズ・おつかれさま！";
+  $("rsScore").textContent = n + " / " + total + " 問正解";
+  $("rsMsg").textContent = (QZ.mode === "test") ? RANK_MSG[rank]
+      : (RANK_MSG[rank] + " 24問、さいごまでできたのがすごい！");
+  $("rsAgain").textContent = (QZ.mode === "test") ? "もう一度チャレンジ" : "もう一度クイズ";
+
+  if(QZ.mode === "test"){
+    store.best = { n: n, total: total, rank: rank, at: new Date().toISOString() };
+    saveStore();
+  }
+  go("result");
+  sfx("rank");
+  var praise = (QZ.mode === "test") ? ("結果は、" + rank + "ランク。" + total + "問中" + n + "問正解。" + RANK_MSG[rank]) : ("24問中" + n + "問正解。" + RANK_MSG[rank]);
+  spkSpeak(praise, 1, null);
+}
+
+function quizSetHide(v){
+  QZ.hideQ = !!v;
+  $("qzQ").className = "qz-q" + (QZ.hideQ ? " hidden" : "");
+  $("qzHint").className = "qz-hint" + (QZ.hideQ ? " on" : "");
+  $("qzHide").className = "qz-toggle" + (QZ.hideQ ? " on" : "");
+  $("qzHide").textContent = QZ.hideQ ? "👀 問題文を表示" : "🙈 問題文を隠す";
+}
+
+/* =========================================================
+   📖 要点まとめ
+   ========================================================= */
+var SM = { story: "dog" };
+
+function renderSummary(key){
+  if(key && STORIES[key]) SM.story = key;
+  var st = STORIES[SM.story];
+  var seg = $("smSeg");
+  if(seg){
+    var bs = seg.querySelectorAll("button");
+    for(var i = 0; i < bs.length; i++) bs[i].classList.toggle("on", bs[i].getAttribute("data-story") === SM.story);
+  }
+  var h = "";
+  h += '<div class="sum-head"><span class="sum-emoji">' + st.emoji + '</span><h2 class="sum-h">' + esc(st.title) + "</h2></div>";
+
+  h += '<div class="card sum-card"><div class="sum-t">本文（歴史的仮名遣い）</div><div class="plain">';
+  st.sentences.forEach(function(s){
+    h += '<span class="sent">' + esc(s.text) + '<span class="ruby">' + esc(s.kana) + "</span></span>";
+  });
+  h += "</div></div>";
+
+  h += '<div class="card sum-card"><div class="sum-t ai">現代語訳</div><div class="trans-txt">';
+  st.sentences.forEach(function(s){ h += "<p>" + esc(s.trans) + "</p>"; });
+  h += "</div></div>";
+
+  h += '<div class="card sum-card"><div class="sum-t">重要語句</div><div class="wordlist">';
+  st.words.forEach(function(w){ h += '<div class="word"><span class="w">' + esc(w[0]) + '</span><span class="m">' + esc(w[1]) + "</span></div>"; });
+  h += "</div></div>";
+
+  h += '<div class="card sum-card"><div class="sum-t mc">歴史的仮名遣い → 現代</div><div class="kana-tbl">';
+  st.kanaTable.forEach(function(r){
+    h += '<div class="kana-row"><span class="from">' + esc(r[0]) + '</span><span class="arrow">→</span><span class="to">' + esc(r[1]) + '</span><span class="note">' + esc(r[2]) + "</span></div>";
+  });
+  h += "</div></div>";
+
+  h += '<div class="card sum-card"><div class="sum-t yb">「これ・かれ」はどれ？</div><div class="wordlist">';
+  st.pronouns.forEach(function(p){ h += '<div class="word"><span class="w">' + esc(p.w) + '</span><span class="m">' + esc(p.m) + "</span></div>"; });
+  h += "</div></div>";
+
+  h += '<div class="card sum-card"><div class="sum-t">教訓</div>';
+  h += '<div class="lesson-box"><span class="em">💡</span>' + esc(st.lesson) + "</div>";
+  h += '<div class="tip-box" style="margin-top:9px">記述の答え方：「' + esc(st.lessonLong) + "」</div>";
+  h += "</div>";
+
+  h += '<div class="sum-nav" style="margin-top:12px"><button class="btn-big ghost" id="smListen">🎧 この話を聞き流す</button></div>';
+
+  $("smBody").innerHTML = h;
+  var lb = $("smListen");
+  if(lb) lb.onclick = function(){ openListen(SM.story); };
+}
+
+/* =========================================================
+   起動・イベント
+   ========================================================= */
+function init(){
+  paintSound();
+  paintListenChips();
+  if(store.best && store.best.total){
+    var hb = $("homeBest");
+    if(hb){
+      hb.hidden = false;
+      hb.textContent = "前回の仕上げテスト：" + store.best.rank + " ランク（" + store.best.n + " / " + store.best.total + "）";
+    }
+  }
+
+  /* ホームのモード */
+  var modes = document.querySelectorAll(".mode");
+  for(var i = 0; i < modes.length; i++){
+    modes[i].addEventListener("click", function(){
+      sfx("tap");
+      var g = this.getAttribute("data-go");
+      if(g === "listen") openListen(null);
+      else if(g === "ear") quizStart("ear");
+      else if(g === "test") quizStart("test");
+      else if(g === "summary"){ SM.story = "dog"; go("summary"); }
+    });
+  }
+
+  $("btnBack").addEventListener("click", function(){ sfx("tap"); go("home"); });
+  $("btnSound").addEventListener("click", function(){
+    store.sound = !store.sound;
+    saveStore();
+    paintSound();
+    if(!store.sound) spkStop();
+    else { audioCtx(); sfx("tap"); }
+    toast(store.sound ? "🔔 音 ON" : "🔕 音 OFF");
+    if(current === "listen") lzPaint();
+  });
+
+  /* 聞き流し */
+  $("lsPlay").addEventListener("click", lzToggle);
+  $("lsPrev").addEventListener("click", function(){ lzMove(-1); });
+  $("lsNext").addEventListener("click", function(){ lzMove(1); });
+
+  $("lsStoryChips").addEventListener("click", function(e){
+    var t = e.target;
+    if(!t || !t.getAttribute) return;
+    var v = t.getAttribute("data-story");
+    if(!v) return;
+    sfx("tap");
+    lzSetStory(v);
+    paintListenChips();
+  });
+  $("lsRateChips").addEventListener("click", function(e){
+    var t = e.target;
+    if(!t || !t.getAttribute) return;
+    var v = t.getAttribute("data-rate");
+    if(!v) return;
+    sfx("tap");
+    lzSetRate(parseFloat(v));
+    paintListenChips();
+  });
+  $("lsRepeatChips").addEventListener("click", function(e){
+    var t = e.target;
+    if(!t || !t.getAttribute) return;
+    var v = t.getAttribute("data-repeat");
+    if(v == null) return;
+    sfx("tap");
+    LZ.repeat = (v === "1");
+    paintListenChips();
+    if(current === "listen") lzPaint();
+  });
+
+  /* クイズ */
+  $("qzReplay").addEventListener("click", function(){ sfx("tap"); audioCtx(); quizRead(); });
+  $("qzNext").addEventListener("click", function(){ sfx("tap"); quizNext(); });
+  $("qzHide").addEventListener("click", function(){ sfx("tap"); quizSetHide(!QZ.hideQ); });
+
+  /* 結果 */
+  $("rsAgain").addEventListener("click", function(){
+    sfx("tap");
+    quizStart(QZ.mode);
+  });
+  $("rsSummary").addEventListener("click", function(){ sfx("tap"); go("summary"); });
+
+  /* まとめのタブ */
+  $("smSeg").addEventListener("click", function(e){
+    var t = e.target;
+    if(!t || !t.getAttribute) return;
+    var v = t.getAttribute("data-story");
+    if(!v) return;
+    sfx("tap");
+    renderSummary(v);
+    try{ window.scrollTo(0, 0); }catch(e2){}
+  });
+
+  /* 画面を離れたとき */
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState === "visible" && current === "listen" && LZ.playing) wakeOn();
+  });
+  window.addEventListener("pagehide", function(){ try{ spkStop(); }catch(e){} });
+
+  /* キーボード（PC確認用） */
+  document.addEventListener("keydown", function(e){
+    if(e.key === " " && current === "listen"){ e.preventDefault(); lzToggle(); }
+  });
+}
+
+init();
+
+</script>
+</body>
+</html>
