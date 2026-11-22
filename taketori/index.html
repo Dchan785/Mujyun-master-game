@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fdfbf4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="format-detection" content="telephone=no">
+<title>竹取物語 かぐや姫の生い立ち マスター｜車内で耳学習</title>
+<style>
+:root{
+  --paper:#fdfbf4;
+  --card:#fffefb;
+  --ink:#3e443f;
+  --ink2:#8b8f86;
+  --take:#7ba86b;
+  --take-d:#567d49;
+  --take-l:#edf5e8;
+  --yoru:#4d5d7c;
+  --yoru-l:#ecedf6;
+  --tsuki:#dfb968;
+  --tsuki-l:#fdf3dc;
+  --sakura:#e08f9f;
+  --sakura-l:#fdeef1;
+  --line:#e9e3d4;
+  --line2:#dcd3bf;
+  --shadow:0 3px 0 #eee7d8;
+  --mincho:"Hiragino Mincho ProN","Hiragino Mincho Pro","Yu Mincho","YuMincho","Noto Serif JP",serif;
+  --r:18px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+[hidden]{display:none !important;}
+html,body{margin:0;padding:0;}
+html{background:var(--paper);}
+body{
+  font-family:system-ui,-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(720px 400px at 8% -6%, #f0f7ea 0%, rgba(240,247,234,0) 62%),
+    radial-gradient(640px 380px at 106% 4%, #fdf4e0 0%, rgba(253,244,224,0) 58%),
+    radial-gradient(700px 420px at 50% 108%, #eef0f8 0%, rgba(238,240,248,0) 60%),
+    repeating-linear-gradient(54deg, rgba(150,170,130,.03) 0 2px, rgba(0,0,0,0) 2px 13px),
+    var(--paper);
+  min-height:100vh;min-height:100dvh;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  touch-action:manipulation;
+  overflow-x:hidden;
+}
+button{font-family:inherit;color:inherit;}
+h1,h2,h3,h4,p,ul,ol,dl,dd{margin:0;}
+.app{max-width:480px;margin:0 auto;padding:0 13px calc(26px + env(safe-area-inset-bottom));}
+
+/* ---------- topbar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) 0 8px;
+  background:linear-gradient(rgba(253,251,244,.97), rgba(253,251,244,.9));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  margin-bottom:10px;
+}
+.iconbtn{
+  width:42px;height:42px;flex:0 0 42px;border-radius:50%;
+  border:2px solid var(--line);background:var(--card);
+  font-size:17px;line-height:1;display:grid;place-items:center;
+  box-shadow:0 2px 0 #eee7d8;cursor:pointer;padding:0;
+}
+.iconbtn:active{transform:translateY(1px);box-shadow:none;}
+.iconbtn[hidden]{display:none;}
+.brand{flex:1;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;}
+.brand-txt{font-family:var(--mincho);font-size:.98rem;font-weight:700;letter-spacing:.06em;white-space:nowrap;}
+.brand-txt b{color:var(--take-d);font-weight:700;}
+
+/* ---------- screens ---------- */
+.screen{display:none;padding-bottom:6px;}
+.screen.active{display:block;animation:fadein .24s ease-out both;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------- home ---------- */
+.hero{position:relative;text-align:center;padding:6px 0 12px;}
+.hero-deco{font-size:2rem;line-height:1;margin-bottom:2px;}
+.hero-title{font-family:var(--mincho);font-size:clamp(1.5rem,7.2vw,1.9rem);line-height:1.4;letter-spacing:.08em;font-weight:700;color:#3c423d;}
+.hero-title .hl{color:var(--take-d);background:linear-gradient(transparent 66%, #e6f1de 66%);padding:0 .06em;}
+.hero-sub{margin-top:5px;font-size:.78rem;color:var(--ink2);letter-spacing:.03em;}
+.hero-sub b{color:#a98e52;}
+
+.card{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:12px;box-shadow:var(--shadow);}
+.rec-card{margin-bottom:12px;padding:11px 12px 12px;}
+.rec-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.rec-head .t{font-size:.78rem;font-weight:800;letter-spacing:.06em;color:#8d856f;}
+.rec-head .s{font-size:.7rem;color:var(--ink2);text-align:right;}
+.dots{display:flex;justify-content:space-between;gap:5px;}
+.dot{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.62rem;color:var(--ink2);text-align:center;line-height:1.25;}
+.dot .d{width:100%;max-width:40px;aspect-ratio:1/1;border-radius:50%;display:grid;place-items:center;font-size:.74rem;font-weight:800;background:#f6f1e5;border:2px solid #ece4d3;color:#b3a894;}
+.dot.on .d{background:var(--take-l);border-color:#b6d3a7;color:var(--take-d);}
+.dot.gold .d{background:linear-gradient(140deg,#fdf1d4,#fbe3ea);border-color:#e8c98a;color:#a8802f;box-shadow:0 0 0 3px rgba(253,240,205,.6);}
+
+.modes{display:flex;flex-direction:column;gap:10px;}
+.mode{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  background:var(--card);border:2px solid var(--line);border-radius:var(--r);
+  padding:11px 11px;font-size:1rem;box-shadow:var(--shadow);
+  cursor:pointer;transition:transform .1s ease, box-shadow .1s ease;min-height:72px;
+}
+.mode:active{transform:translateY(2px);box-shadow:0 1px 0 #eee7d8;}
+.mode-ic{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;font-size:23px;border-radius:15px;background:linear-gradient(145deg,var(--c1,#edf5e8),var(--c2,#cfe4c4));}
+.mode-body{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0;}
+.mode-body b{font-size:.98rem;letter-spacing:.02em;line-height:1.35;}
+.mode-body small{color:var(--ink2);font-size:.71rem;line-height:1.45;}
+.mode-go{color:#d5cbbe;font-size:1.05rem;flex:0 0 auto;}
+.foot-note{margin:13px 0 0;text-align:center;font-size:.68rem;color:#b5aa99;line-height:1.75;}
+
+/* ---------- shared bits ---------- */
+.pill{font-size:.72rem;font-weight:800;color:#7d8279;background:#f4f0e4;border-radius:99px;padding:3px 9px;white-space:nowrap;}
+.bar{flex:1;height:7px;border-radius:99px;background:#efe9da;overflow:hidden;}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#a9cd98,#7ba86b);transition:width .3s ease;}
+.screen-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 9px;}
+.screen-h .h{font-family:var(--mincho);font-size:1.06rem;font-weight:700;letter-spacing:.05em;}
+.screen-h .h em{font-style:normal;font-size:.95em;}
+
+.btn-big{
+  width:100%;min-height:64px;border-radius:20px;border:2px solid var(--line2);
+  background:var(--card);font-size:1.02rem;font-weight:800;letter-spacing:.03em;
+  box-shadow:var(--shadow);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;
+}
+.btn-big:active{transform:translateY(2px);box-shadow:none;}
+.btn-big.primary{background:linear-gradient(160deg,#8fbd7f,#6f9d5f);border-color:#649252;color:#fff;box-shadow:0 4px 0 #55804a;text-shadow:0 1px 0 rgba(0,0,0,.1);}
+.btn-big.primary:active{box-shadow:0 1px 0 #55804a;}
+.btn-big.ghost{background:#fffdf7;}
+
+/* ---------- listen ---------- */
+.dv-prog{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.dv-dots{display:flex;gap:4px;justify-content:center;margin-bottom:9px;}
+.dv-dots i{width:100%;max-width:26px;height:6px;border-radius:99px;background:#eae3d2;}
+.dv-dots i.done{background:#c3dcb4;}
+.dv-dots i.cur{background:var(--take);box-shadow:0 0 0 2px #dfeed6;}
+.dv-card{padding:13px 13px 12px;margin-bottom:11px;}
+.dv-tag{display:flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;color:#8d856f;margin-bottom:7px;letter-spacing:.04em;}
+.dv-tag .live{width:8px;height:8px;border-radius:50%;background:#cfd6c8;}
+.dv-tag .live.on{background:var(--take);animation:pulse 1.3s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.dv-text{font-family:var(--mincho);font-size:1.3rem;line-height:1.85;letter-spacing:.02em;color:#343a35;}
+.dv-kana{font-size:.78rem;color:#9a9f96;line-height:1.7;margin-top:3px;letter-spacing:.02em;}
+.dv-yaku,.dv-point{margin-top:10px;border-radius:13px;padding:9px 10px;background:#f7f4ea;border:1px solid #eee7d6;}
+.dv-yaku.live{background:var(--tsuki-l);border-color:#eddaa8;}
+.dv-point.live{background:var(--take-l);border-color:#c6ddb9;}
+.dv-yaku b,.dv-point b{display:block;font-size:.66rem;letter-spacing:.1em;color:#a99460;margin-bottom:3px;}
+.dv-point b{color:var(--take-d);}
+.dv-yaku span,.dv-point span{font-size:.9rem;line-height:1.65;display:block;}
+.dv-controls{display:flex;align-items:center;justify-content:center;gap:13px;margin:4px 0 11px;}
+.dv-big{
+  width:104px;height:104px;border-radius:50%;border:none;padding:0;
+  background:linear-gradient(160deg,#93c082,#6d9b5d);color:#fff;
+  box-shadow:0 6px 0 #55804a,0 12px 22px rgba(86,125,73,.22);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  font-size:2rem;line-height:1;cursor:pointer;
+}
+.dv-big small{font-size:.64rem;font-weight:800;letter-spacing:.1em;margin-top:2px;}
+.dv-big:active{transform:translateY(3px);box-shadow:0 3px 0 #55804a;}
+.dv-big.playing{background:linear-gradient(160deg,#f0c27a,#dfa951);box-shadow:0 6px 0 #b98a35,0 12px 22px rgba(190,150,60,.2);}
+.dv-mini{
+  width:74px;height:74px;border-radius:50%;border:2px solid var(--line);background:var(--card);
+  box-shadow:0 3px 0 #eee7d8;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:1.25rem;line-height:1;cursor:pointer;padding:0;color:#6f756c;
+}
+.dv-mini small{font-size:.6rem;font-weight:800;margin-top:2px;letter-spacing:.04em;}
+.dv-mini:active{transform:translateY(2px);box-shadow:none;}
+.seg{display:flex;gap:5px;background:#f4f0e4;padding:4px;border-radius:15px;margin-bottom:9px;}
+.seg button{flex:1;min-height:46px;border-radius:11px;border:none;background:transparent;font-size:.82rem;font-weight:800;color:#8f938a;cursor:pointer;padding:2px;}
+.seg button.on{background:#fff;color:var(--take-d);box-shadow:0 2px 6px rgba(60,70,55,.1);}
+.toggle{width:100%;min-height:54px;border-radius:16px;border:2px dashed var(--line2);background:#fffdf7;font-size:.9rem;font-weight:800;color:#7d8279;cursor:pointer;margin-bottom:8px;}
+.toggle.on{border-style:solid;border-color:#a9cd98;background:var(--take-l);color:var(--take-d);}
+.dv-note{text-align:center;font-size:.7rem;color:#b0a99a;line-height:1.6;}
+
+/* ---------- quiz ---------- */
+.qhead{display:flex;align-items:center;gap:8px;margin-bottom:9px;}
+.qcard{padding:13px 12px;margin-bottom:10px;}
+.qtext{font-size:1.02rem;line-height:1.65;font-weight:700;letter-spacing:.01em;}
+.qtext .qsmall{display:block;font-size:.7rem;font-weight:700;color:#a09a89;letter-spacing:.08em;margin-bottom:5px;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{
+  width:100%;min-height:62px;display:flex;align-items:center;gap:10px;text-align:left;
+  background:var(--card);border:2px solid var(--line);border-radius:16px;padding:9px 11px;
+  font-size:1.04rem;font-weight:700;line-height:1.45;box-shadow:var(--shadow);cursor:pointer;
+  transition:background .15s,border-color .15s;
+}
+.opt:active{transform:translateY(2px);box-shadow:none;}
+.opt b{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:var(--take-l);color:var(--take-d);display:grid;place-items:center;font-size:.95rem;font-weight:800;}
+.opt span{flex:1;}
+.opt.correct{background:#e9f5e1;border-color:#9dc98a;}
+.opt.correct b{background:#7ba86b;color:#fff;}
+.opt.wrong{background:#fdecec;border-color:#e8a3a3;}
+.opt.wrong b{background:#d98a8a;color:#fff;}
+.opt.dim{opacity:.62;}
+#scr-ear .opt{min-height:72px;font-size:1.12rem;}
+#scr-ear .opt b{width:38px;height:38px;flex:0 0 38px;font-size:1.02rem;}
+.hideq .qtext .qbody{display:none;}
+.hideq .hidebadge{display:inline-flex;}
+.hidebadge{display:none;align-items:center;gap:5px;font-size:.72rem;font-weight:800;color:#a08050;background:var(--tsuki-l);border:1px solid #eeddae;border-radius:99px;padding:4px 10px;margin-top:7px;}
+.hideq .opt span{display:none;}
+.hideq .opt{justify-content:center;min-height:78px;}
+.hideq .opt b{width:52px;height:52px;flex:0 0 52px;font-size:1.35rem;}
+.eq-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+.eq-actions.row{flex-direction:row;gap:8px;}
+.eq-actions.row .btn-big{flex:1;min-height:54px;font-size:.86rem;padding:6px 4px;letter-spacing:0;}
+.eq-actions .btn-big{min-height:56px;font-size:.94rem;}
+.feedback{margin-top:11px;border-radius:16px;padding:11px 12px;background:var(--take-l);border:2px solid #c6ddb9;animation:fadein .2s ease-out both;}
+.feedback.ng{background:#fdeeee;border-color:#eeb6b6;}
+.feedback .fb-h{font-size:.95rem;font-weight:800;margin-bottom:4px;color:var(--take-d);}
+.feedback.ng .fb-h{color:#b5545a;}
+.feedback .fb-x{font-size:.86rem;line-height:1.65;color:#5c6259;}
+.test-result{text-align:center;padding:16px 12px 14px;}
+.rank{font-family:var(--mincho);font-size:3.6rem;line-height:1;font-weight:700;color:var(--take-d);margin:2px 0 4px;}
+.rank.s{color:#c39a3e;text-shadow:0 2px 0 #f6e7bf;}
+.rank.a{color:#c2708a;}
+.rank.b{color:#5b86a8;}
+.rank.c{color:#9a9a90;}
+.rs-title{font-size:1.02rem;font-weight:800;margin-bottom:3px;}
+.rs-sub{font-size:.82rem;color:var(--ink2);line-height:1.7;}
+.rs-msg{margin-top:9px;font-size:.88rem;color:#5c6259;line-height:1.7;background:#f7f4ea;border-radius:13px;padding:9px 10px;text-align:left;}
+.wronglist{margin-top:10px;text-align:left;font-size:.8rem;color:#7a7f76;line-height:1.7;}
+.wronglist b{color:#8a6a6a;font-weight:800;}
+.result-btns{display:flex;flex-direction:column;gap:9px;margin-top:13px;}
+
+/* ---------- summary ---------- */
+.seg-tabs{display:flex;gap:5px;background:#f4f0e4;padding:4px;border-radius:15px;margin-bottom:11px;}
+.seg-tabs button{flex:1;min-height:44px;border-radius:11px;border:none;background:transparent;font-size:.78rem;font-weight:800;color:#8f938a;cursor:pointer;padding:2px;}
+.seg-tabs button.on{background:#fff;color:var(--take-d);box-shadow:0 2px 6px rgba(60,70,55,.1);}
+.hon-block{padding:11px 0;border-bottom:1px dashed var(--line);}
+.hon-block:last-child{border-bottom:none;}
+.hon-g{font-family:var(--mincho);font-size:1.06rem;line-height:1.9;letter-spacing:.02em;}
+.hon-y{font-size:.84rem;color:#7d8279;line-height:1.75;margin-top:4px;}
+.hon-note{font-size:.72rem;color:#a89d88;line-height:1.6;margin-top:4px;background:#faf7ee;border-radius:9px;padding:5px 7px;}
+.gsec{padding:10px 0;border-bottom:1px dashed var(--line);}
+.gsec:last-child{border-bottom:none;}
+.gsec h4{font-size:.92rem;font-weight:800;color:var(--take-d);margin-bottom:5px;}
+.gsec p{font-size:.86rem;line-height:1.75;}
+.gsec .ex{font-family:var(--mincho);font-size:.94rem;background:#faf7ee;border-radius:10px;padding:6px 8px;margin-top:5px;line-height:1.75;}
+.gsec .ex small{display:block;font-family:system-ui,sans-serif;font-size:.74rem;color:#8d938a;margin-top:2px;}
+.gsec .ex .hl{color:#b0763f;font-weight:700;background:linear-gradient(transparent 62%, #fbe6c2 62%);padding:0 .05em;}
+dl.wlist{padding:2px 0;}
+dl.wlist div{display:flex;gap:9px;padding:7px 0;border-bottom:1px dashed var(--line);align-items:baseline;}
+dl.wlist div:last-child{border-bottom:none;}
+dl.wlist dt{flex:0 0 6.4em;font-family:var(--mincho);font-size:.94rem;font-weight:700;letter-spacing:.02em;}
+dl.wlist dd{flex:1;font-size:.83rem;color:#6f756c;line-height:1.6;}
+dl.wlist dd small{display:block;font-size:.72rem;color:#a49a86;}
+.works li{font-size:.88rem;line-height:1.75;margin-left:1.15em;padding:2px 0;}
+.works li b{color:var(--take-d);}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button id="btnBack" class="iconbtn" hidden aria-label="もどる">‹</button>
+    <div class="brand"><span>🎋</span><span class="brand-txt">竹取物語 <b>マスター</b></span></div>
+    <button id="btnHome" class="iconbtn" hidden aria-label="ホーム">⌂</button>
+  </header>
+
+  <!-- ================= HOME ================= -->
+  <section id="scr-home" class="screen active">
+    <div class="hero">
+      <div class="hero-deco">🎋🌙</div>
+      <h1 class="hero-title">竹取物語<br><span class="hl">かぐや姫の生い立ち</span></h1>
+      <p class="hero-sub">車の中で <b>耳と声</b> でおぼえる 古文マスター</p>
+    </div>
+
+    <div class="card rec-card">
+      <div class="rec-head">
+        <span class="t">きろく</span>
+        <span class="s" id="recText">まだ 0 こ</span>
+      </div>
+      <div class="dots">
+        <div class="dot" id="dot1"><div class="d">🎧</div><span>聞き流し</span></div>
+        <div class="dot" id="dot2"><div class="d">🚗</div><span>耳でクイズ</span></div>
+        <div class="dot" id="dot3"><div class="d">⚡</div><span>テスト</span></div>
+      </div>
+    </div>
+
+    <div class="modes">
+      <button class="mode" data-mode="listen" style="--c1:#edf5e8;--c2:#c9e0be">
+        <span class="mode-ic">🎧</span>
+        <span class="mode-body"><b>車内・聞き流し</b><small>画面を見ずに耳で。古文→訳→ポイントを自動で読み上げ</small></span>
+        <span class="mode-go">›</span>
+      </button>
+      <button class="mode" data-mode="ear" style="--c1:#fdf3dc;--c2:#f2d79c">
+        <span class="mode-ic">🚗</span>
+        <span class="mode-body"><b>車内・耳でクイズ</b><small>音声で出題、特大ボタンで回答（12問）</small></span>
+        <span class="mode-go">›</span>
+      </button>
+      <button class="mode" data-mode="test" style="--c1:#fdeef1;--c2:#f4c6d0">
+        <span class="mode-ic">⚡</span>
+        <span class="mode-body"><b>仕上げテスト 10問</b><small>ランダム10問で S・A・B・C 判定。テスト直前に</small></span>
+        <span class="mode-go">›</span>
+      </button>
+      <button class="mode" data-mode="sum" style="--c1:#ecedf6;--c2:#c9cde6">
+        <span class="mode-ic">📖</span>
+        <span class="mode-body"><b>サクッと要点まとめ</b><small>本文・現代語訳・係り結び・重要語句・作品知識</small></span>
+        <span class="mode-go">›</span>
+      </button>
+    </div>
+    <p class="foot-note">🎧 音が出ます（車ではスピーカーかイヤホンで）<br>おすすめは ①聞き流し → ②耳でクイズ → ③テスト の順</p>
+  </section>
+
+  <!-- ================= LISTEN ================= -->
+  <section id="scr-listen" class="screen">
+    <div class="screen-h"><span class="h">🎧 車内・聞き流し</span><span class="pill" id="dvPos">1 / 10</span></div>
+    <div class="dv-prog"><div class="bar"><i id="dvBar"></i></div></div>
+    <div class="dv-dots" id="dvDots"></div>
+
+    <div class="card dv-card" id="dvCard">
+      <div class="dv-tag"><span class="live" id="dvLive"></span><span id="dvState">タップで再生</span></div>
+      <p class="dv-text" id="dvText"></p>
+      <p class="dv-kana" id="dvKana"></p>
+      <div class="dv-yaku" id="dvYakuBox"><b>現代語訳</b><span id="dvYaku"></span></div>
+      <div class="dv-point" id="dvPointBox"><b>POINT</b><span id="dvPoint"></span></div>
+    </div>
+
+    <div class="dv-controls">
+      <button class="dv-mini" id="dvPrev">⏮<small>前へ</small></button>
+      <button class="dv-big" id="dvPlay">▶<small>再生</small></button>
+      <button class="dv-mini" id="dvNext">⏭<small>次へ</small></button>
+    </div>
+
+    <div class="seg" id="dvSpeed">
+      <button data-rate="0.72">🐢 ゆっくり</button>
+      <button data-rate="0.95" class="on">🚗 ふつう</button>
+      <button data-rate="1.15">🐇 はやめ</button>
+    </div>
+    <button class="toggle" id="dvRepeat">🔁 くり返し再生：OFF</button>
+    <p class="dv-note" id="dvNote">古文を読んだあと、少し間をおいて現代語訳とポイントを読みます。<br>音が出ないときは、iPhoneのマナーモード（消音）を解除してみてください。</p>
+  </section>
+
+  <!-- ================= EAR QUIZ ================= -->
+  <section id="scr-ear" class="screen">
+    <div class="screen-h"><span class="h">🚗 耳でクイズ</span><span class="pill" id="eqScore">○ 0</span></div>
+    <div class="qhead"><span class="pill" id="eqPos">1 / 12</span><div class="bar"><i id="eqBar"></i></div></div>
+
+    <div id="eqPlay">
+      <div class="card qcard" id="eqCard">
+        <div class="qtext"><span class="qsmall" id="eqTag">もんだい</span><span class="qbody" id="eqQ"></span>
+          <span class="hidebadge">🙈 耳だけで挑戦中</span>
+        </div>
+        <div class="opts" id="eqOpts" style="margin-top:11px"></div>
+      </div>
+      <div class="eq-actions row">
+        <button class="btn-big ghost" id="eqReplay">🔊 もう一度</button>
+        <button class="btn-big ghost" id="eqHide">🙈 問題文を隠す</button>
+      </div>
+      <div class="feedback" id="eqFb" hidden>
+        <div class="fb-h" id="eqFbH"></div>
+        <div class="fb-x" id="eqFbX"></div>
+      </div>
+      <div class="eq-actions"><button class="btn-big primary" id="eqNext" hidden>つぎの問題 ▶</button></div>
+    </div>
+
+    <div id="eqDone" hidden>
+      <div class="card test-result">
+        <div class="rank" id="eqRank">🌸</div>
+        <div class="rs-title" id="eqRsTitle"></div>
+        <div class="rs-sub" id="eqRsSub"></div>
+        <div class="rs-msg" id="eqRsMsg"></div>
+      </div>
+      <div class="result-btns">
+        <button class="btn-big primary" id="eqAgain">もう一度（別の問題で）</button>
+        <button class="btn-big ghost" id="eqToTest">仕上げテストへ ⚡</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEST ================= -->
+  <section id="scr-test" class="screen">
+    <div class="screen-h"><span class="h">⚡ 仕上げテスト</span><span class="pill" id="tScore">○ 0</span></div>
+    <div class="qhead"><span class="pill" id="tPos">1 / 10</span><div class="bar"><i id="tBar"></i></div></div>
+
+    <div id="tPlay">
+      <div class="card qcard">
+        <div class="qtext"><span class="qsmall" id="tTag">もんだい</span><span id="tQ"></span></div>
+        <div class="opts" id="tOpts" style="margin-top:11px"></div>
+      </div>
+      <div class="feedback" id="tFb" hidden>
+        <div class="fb-h" id="tFbH"></div>
+        <div class="fb-x" id="tFbX"></div>
+      </div>
+      <div class="eq-actions"><button class="btn-big primary" id="tNext" hidden>つぎへ ▶</button></div>
+    </div>
+
+    <div id="tDone" hidden>
+      <div class="card test-result">
+        <div class="rank" id="tRank">S</div>
+        <div class="rs-title" id="tRsTitle"></div>
+        <div class="rs-sub" id="tRsSub"></div>
+        <div class="rs-msg" id="tRsMsg"></div>
+        <div class="wronglist" id="tWrong"></div>
+      </div>
+      <div class="result-btns">
+        <button class="btn-big primary" id="tAgain">もう一度 10問</button>
+        <button class="btn-big ghost" id="tToSum">要点まとめを見る 📖</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SUMMARY ================= -->
+  <section id="scr-sum" class="screen">
+    <div class="screen-h"><span class="h">📖 サクッと要点まとめ</span></div>
+    <div class="seg-tabs" id="sumTabs">
+      <button data-seg="hon" class="on">本文</button>
+      <button data-seg="yaku">訳</button>
+      <button data-seg="gram">係り結び</button>
+      <button data-seg="word">語句</button>
+      <button data-seg="work">作品</button>
+    </div>
+    <div class="card" id="sumBody"></div>
+    <p class="foot-note">教科書によって、中略のしかたや表記（三室戸／御室戸）が少しちがう場合があります。</p>
+  </section>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* =========================================================
+   データ
+   ========================================================= */
+var SENTS = [
+  {kana:"いまはむかし、たけとりのおきなというものありけり。",
+   text:"今は昔、竹取の翁といふものありけり。",
+   yaku:"今となっては昔のことだが、竹取の翁という者がいた。",
+   point:"今は昔は、物語の書き出しの決まり文句。けりは、昔のことを語る過去の助動詞です。"},
+  {kana:"のやまにまじりてたけをとりつつ、よろずのことにつかいけり。",
+   text:"野山にまじりて竹を取りつつ、よろづのことに使ひけり。",
+   yaku:"野や山に分け入って竹を取っては、いろいろなことに使っていた。",
+   point:"よろづは、いろいろ、さまざま。つつは、くり返しを表します。"},
+  {kana:"なをば、さぬきのみやつことなむいいける。",
+   text:"名をば、さぬきの造となむいひける。",
+   yaku:"名を、さぬきの造といった。",
+   point:"係り結び。なむがあるので、文末はけりではなく連体形のけるになります。強意なので訳には出しません。"},
+  {kana:"そのたけのなかに、もとひかるたけなむひとすじありける。",
+   text:"その竹の中に、もと光る竹なむ一筋ありける。",
+   yaku:"その竹林の中に、根もとの光る竹が一本あった。",
+   point:"ここにも係り結び、なむときける。もとは根もと、一筋は一本。"},
+  {kana:"あやしがりてよりてみるに、つつのなかひかりたり。",
+   text:"あやしがりて寄りて見るに、筒の中光りたり。",
+   yaku:"不思議に思って近寄って見ると、竹の筒の中が光っていた。",
+   point:"あやしがるは、不思議に思う。怪しいではありません。たりは、光っている、と存続で訳します。"},
+  {kana:"それを見れば、さんずんばかりなるひと、いとうつくしゅうてゐたり。",
+   text:"それを見れば、三寸ばかりなる人、いとうつくしうてゐたり。",
+   yaku:"それを見ると、三寸ほどの人が、とてもかわいらしい様子で座っていた。",
+   point:"うつくしは、かわいらしい。美しいではありません。ゐるは、座っている。うつくしうては、うつくしゅうてと読みます。"},
+  {kana:"おきなのいうやう、われ、あさごとゆうごとごとにみるたけのなかにおはするにてしりぬ。こになりたまふべきひとなめり。",
+   text:"翁言ふやう、「我、朝ごと夕ごとに見る竹の中におはするにて知りぬ。子になりたまふべき人なめり。」",
+   yaku:"翁が言うことには、「私が毎朝毎晩見る竹の中にいらっしゃるので分かった。私の子におなりになるはずの人であるようだ。」",
+   point:"おはす、たまふは尊敬語で、この子への敬意。翁が、この子をただ者ではないと見ている証拠です。"},
+  {kana:"めのおうなにあずけてやしなわす。うつくしきことかぎりなし。いとおさなければこにいれてやしなふ。",
+   text:"妻の嫗に預けて養はす。うつくしきことかぎりなし。いと幼ければ籠に入れて養ふ。",
+   yaku:"妻のおばあさんに預けて育てさせる。かわいらしいことこの上ない。とても幼いので、籠に入れて育てる。",
+   point:"預くは、預ける。養ふは、育てる。養はすのすは、使役で、育てさせる。いとおさなしは、とても幼い。"},
+  {kana:"たけとりのおきな、たけをとるに、ふしをへだててよごとに、こがねあるたけをみつくることかさなりぬ。かくておきな、やうやうゆたかになりゆく。",
+   text:"竹取の翁、竹を取るに、節を隔ててよごとに、黄金ある竹を見つくること重なりぬ。かくて翁やうやう豊かになりゆく。",
+   yaku:"竹取の翁が竹を取ると、節を隔てて節と節の間ごとに、黄金の入っている竹を見つけることが重なった。こうして翁はだんだん豊かになっていく。",
+   point:"よは、節と節の間。重なりぬのぬは完了。やうやうは、だんだん。"},
+  {kana:"このちご、やしなふほどに、すくすくとおおきになりまさる。このこ、いとおおきになりぬれば、なを、みむろどのいんべのあきたをよびてつけさす。あきた、なよたけのかぐやひめとつけつ。",
+   text:"この児、養ふほどに、すくすくと大きになりまさる。この子いと大きになりぬれば、名を、御室戸の斎部の秋田を呼びてつけさす。秋田、なよ竹のかぐや姫とつけつ。",
+   yaku:"この子は、育てるうちにすくすくと大きくなっていく。この子がたいそう大きくなったので、名を、御室戸の斎部の秋田を呼んでつけさせる。秋田は、なよ竹のかぐや姫と名づけた。",
+   point:"なりぬればは、已然形にばで、大きくなったので。つけさすは使役で、名をつけさせる。名づけたのは翁ではなく秋田。なよ竹は、細くしなやかな竹です。"
+  }
+];
+
+var BANK = [
+  {id:1, tag:"仮名遣い", q:"「いふ」を現代仮名遣いに直すと、どれ？", opts:["いう","いふ","いぶ","ゆう"], ans:0, exp:"語中・語尾のハ行は、わ・い・う・え・おに直します。", drive:true},
+  {id:2, tag:"仮名遣い", q:"「使ひけり」を現代仮名遣いに直すと、どれ？", opts:["つかひけり","つかいけり","つかえけり","つがいけり"], ans:1, exp:"「ひ」は「い」に直します。", drive:true},
+  {id:3, tag:"仮名遣い", q:"「うつくしうて」を現代仮名遣いで書くと、どれ？", opts:["うつくしうて","うつくしいて","うつくしゅうて","うつくしゅて"], ans:2, exp:"ウ音便で「く」が「う」に変わり、現代仮名遣いでは「うつくしゅうて」と書きます。", drive:true},
+  {id:4, tag:"仮名遣い", q:"「養ふ」を現代仮名遣いに直すと、どれ？", opts:["やしなう","やしなふ","やしのう","ようふ"], ans:0, exp:"語尾の「ふ」は「う」に直します。", drive:true},
+  {id:5, tag:"仮名遣い", q:"「ゐたり」を現代仮名遣いに直すと、どれ？", opts:["ゐたり","いったり","いた","いたり"], ans:3, exp:"ワ行の「ゐ」はア行の「い」に直します。", drive:true},
+  {id:6, tag:"仮名遣い", q:"「預けて」を現代仮名遣いに直すと、どれ？", opts:["あづけて","あずけて","おずけて","あつけて"], ans:1, exp:"「づ」は「ず」に直します。", drive:true},
+  {id:7, tag:"古語", q:"「うつくし」の意味は、どれ？", opts:["かわいらしい","きれいだ","めずらしい","うつくしい声だ"], ans:0, exp:"小さくていとおしい、かわいらしい。現代語の「美しい」とはちがいます。", drive:true},
+  {id:8, tag:"古語", q:"「あやしがりて」の意味は、どれ？", opts:["気味悪く思って","こわがって","不思議に思って","喜んで"], ans:2, exp:"あやしがるは、不思議に思う。「怪しい」ではありません。", drive:true},
+  {id:9, tag:"古語", q:"「よろづのことに使ひけり」の「よろづ」の意味は、どれ？", opts:["一万という数","いろいろな","夜ごとの","すべての人"], ans:1, exp:"よろづは、いろいろ、さまざま、すべて。", drive:true},
+  {id:10, tag:"古語", q:"「ゐたり」の「ゐる」の意味は、どれ？", opts:["座っている","行く","寝ている","隠れている"], ans:0, exp:"ゐるは、座っている、じっとしている。", drive:true},
+  {id:11, tag:"古語", q:"「三寸ばかりなる人」の「ばかり」の意味は、どれ？", opts:["だけ","ほど（くらい）","より","しか"], ans:1, exp:"ばかりは、だいたいの程度で「〜ほど」。限定の「だけ」ではありません。", drive:true},
+  {id:12, tag:"古語", q:"「いとうつくしうて」の「いと」の意味は、どれ？", opts:["少し","いつも","とても","いちばん"], ans:2, exp:"いとは、とても、たいそう。", drive:true},
+  {id:13, tag:"文法", q:"「名をば、さぬきの造となむいひける」で、なむの結びは、どれ？", opts:["けり（終止形）","ける（連体形）","いひ（連用形）","なむ（終止形）"], ans:1, exp:"係助詞なむの結びは連体形。なので「けり」が「ける」になっています。", drive:true},
+  {id:14, tag:"文法", q:"本文で、なむの係り結びがもう一か所あるのは、どの文？", opts:["筒の中光りたり","いとうつくしうてゐたり","もと光る竹なむ一筋ありける","預けて養はす"], ans:2, exp:"「もと光る竹なむ一筋ありける」も、なむの結びが連体形「ける」です。", drive:true},
+  {id:15, tag:"文法", q:"係助詞「なむ」の意味は、どれ？", opts:["強意","疑問","反語","比喩"], ans:0, exp:"なむは強意。訳には出さなくてかまいません。", drive:true},
+  {id:16, tag:"文法", q:"「ありけり」の「けり」の意味は、どれ？", opts:["完了","打消","過去","推量"], ans:2, exp:"けりは過去。「〜た」と訳します。", drive:true},
+  {id:17, tag:"文法", q:"「家へ持ちて来ぬ」の「ぬ」の意味は、どれ？", opts:["完了（〜た）","打消（〜ない）","過去","存続"], ans:0, exp:"連用形に付いているので完了。打消の「ず」の連体形「ぬ」とまぎらわしいので注意。", drive:true},
+  {id:18, tag:"文法", q:"「この子いと大きになりぬれば」の「ば」の訳は、どれ？", opts:["大きくなったら","大きくなったので","大きくなりながら","大きくなっても"], ans:1, exp:"已然形に付くばは、順接の確定条件で「〜ので」。", drive:true},
+  {id:19, tag:"文法", q:"「預けて養はす」「秋田を呼びてつけさす」の「す・さす」は、どれ？", opts:["尊敬","使役（〜させる）","受身","自発"], ans:1, exp:"どちらも人にさせる使役。「育てさせる」「名をつけさせる」。", drive:true},
+  {id:20, tag:"内容", q:"「なよ竹のかぐや姫」の「なよ竹」の意味は、どれ？", opts:["光る竹","細くしなやかな竹","節の多い竹","枯れた竹"], ans:1, exp:"なよ竹は、細くしなやかな竹。竹から生まれたことにちなんだ名です。", drive:true},
+  {id:21, tag:"内容", q:"この子に名をつけたのは、だれ？", opts:["竹取の翁","妻の嫗","御室戸の斎部の秋田","帝"], ans:2, exp:"翁が秋田を呼んで「つけさす」（つけさせる）。名づけたのは秋田です。", drive:true},
+  {id:22, tag:"内容", q:"翁が「子になりたまふべき人なめり」と思った理由は、どれ？", opts:["毎朝毎晩見る竹の中にいたから","竹が光っていたから","黄金が出たから","妻が望んだから"], ans:0, exp:"「我、朝ごと夕ごとに見る竹の中におはするにて知りぬ」が理由。", drive:true},
+  {id:23, tag:"文学史", q:"『竹取物語』ができたのは、どの時代？", opts:["奈良時代","平安時代（初期）","鎌倉時代","江戸時代"], ans:1, exp:"平安時代初期、9世紀末から10世紀ごろに成立したと考えられています。", drive:true},
+  {id:24, tag:"文学史", q:"『竹取物語』の作者は、だれ？", opts:["紫式部","清少納言","紀貫之","不明（作者不詳）"], ans:3, exp:"作者は不詳。日本に現存する最古の物語（作り物語）です。", drive:true},
+
+  {id:25, tag:"古語", q:"「今は昔」の意味は、どれ？", opts:["今から昔にかけて","今となっては昔のことだが","今も昔も変わらず","今すぐ昔のように"], ans:1, exp:"物語の書き出しの決まり文句で、「今となっては昔のことだが」。", drive:false},
+  {id:26, tag:"古語", q:"「野山にまじりて」の「まじりて」の意味は、どれ？", opts:["分け入って","まざり合って","迷って","遊んで"], ans:0, exp:"まじるは、分け入る、入りこむ。", drive:false},
+  {id:27, tag:"古語", q:"「もと光る竹」の「もと」の意味は、どれ？", opts:["昔","根もと","もともと","下の方の人"], ans:1, exp:"もとは、根もと。根もとの光る竹です。", drive:false},
+  {id:28, tag:"古語", q:"「一筋」の意味は、どれ？", opts:["一本","一列","ひとすじの光","一か所"], ans:0, exp:"一筋は、一本。", drive:false},
+  {id:29, tag:"内容", q:"「いと幼ければ籠に入れて養ふ」とあるが、なぜ籠に入れた？", opts:["外に見せないため","とても幼いから","竹で作るため","翁が竹細工を仕事にしていたから"], ans:1, exp:"「いと幼ければ」が理由。とても幼いので籠に入れて育てた。", drive:false},
+  {id:30, tag:"内容", q:"黄金の入った竹を何度も見つけて、翁はどうなった？", opts:["竹を取るのをやめた","都へ引っ越した","だんだん豊かになった","黄金を帝に差し出した"], ans:2, exp:"「かくて翁やうやう豊かになりゆく」。やうやうは、だんだん。", drive:false},
+  {id:31, tag:"古語", q:"「すくすくと大きになりまさる」の意味は、どれ？", opts:["ぐんぐん大きく成長する","ゆっくり大きくなる","大きくならない","小さくなっていく"], ans:0, exp:"すくすくとは、ぐんぐんと。まさるは、ますます〜する。", drive:false},
+  {id:32, tag:"文法", q:"「おはする」「たまふ」の敬語の種類は、どれ？", opts:["謙譲語","尊敬語","丁寧語","美化語"], ans:1, exp:"どちらも尊敬語。翁の会話文の中なので、翁からこの子への敬意です。", drive:false},
+  {id:33, tag:"文法", q:"係り結びで、係助詞「こそ」の結びは、どれ？", opts:["連体形","已然形","終止形","連用形"], ans:1, exp:"ぞ・なむ・や・かは連体形、こそは已然形。", drive:false},
+  {id:34, tag:"文学史", q:"『源氏物語』で『竹取物語』は何と呼ばれている？", opts:["物語の出で来はじめの祖","もののあはれの元","歌の親","月の物語"], ans:0, exp:"「物語の出で来はじめの祖」＝物語の始まりの祖、日本最古の物語という意味。", drive:false},
+  {id:35, tag:"文法", q:"「人なめり」の「なめり」の意味は、どれ？", opts:["〜ではない","〜であるようだ","〜すべきだ","〜してしまった"], ans:1, exp:"断定の「なり」の連体形に推定の「めり」がついた形で、「〜であるようだ」。", drive:false}
+];
+
+var HON = [
+  {g:"今は昔、竹取の翁といふものありけり。野山にまじりて竹を取りつつ、よろづのことに使ひけり。名をば、さぬきの造となむいひける。",
+   y:"今となっては昔のことだが、竹取の翁という者がいた。野や山に分け入って竹を取っては、いろいろなことに使っていた。名を、さぬきの造（みやつこ）といった。"},
+  {g:"その竹の中に、もと光る竹なむ一筋ありける。あやしがりて寄りて見るに、筒の中光りたり。それを見れば、三寸ばかりなる人、いとうつくしうてゐたり。",
+   y:"その竹林の中に、根もとの光る竹が一本あった。不思議に思って近寄って見ると、竹の筒の中が光っていた。それを見ると、三寸ほどの人が、とてもかわいらしい様子で座っていた。"},
+  {g:"翁言ふやう、「我、朝ごと夕ごとに見る竹の中におはするにて知りぬ。子になりたまふべき人なめり。」とて、手にうち入れて家へ持ちて来ぬ。",
+   y:"翁が言うことには、「私が毎朝毎晩見る竹の中にいらっしゃるので分かった。私の子におなりになるはずの人であるようだ。」と言って、その子を手に入れて家へ持ち帰った。"},
+  {g:"妻の嫗に預けて養はす。うつくしきことかぎりなし。いと幼ければ籠に入れて養ふ。",
+   y:"妻のおばあさんに預けて育てさせる。かわいらしいことこの上ない。とても幼いので、籠に入れて育てる。"},
+  {g:"竹取の翁、竹を取るに、節を隔ててよごとに、黄金ある竹を見つくること重なりぬ。かくて翁やうやう豊かになりゆく。",
+   y:"竹取の翁が竹を取ると、節を隔てて節と節の間ごとに、黄金の入っている竹を見つけることが重なった。こうして翁はだんだん豊かになっていく。"},
+  {g:"この児、養ふほどに、すくすくと大きになりまさる。……（中略）……この子いと大きになりぬれば、名を、御室戸の斎部の秋田を呼びてつけさす。秋田、なよ竹のかぐや姫とつけつ。",
+   y:"この子は、育てるうちにすくすくと大きくなっていく。……この子がたいそう大きくなったので、名を、御室戸の斎部の秋田を呼んでつけさせる。秋田は、なよ竹のかぐや姫と名づけた。",
+   note:"中略の部分（三月ばかりになるほどに…髪上げ…裳着す…）を載せている教科書もあります。「三室戸」と書く教科書もあります。"}
+];
+
+var GRAM = [
+  {h:"係り結び（本文に2か所）", p:"「なむ」が出たら、文末は連体形になります。だから「けり」が「ける」になります。強意なので、訳には出さなくてかまいません。",
+   ex:"名をば、さぬきの造と<span class=\"hl\">なむ</span>いひ<span class=\"hl\">ける</span>。<small>もう一か所：もと光る竹なむ一筋ありける。</small>"},
+  {h:"係り結びの決まり", p:"ぞ・なむ・や・か → 連体形 ／ こそ → 已然形。結びの語と活用形をセットで答えられるように。"},
+  {h:"助動詞", p:"けり＝過去（〜た）／ぬ＝完了（〜てしまった）／たり＝存続（〜ている）／なめり＝〜であるようだ／べし＝当然（〜はずだ）。"},
+  {h:"使役の「す」「さす」", p:"人にさせる意味。「預けて養はす」＝妻に預けて育てさせる。「秋田を呼びてつけさす」＝秋田に名をつけさせる。",
+   ex:"養は<span class=\"hl\">す</span>／つけ<span class=\"hl\">さす</span><small>四段・ナ変・ラ変には「す」、それ以外には「さす」。</small>"},
+  {h:"已然形＋ば", p:"「〜ので」「〜と」と訳す順接の確定条件。「大きになりぬれ＋ば」＝大きくなったので。未然形＋ばなら「もし〜ならば」。"},
+  {h:"敬語", p:"「おはす」「たまふ」は尊敬語。翁の会話文の中なので、話し手の翁から、竹の中にいた子への敬意。翁がこの子をただ者ではないと見ていることが分かる。"},
+  {h:"ウ音便", p:"「うつくしくて」が「うつくしうて」に。現代仮名遣いでは「うつくしゅうて」と書きます。"}
+];
+
+var WORDS = [
+  {w:"今は昔", y:"今となっては昔のことだが", n:"物語の書き出しの決まり文句"},
+  {w:"翁（おきな）", y:"おじいさん", n:""},
+  {w:"嫗（おうな）", y:"おばあさん", n:"ここでは翁の妻"},
+  {w:"まじる", y:"分け入る、入りこむ", n:""},
+  {w:"よろづ", y:"いろいろ、さまざま", n:""},
+  {w:"造（みやつこ）", y:"姓の一つ（人名）", n:"さぬきの造＝翁の名"},
+  {w:"もと", y:"根もと", n:""},
+  {w:"一筋", y:"一本", n:""},
+  {w:"あやしがる", y:"不思議に思う", n:"「怪しい」ではない"},
+  {w:"筒", y:"竹の節と節の間の空洞", n:""},
+  {w:"三寸", y:"約9センチ", n:"一寸は約3センチ"},
+  {w:"うつくし", y:"かわいらしい、いとしい", n:"「美しい」ではない"},
+  {w:"ゐる", y:"座っている、じっとしている", n:""},
+  {w:"いと", y:"とても、たいそう", n:""},
+  {w:"預く", y:"預ける", n:""},
+  {w:"養ふ", y:"育てる", n:""},
+  {w:"幼し（をさなし）", y:"幼い", n:"いと幼ければ＝とても幼いので"},
+  {w:"おひたち", y:"成長", n:"単元名にもなっている言葉"},
+  {w:"やうやう", y:"だんだん", n:""},
+  {w:"重なりぬ", y:"重なった", n:"ぬは完了"},
+  {w:"さる時より", y:"そうするようになってから", n:"その時から"},
+  {w:"なよ竹", y:"細くしなやかな竹", n:"竹から生まれたことにちなむ"},
+  {w:"かぐや", y:"かがやく（光り輝く）", n:"光る姫の意"}
+];
+
+var WORKS = [
+  "<b>時代</b>：平安時代初期（9世紀末〜10世紀ごろ）に成立。",
+  "<b>作者</b>：不明（作者不詳）。",
+  "<b>位置づけ</b>：日本に現存する最古の物語（作り物語）。『源氏物語』で「物語の出で来はじめの祖」と評された。",
+  "<b>あらすじ（冒頭）</b>：竹取の翁が光る竹の中から三寸ほどの女の子を見つけ、妻とともに育てる。黄金の竹が続いて翁は豊かになり、子はすくすくと育つ。",
+  "<b>名づけ</b>：翁が御室戸の斎部の秋田を呼んで名をつけさせ、「なよ竹のかぐや姫」と名づけた。",
+  "<b>この後の流れ</b>：美しく育った姫に五人の貴公子が求婚し難題を出す → 帝も心を寄せる → 八月十五夜、月の都から迎えが来て姫は月へ帰る。",
+  "<b>テストで問われること</b>：歴史的仮名遣い、古語の意味（うつくし・あやし・よろづ）、係り結び（なむ〜ける）、主語、名づけた人、作品の時代と作者。"
+];
+
+/* =========================================================
+   小道具
+   ========================================================= */
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ var x=a.slice(), i, j, t; for(i=x.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=x[i]; x[i]=x[j]; x[j]=t; } return x; }
+function bankById(id){ for(var i=0;i<BANK.length;i++){ if(BANK[i].id===id) return BANK[i]; } return null; }
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+var ST = {listenDone:false, earBest:0, earBestRate:0, testRank:"", testScore:0};
+function loadST(){
+  try{
+    var s = localStorage.getItem("taketori-v1");
+    if(s){ var o = JSON.parse(s); for(var k in o){ if(Object.prototype.hasOwnProperty.call(ST,k)) ST[k]=o[k]; } }
+  }catch(e){}
+}
+function saveST(){ try{ localStorage.setItem("taketori-v1", JSON.stringify(ST)); }catch(e){} }
+
+/* ---------- 音（小さな効果音） ---------- */
+var AC = null;
+function beep(good){
+  try{
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if(!Ctx) return;
+    if(!AC) AC = new Ctx();
+    if(AC.state === "suspended"){ AC.resume(); }
+    var t0 = AC.currentTime;
+    var notes = good ? [880, 1180] : [420, 330];
+    for(var i=0;i<notes.length;i++){
+      var o = AC.createOscillator(), g = AC.createGain();
+      o.type = "sine"; o.frequency.value = notes[i];
+      g.gain.setValueAtTime(0.0001, t0 + i*0.09);
+      g.gain.exponentialRampToValueAtTime(0.12, t0 + i*0.09 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + i*0.09 + 0.16);
+      o.connect(g); g.connect(AC.destination);
+      o.start(t0 + i*0.09); o.stop(t0 + i*0.09 + 0.2);
+    }
+  }catch(e){}
+}
+
+/* ---------- 画面起こし（対応端末のみ） ---------- */
+var wakeLock = null;
+function wakeOn(){
+  try{
+    if(!navigator.wakeLock || wakeLock) return;
+    navigator.wakeLock.request("screen").then(function(l){
+      wakeLock = l;
+      l.addEventListener("release", function(){ wakeLock = null; });
+    }).catch(function(){});
+  }catch(e){}
+}
+function wakeOff(){ try{ if(wakeLock){ wakeLock.release(); wakeLock = null; } }catch(e){} }
+
+/* =========================================================
+   読み上げ（Web Speech API ＋ タイマー・フォールバック）
+   ========================================================= */
+var synth = (typeof window !== "undefined" && window.speechSynthesis) ? window.speechSynthesis : null;
+var voice = null;
+function pickVoice(){
+  if(!synth || !synth.getVoices) return null;
+  var vs = [];
+  try{ vs = synth.getVoices() || []; }catch(e){ return null; }
+  var ja = [];
+  for(var i=0;i<vs.length;i++){ if(/^ja/i.test(vs[i].lang || "")) ja.push(vs[i]); }
+  if(!ja.length) return null;
+  for(var j=0;j<ja.length;j++){ if(/kyoko|o-ren|nanami|siri|haruka|ja[-_]JP/i.test((ja[j].name||"") + " " + (ja[j].lang||""))) return ja[j]; }
+  return ja[0];
+}
+if(synth){
+  voice = pickVoice();
+  try{ synth.addEventListener("voiceschanged", function(){ voice = pickVoice(); }); }
+  catch(e){ synth.onvoiceschanged = function(){ voice = pickVoice(); }; }
+}
+
+var Say = (function(){
+  var gen = 0, timer = null;
+  function clearT(){ if(timer){ clearTimeout(timer); timer = null; } }
+  function est(text, rate){
+    var n = String(text).replace(/\s+/g, "").length;
+    return Math.max(1400, (n / 6.2) * 1000 / rate + 800);
+  }
+  function stop(){
+    gen++;
+    clearT();
+    if(synth){ try{ synth.cancel(); }catch(e){} }
+  }
+  function say(text, rate, cb){
+    rate = rate || 0.95;
+    if(!text){ if(cb) cb(); return; }
+    var g = ++gen;
+    clearT();
+    if(synth){
+      try{ synth.cancel(); }catch(e){}
+      try{ if(synth.paused) synth.resume(); }catch(e){}
+    }
+    var fin = false, e = est(text, rate);
+    function done(){
+      if(fin) return;
+      fin = true; clearT();
+      if(g !== gen) return;
+      if(cb) cb();
+    }
+    function arm(ms){ clearT(); timer = setTimeout(done, ms); }
+    var U = window.SpeechSynthesisUtterance;
+    if(!synth || typeof U !== "function"){ arm(e); return; }
+    var u;
+    try{ u = new U(text); }catch(err){ arm(e); return; }
+    u.lang = "ja-JP";
+    u.rate = rate;
+    u.pitch = 1.0;
+    u.volume = 1;
+    if(voice){ u.voice = voice; }
+    u.onstart = function(){ if(g !== gen) return; arm(Math.max(3000, e * 1.9 + 1500)); };
+    u.onend = function(){ if(g !== gen) return; done(); };
+    u.onerror = function(){ if(g !== gen) return; done(); };
+    try{ synth.speak(u); }catch(err){ arm(e); return; }
+    arm(1300); /* 音声が始まらない端末ではタイマーで進める */
+  }
+  return { say: say, stop: stop };
+})();
+
+/* =========================================================
+   画面切替
+   ========================================================= */
+var CUR = "home";
+var SCREENS = {home:"scr-home", listen:"scr-listen", ear:"scr-ear", test:"scr-test", sum:"scr-sum"};
+function show(name){
+  if(CUR === "listen" && name !== "listen") dvStop();
+  if(CUR === "ear" && name !== "ear") Say.stop();
+  CUR = name;
+  for(var k in SCREENS){
+    var el = $(SCREENS[k]);
+    if(el) el.className = "screen" + (k === name ? " active" : "");
+  }
+  $("btnBack").hidden = (name === "home");
+  $("btnHome").hidden = (name === "home");
+  try{ window.scrollTo(0,0); }catch(e){}
+}
+function goHome(){ Say.stop(); dvStop(); show("home"); renderHome(); }
+
+function renderHome(){
+  var n = 0;
+  if(ST.listenDone){ n++; $("dot1").className = "dot on"; } else { $("dot1").className = "dot"; }
+  if(ST.earBestRate > 0){ n++; $("dot2").className = "dot on"; } else { $("dot2").className = "dot"; }
+  if(ST.testRank){ n++; $("dot3").className = "dot gold"; } else { $("dot3").className = "dot"; }
+  var bits = [];
+  if(ST.earBestRate > 0) bits.push("耳 " + Math.round(ST.earBestRate*100) + "%");
+  if(ST.testRank) bits.push("テスト " + ST.testRank + "（" + ST.testScore + "/10）");
+  $("recText").textContent = bits.length ? (n + " こ達成・" + bits.join(" / ")) : "まだ 0 こ";
+}
+
+/* =========================================================
+   🎧 聞き流し
+   ========================================================= */
+var DV = {i:0, step:0, playing:false, rate:0.95, repeat:false, gap:null, finished:false};
+
+function dvClearGap(){ if(DV.gap){ clearTimeout(DV.gap); DV.gap = null; } }
+function dvGap(ms, fn){ dvClearGap(); DV.gap = setTimeout(fn, ms); }
+
+function dvRender(){
+  var i = Math.min(DV.i, SENTS.length - 1);
+  var s = SENTS[i];
+  $("dvText").textContent = s.text;
+  $("dvKana").textContent = s.kana;
+  $("dvYaku").textContent = s.yaku;
+  $("dvPoint").textContent = s.point;
+  $("dvPos").textContent = (i + 1) + " / " + SENTS.length;
+  $("dvBar").style.width = ((i + 1) / SENTS.length * 100) + "%";
+
+  var dots = "";
+  for(var k=0;k<SENTS.length;k++){
+    dots += '<i class="' + (k < i ? "done" : (k === i ? "cur" : "")) + '"></i>';
+  }
+  $("dvDots").innerHTML = dots;
+
+  $("dvPlay").className = "dv-big" + (DV.playing ? " playing" : "");
+  $("dvPlay").innerHTML = (DV.playing ? "❙❙" : "▶") + "<small>" + (DV.playing ? "一時停止" : "再生") + "</small>";
+  $("dvLive").className = "live" + (DV.playing ? " on" : "");
+
+  var state = "タップで再生";
+  if(DV.playing){ state = (DV.step === 0 ? "古文を読んでいます" : "現代語訳とポイントを読んでいます"); }
+  else if(DV.finished){ state = "さいごまで聞けました 🎋"; }
+  else if(DV.i > 0 || DV.step > 0){ state = "一時停止中"; }
+  $("dvState").textContent = state;
+
+  $("dvYakuBox").className = "dv-yaku" + (DV.playing && DV.step === 1 ? " live" : "");
+  $("dvPointBox").className = "dv-point" + (DV.playing && DV.step === 1 ? " live" : "");
+  $("dvRepeat").className = "toggle" + (DV.repeat ? " on" : "");
+  $("dvRepeat").textContent = "🔁 くり返し再生：" + (DV.repeat ? "ON" : "OFF");
+}
+
+function dvSpeak(step){
+  var s = SENTS[DV.i];
+  if(!s) return;
+  var txt = (step === 0) ? s.kana : (s.yaku + "。ポイント。" + s.point);
+  var rate = (step === 0) ? DV.rate : Math.max(0.7, DV.rate * 0.98);
+  Say.say(txt, rate, function(){
+    if(!DV.playing) return;
+    if(step === 0){
+      DV.step = 1; dvRender();
+      dvGap(420, function(){ if(DV.playing && DV.step === 1) dvSpeak(1); });
+    }else{
+      DV.step = 0; DV.i++;
+      dvGap(680, function(){ dvStep(); });
+    }
+  });
+}
+
+function dvStep(){
+  if(!DV.playing) return;
+  if(DV.i >= SENTS.length){
+    if(DV.repeat){ DV.i = 0; DV.step = 0; }
+    else{
+      DV.i = SENTS.length - 1; DV.step = 1;
+      DV.playing = false; DV.finished = true;
+      ST.listenDone = true; saveST(); wakeOff();
+      dvRender(); renderHome();
+      return;
+    }
+  }
+  dvRender();
+  dvSpeak(DV.step);
+}
+
+function dvPlay(){
+  if(DV.playing) return;
+  if(DV.finished){ DV.finished = false; DV.i = 0; DV.step = 0; }
+  DV.playing = true;
+  wakeOn();
+  dvRender();
+  dvStep();
+}
+function dvStop(){
+  DV.playing = false;
+  Say.stop();
+  dvClearGap();
+  wakeOff();
+  dvRender();
+}
+function dvToggle(){ if(DV.playing) dvStop(); else dvPlay(); }
+function dvJump(dir){
+  var was = DV.playing;
+  Say.stop(); dvClearGap();
+  DV.playing = false;
+  DV.finished = false;
+  DV.i = (DV.i + dir + SENTS.length) % SENTS.length;
+  DV.step = 0;
+  dvRender();
+  if(was) dvPlay();
+}
+
+function initListen(){
+  DV = {i:0, step:0, playing:false, rate:DV.rate, repeat:DV.repeat, gap:null, finished:false};
+  dvRender();
+}
+
+/* =========================================================
+   🚗 耳でクイズ
+   ========================================================= */
+var EQ = {ids:[], i:0, answered:false, ok:0, hide:false, done:false, wrong:[]};
+
+function startEar(){
+  var pool = BANK.filter(function(q){ return q.drive; });
+  var ids = shuffle(pool.map(function(q){ return q.id; })).slice(0, 12);
+  EQ = {ids:ids, i:0, answered:false, ok:0, hide:false, done:false, wrong:[]};
+  show("ear");
+  $("eqDone").hidden = true;
+  $("eqPlay").hidden = false;
+  eqRender();
+  eqPrompt();
+}
+
+function eqRender(){
+  var q = bankById(EQ.ids[EQ.i]);
+  if(!q) return;
+  $("eqPos").textContent = (EQ.i + 1) + " / " + EQ.ids.length;
+  $("eqBar").style.width = ((EQ.i + 1) / EQ.ids.length * 100) + "%";
+  $("eqScore").textContent = "○ " + EQ.ok;
+  $("eqTag").textContent = q.tag;
+  $("eqQ").textContent = q.q;
+
+  var html = "";
+  for(var i=0;i<q.opts.length;i++){
+    var cls = "opt";
+    if(EQ.answered){
+      if(i === q.ans) cls += " correct";
+      else if(i === EQ.picked) cls += " wrong";
+      else cls += " dim";
+    }
+    html += '<button class="' + cls + '" data-i="' + i + '"><b>' + (i + 1) + "</b><span>" + esc(q.opts[i]) + "</span></button>";
+  }
+  $("eqOpts").innerHTML = html;
+  $("eqCard").className = "card qcard" + (EQ.hide ? " hideq" : "");
+  $("eqHide").textContent = EQ.hide ? "👀 問題文を出す" : "🙈 問題文を隠す";
+
+  if(EQ.answered){
+    var good = (EQ.picked === q.ans);
+    $("eqFb").hidden = false;
+    $("eqFb").className = "feedback" + (good ? "" : " ng");
+    $("eqFbH").textContent = good ? "せいかい！ 🌸" : "ざんねん… こたえは「" + q.opts[q.ans] + "」";
+    $("eqFbX").textContent = q.exp;
+    $("eqNext").hidden = false;
+    $("eqNext").textContent = (EQ.i + 1 >= EQ.ids.length) ? "けっかを 見る 🌙" : "つぎの問題 ▶";
+    setTimeout(function(){ try{ $("eqNext").scrollIntoView({block:"center", behavior:"smooth"}); }catch(e){} }, 240);
+  }else{
+    $("eqFb").hidden = true;
+    $("eqNext").hidden = true;
+  }
+}
+
+function eqPrompt(){
+  var q = bankById(EQ.ids[EQ.i]);
+  if(!q) return;
+  var parts = ["第" + (EQ.i + 1) + "問。", q.q + "。", "せんたくし。"];
+  for(var i=0;i<q.opts.length;i++){ parts.push((i + 1) + "、" + q.opts[i] + "。"); }
+  Say.say(parts.join(""), 0.95, null);
+}
+
+function eqAnswer(k){
+  if(EQ.answered || EQ.done) return;
+  var q = bankById(EQ.ids[EQ.i]);
+  if(!q) return;
+  EQ.answered = true;
+  EQ.picked = k;
+  var good = (k === q.ans);
+  if(good){ EQ.ok++; } else { EQ.wrong.push(q); }
+  beep(good);
+  eqRender();
+  var head = good ? "せいかい！" : "ざんねん。";
+  var ansTxt = "こたえは、" + (q.ans + 1) + "番、" + q.opts[q.ans] + "。";
+  Say.say(head + ansTxt + q.exp, 0.95, null);
+}
+
+function eqNext(){
+  if(!EQ.answered) return;
+  if(EQ.i + 1 >= EQ.ids.length){ eqFinish(); return; }
+  EQ.i++; EQ.answered = false; EQ.picked = -1;
+  eqRender();
+  eqPrompt();
+}
+
+function eqFinish(){
+  EQ.done = true;
+  Say.stop();
+  $("eqPlay").hidden = true;
+  $("eqDone").hidden = false;
+  var n = EQ.ids.length, ok = EQ.ok;
+  var rate = ok / n;
+  if(rate > ST.earBestRate){ ST.earBestRate = rate; }
+  if(ok > ST.earBest) ST.earBest = ok;
+  saveST(); renderHome();
+
+  var face = "🌸", title = "", msg = "";
+  if(rate >= 0.9){ face = "🌕"; title = "かぐや姫レベル！"; msg = "耳だけでこの正解率はすごい。テストでも そのまま いけます。"; }
+  else if(rate >= 0.7){ face = "🌙"; title = "いい調子！"; msg = "あと少し。まちがえた問題を「聞き流し」でもう一度 流すと 定着します。"; }
+  else{ face = "🌱"; title = "ここから のびる！"; msg = "まずは 聞き流しで 古文→訳を 3回。それから もう一度 クイズへ。"; }
+  $("eqRank").textContent = face;
+  $("eqRank").className = "rank";
+  $("eqRsTitle").textContent = title;
+  $("eqRsSub").textContent = "12問中 " + ok + "問 せいかい（" + Math.round(rate * 100) + "%）";
+  $("eqRsMsg").textContent = msg;
+}
+
+/* =========================================================
+   ⚡ 仕上げテスト
+   ========================================================= */
+var T = {ids:[], i:0, answered:false, picked:-1, ok:0, done:false, wrong:[]};
+
+function startTest(){
+  var ids = shuffle(BANK.map(function(q){ return q.id; })).slice(0, 10);
+  T = {ids:ids, i:0, answered:false, picked:-1, ok:0, done:false, wrong:[]};
+  show("test");
+  $("tDone").hidden = true;
+  $("tPlay").hidden = false;
+  tRender();
+}
+
+function tRender(){
+  var q = bankById(T.ids[T.i]);
+  if(!q) return;
+  $("tPos").textContent = (T.i + 1) + " / " + T.ids.length;
+  $("tBar").style.width = ((T.i + 1) / T.ids.length * 100) + "%";
+  $("tScore").textContent = "○ " + T.ok;
+  $("tTag").textContent = q.tag;
+  $("tQ").textContent = q.q;
+
+  var html = "";
+  for(var i=0;i<q.opts.length;i++){
+    var cls = "opt";
+    if(T.answered){
+      if(i === q.ans) cls += " correct";
+      else if(i === T.picked) cls += " wrong";
+      else cls += " dim";
+    }
+    html += '<button class="' + cls + '" data-i="' + i + '"><b>' + (i + 1) + "</b><span>" + esc(q.opts[i]) + "</span></button>";
+  }
+  $("tOpts").innerHTML = html;
+
+  if(T.answered){
+    var good = (T.picked === q.ans);
+    $("tFb").hidden = false;
+    $("tFb").className = "feedback" + (good ? "" : " ng");
+    $("tFbH").textContent = good ? "せいかい！ ○" : "不正解… こたえは「" + q.opts[q.ans] + "」";
+    $("tFbX").textContent = q.exp;
+    $("tNext").hidden = false;
+    $("tNext").textContent = (T.i + 1 >= T.ids.length) ? "けっかを 見る ⚡" : "つぎへ ▶";
+    setTimeout(function(){ try{ $("tNext").scrollIntoView({block:"center", behavior:"smooth"}); }catch(e){} }, 240);
+  }else{
+    $("tFb").hidden = true;
+    $("tNext").hidden = true;
+  }
+}
+
+function tAnswer(k){
+  if(T.answered || T.done) return;
+  var q = bankById(T.ids[T.i]);
+  if(!q) return;
+  T.answered = true; T.picked = k;
+  var good = (k === q.ans);
+  if(good){ T.ok++; } else { T.wrong.push(q); }
+  beep(good);
+  tRender();
+}
+
+function tNext(){
+  if(!T.answered) return;
+  if(T.i + 1 >= T.ids.length){ tFinish(); return; }
+  T.i++; T.answered = false; T.picked = -1;
+  tRender();
+}
+
+function tFinish(){
+  T.done = true;
+  $("tPlay").hidden = true;
+  $("tDone").hidden = false;
+  var ok = T.ok;
+  var rank = ok === 10 ? "S" : (ok === 9 ? "A" : (ok >= 7 ? "B" : "C"));
+  var msg = "";
+  if(rank === "S") msg = "かんぺき！ この調子で本番も いけます。🌕";
+  else if(rank === "A") msg = "あと1問で S。まちがえた問題の 解説だけ もう一度 読んでおこう。";
+  else if(rank === "B") msg = "半分は とれています。まちがえた問題を「聞き流し」で 3回流すと ぐっと上がります。";
+  else msg = "まずは 聞き流しで 古文→訳を 音で 3回。そのあと もう一度 テスト！ 🌱";
+  if(!ST.testRank || ok > ST.testScore){ ST.testRank = rank; ST.testScore = ok; }
+  saveST(); renderHome();
+
+  $("tRank").textContent = rank;
+  $("tRank").className = "rank " + rank.toLowerCase();
+  $("tRsTitle").textContent = (rank === "S" ? "Sランク！" : rank + "ランク");
+  $("tRsSub").textContent = "10問中 " + ok + "問 正解";
+  $("tRsMsg").textContent = msg;
+
+  if(T.wrong.length){
+    var w = "まちがえた問題：";
+    for(var i=0;i<T.wrong.length;i++){
+      w += (i ? " ／ " : "") + "<b>" + T.wrong[i].tag + "</b> " + esc(T.wrong[i].q);
+    }
+    $("tWrong").innerHTML = w;
+  }else{
+    $("tWrong").innerHTML = "";
+  }
+}
+
+/* =========================================================
+   📖 まとめ
+   ========================================================= */
+var SEG = "hon";
+function renderSum(seg){
+  SEG = seg || SEG;
+  var tabs = $("sumTabs").getElementsByTagName("button");
+  for(var i=0;i<tabs.length;i++){
+    tabs[i].className = (tabs[i].getAttribute("data-seg") === SEG) ? "on" : "";
+  }
+  var html = "";
+  if(SEG === "hon"){
+    for(var a=0;a<HON.length;a++){
+      html += '<div class="hon-block"><p class="hon-g">' + esc(HON[a].g) + '</p>';
+      if(HON[a].note){ html += '<p class="hon-note">※ ' + esc(HON[a].note) + '</p>'; }
+      html += '</div>';
+    }
+  }else if(SEG === "yaku"){
+    for(var b=0;b<HON.length;b++){
+      html += '<div class="hon-block"><p class="hon-y" style="font-size:.92rem;color:inherit;line-height:1.8">' + esc(HON[b].y) + "</p></div>";
+    }
+  }else if(SEG === "gram"){
+    for(var c=0;c<GRAM.length;c++){
+      html += '<div class="gsec"><h4>' + esc(GRAM[c].h) + "</h4><p>" + esc(GRAM[c].p) + "</p>";
+      if(GRAM[c].ex){ html += '<div class="ex">' + GRAM[c].ex + "</div>"; }
+      html += "</div>";
+    }
+  }else if(SEG === "word"){
+    html += '<dl class="wlist">';
+    for(var d=0;d<WORDS.length;d++){
+      html += "<div><dt>" + esc(WORDS[d].w) + "</dt><dd>" + esc(WORDS[d].y) + (WORDS[d].n ? "<small>" + esc(WORDS[d].n) + "</small>" : "") + "</dd></div>";
+    }
+    html += "</dl>";
+  }else{
+    html += '<ul class="works">';
+    for(var e=0;e<WORKS.length;e++){ html += "<li>" + WORKS[e] + "</li>"; }
+    html += "</ul>";
+  }
+  $("sumBody").innerHTML = html;
+  try{ window.scrollTo(0,0); }catch(err){}
+}
+
+/* =========================================================
+   イベント
+   ========================================================= */
+function init(){
+  loadST();
+  renderHome();
+  initListen();
+
+  $("btnBack").addEventListener("click", goHome);
+  $("btnHome").addEventListener("click", goHome);
+
+  var modes = document.querySelectorAll(".mode");
+  for(var m=0;m<modes.length;m++){
+    modes[m].addEventListener("click", function(){
+      var md = this.getAttribute("data-mode");
+      if(md === "listen"){ initListen(); show("listen"); }
+      else if(md === "ear"){ startEar(); }
+      else if(md === "test"){ startTest(); }
+      else { show("sum"); renderSum("hon"); }
+    });
+  }
+
+  /* ---- 聞き流し ---- */
+  $("dvPlay").addEventListener("click", function(){ dvToggle(); });
+  $("dvCard").addEventListener("click", function(){ dvToggle(); });
+  $("dvPrev").addEventListener("click", function(){ dvJump(-1); });
+  $("dvNext").addEventListener("click", function(){ dvJump(1); });
+  $("dvRepeat").addEventListener("click", function(){
+    DV.repeat = !DV.repeat;
+    dvRender();
+  });
+  var sp = $("dvSpeed").getElementsByTagName("button");
+  for(var s=0;s<sp.length;s++){
+    sp[s].addEventListener("click", function(){
+      DV.rate = parseFloat(this.getAttribute("data-rate"));
+      var all = $("dvSpeed").getElementsByTagName("button");
+      for(var q2=0;q2<all.length;q2++){ all[q2].className = (all[q2] === this) ? "on" : ""; }
+      /* 再生中なら今の文から読み直す */
+      if(DV.playing){
+        Say.stop();
+        Say.say("速さ、変更。", DV.rate, function(){ if(DV.playing) dvStep(); });
+      }
+    });
+  }
+
+  /* ---- 耳でクイズ ---- */
+  $("eqOpts").addEventListener("click", function(e){
+    var t = e.target;
+    while(t && t !== this && !(t.getAttribute && t.getAttribute("data-i") !== null)) t = t.parentNode;
+    if(!t || t === this) return;
+    var i = parseInt(t.getAttribute("data-i"), 10);
+    if(isNaN(i)) return;
+    eqAnswer(i);
+  });
+  $("eqReplay").addEventListener("click", function(){
+    if(EQ.answered || EQ.done) return;
+    eqPrompt();
+  });
+  $("eqHide").addEventListener("click", function(){
+    EQ.hide = !EQ.hide;
+    eqRender();
+    if(!EQ.answered) eqPrompt();
+  });
+  $("eqNext").addEventListener("click", eqNext);
+  $("eqAgain").addEventListener("click", startEar);
+  $("eqToTest").addEventListener("click", startTest);
+
+  /* ---- テスト ---- */
+  $("tOpts").addEventListener("click", function(e){
+    var t = e.target;
+    while(t && t !== this && !(t.getAttribute && t.getAttribute("data-i") !== null)) t = t.parentNode;
+    if(!t || t === this) return;
+    var i = parseInt(t.getAttribute("data-i"), 10);
+    if(isNaN(i)) return;
+    tAnswer(i);
+  });
+  $("tNext").addEventListener("click", tNext);
+  $("tAgain").addEventListener("click", startTest);
+  $("tToSum").addEventListener("click", function(){ show("sum"); renderSum("hon"); });
+
+  /* ---- まとめ ---- */
+  var st = $("sumTabs").getElementsByTagName("button");
+  for(var u=0;u<st.length;u++){
+    st[u].addEventListener("click", function(){ renderSum(this.getAttribute("data-seg")); });
+  }
+
+  document.addEventListener("visibilitychange", function(){
+    if(document.visibilityState !== "visible") return;
+    if(!DV.playing) return;
+    wakeOn();
+    var alive = false;
+    try{ alive = !!(synth && (synth.speaking || synth.pending)); }catch(e){}
+    if(!alive){ Say.stop(); dvStep(); }
+  });
+}
+
+/* 点検用の小さな窓口（表示には影響しません） */
+window.TAKETORI = {
+  SENTS: SENTS, BANK: BANK, HON: HON, GRAM: GRAM, WORDS: WORDS, WORKS: WORKS,
+  state: function(){ return {DV: DV, EQ: EQ, T: T, ST: ST, CUR: CUR}; }
+};
+
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+else init();
+})();
+</script>
+</body>
+</html>
